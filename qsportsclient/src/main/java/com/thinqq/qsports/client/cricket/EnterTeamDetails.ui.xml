@@ -1,0 +1,72 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+		
+		.matchDetails {
+			padding-top: 5px;
+			padding-bottom: 15px;
+			float:left;
+		}
+		
+		.tossTeamList {
+			float: left;
+			padding-top: 2px;
+			padding-bottom: 2px;
+		}
+		
+		.electedToList {
+			float: right;
+			padding-top: 2px;
+			padding-bottom: 2px;
+			padding-left: 100px;
+		}
+		
+		.teamPanelHeaderLabel {
+			padding-bottom: 12px;
+			font-style: normal;
+			font-size: 22px;
+			font-weight: bold;
+		}
+		.labelBold {
+			font-style: normal;
+			font-size: 13px;
+			font-weight: bold;
+			padding-bottom: 5px;
+		}
+		
+		.margin {
+	margin-left: 100px;
+
+	}
+	</ui:style>
+	<g:HTMLPanel width="100%" height="800px">
+		<g:HTMLPanel styleName="{style.matchDetails} {style.margin}">
+			<div style="float:left">
+				<g:HTMLPanel styleName="{style.tossTeamList}">
+					<g:Label ui:field="tossWonByLabel" styleName="{style.labelBold}"></g:Label>
+					<g:ListBox ui:field="tossWonBy"></g:ListBox>
+				</g:HTMLPanel>
+				<g:HTMLPanel styleName="{style.electedToList}">
+					<g:Label ui:field="chooseToLabel" styleName="{style.labelBold}"></g:Label>
+					<g:ListBox ui:field="chooseTo"></g:ListBox>
+				</g:HTMLPanel>
+			</div>
+		</g:HTMLPanel>
+<div style="float:left"  class="{style.matchDetails} {style.margin}">
+		<g:VerticalPanel>
+			<g:Label ui:field="teamPanelHeaderLabel" styleName="{style.teamPanelHeaderLabel}"></g:Label>
+			<g:HorizontalPanel ui:field="teamPanel">
+				<g:HTMLPanel width="50%" height="600px" ui:field="team1">
+				</g:HTMLPanel>
+				<g:HTMLPanel width="50%" height="600px" ui:field="team2">
+				</g:HTMLPanel>
+			</g:HorizontalPanel>
+
+		</g:VerticalPanel>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

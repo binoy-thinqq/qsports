@@ -1,0 +1,17 @@
+ step0)  >>>>>>> cd cloned directory
+ step1)  >>>>>>> ssh -i ec2.pem ubuntu@54.213.152.115
+ step2)  >>>>>>> sudo su
+ step3)  >>>>>>> rm -rf db.sqlite3
+ step4) >>>>>>> python manage.py syncdb
+ step5) >>>>>>> vim sportsapp/settings.py 
+////enable the commented code for server
+ step6) >>>>>>> python manage.py runserver 0.0.0.0:8000 
+
+step7)
+change Facebook  app site url to 
+http://ec2-54-213-152-115.us-west-2.compute.amazonaws.com:8000/
+
+step8)
+http://ec2-54-213-152-115.us-west-2.compute.amazonaws.com:8000/crkt/
+
+

@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=100%; initial-scale=1; maximum-scale=1; minimum-scale=1; user-scalable=no;"/>
+<meta name="viewport" content="width=100%; initial-scale=1; maximum-scale=1; minimum-scale=1; user-scalable=no;"/>
+<title>Cricket Konnect</title>
+
+<!-- css&js. Used bootstrap, jquery & backborn -->
+
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+
+<script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
+
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<link href="/static/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/static/css/common.css">
+
+
+<script language="JavaScript">
+       $(document).ready(function(){
+
+            $("#div-editteam").hide();
+            $("#div-team").show();
+
+            $("#div-editplayers").hide();
+            $("#div-players").show();
+
+
+////////////////////////////////// team save start ////////////////////////////////////////////////////
+            $("#btn-saveteam").click(function(){
+
+                var elem = document.getElementById('form-team').elements;
+                for(var i = 0; i < elem.length; i++){
+                    if(!elem[i].checkValidity()){
+                      return;
+                    }
+                }
+                var postData = $("#form-team").serializeArray();
+                var jsonData = { };
+                for(var i = 0, l = postData.length; i < l; i++) {
+                    jsonData[postData[i].name] = postData[i].value;
+                }
+                $.ajax({
+                        type: "POST",
+                        url: API_SAVE_TEAM,
+                        data: JSON.stringify(jsonData),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        }).done(function(data){
+                            $("#div-editteam").hide();
+                            $("#div-team").show();
+                            $("#in-id-teamId").val(data.teamId);
+                            $("#sp-description").text(data.description);
+                            $("#sp-teamName").text(data.teamName);
+                            $("#sp-city").text(data.city);
+                            $("#sp-state").text(data.state);
+                            $("#sp-country").text(data.country);
+                         }
+                );
+            });
+////////////////////////////////// team save end ////////////////////////////////////////////////////
+
+           $("#btn-cancelteam").click(function(){
+                window.location="/crkt/1/done"
+           });
+
+           $("#btn-clearteam").click(function(){
+                //clear all fields
+
+           });
+
+////////////////////////////////// team edit start ////////////////////////////////////////////////////
+
+            $("#btn-editteam").click(function(){
+                $("#in-id-teamId").hide();
+                $("#div-editteam").show();
+                $("#div-team").hide();
+           });
+
+            $("#btn-jointeam").click(function(){
+                 $("#btn-jointeam").hide();
+                  var jsonData = {};
+                 jsonData['teamId'] = $("#in-id-teamId").val();
+
+                 $.ajax({
+                        type: "POST",
+                        url: API_JOIN_TEAM,
+                        data: JSON.stringify(jsonData),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        }).done(function(data){
+                           });
+             });
+
+
+////////////////////////////////// team edit end ////////////////////////////////////////////////////
+
+
+////////////////////////////////// search player ////////////////////////////////////////////////////
+
+
+
+             $("#btn-player-search").click(function(){
+                 var jsonData = {};
+                 jsonData['email'] = $("#id-in-player-email").val();
+                 jsonData['name'] = $("#id-in-player-name").val();
+
+                 $.ajax({
+                        type: "POST",
+                        url: API_SEARCH,
+                        data: JSON.stringify(jsonData),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        }).done(function(data){
+                            $.each(data, function(idx, obj) {
+                            $('#div-player-search').append('<div class="form-group" id="div-player-1"> \
+                                                    <label class="col-sm-4 control-label">'+ obj.fname +'</label> \
+                                                    <label class="col-sm-4 control-label">'+ obj.email +'</label> \
+                                                    <label class="col-sm-2 control-label">'+ obj.city +'</label> \
+                                                    <div class="col-sm-1"> \
+                                                        <button id="btn-player-add" type="button" onClick="addPlayer(\'' + obj.fname + '\', + \'' + obj.id + '\')"  class="btn btn-default"> \
+                                                            <span class="glyphicon glyphicon-plus"></span> \
+                                                        </button> \
+                                                    </div> \
+                                                </div>');
+
+                            });
+
+                        }
+                        );
+
+             });
+
+////////////////////////////////// search player ////////////////////////////////////////////////////
+
+
+////////////////////////////////// add player click ////////////////////////////////////////////////////
+
+            $("#btn-add-player").click(function(){
+                $("#div-player-search").empty();
+                $("#ul-player-list").empty();
+            });
+
+////////////////////////////////// add player click ////////////////////////////////////////////////////
+
+   });
+
+
+
+
+////////////////////////////////// add player api call ////////////////////////////////////////////////////
+
+        function addPlayer(fname, id){
+            $('#ul-player-list').append('<li><a href="#">' + fname +'</a></li>');
+            var jsonData = {};
+            jsonData['teamId'] = $("#in-id-teamId").val();
+            jsonData['profileId'] = id;
+
+            $.ajax({
+                type: "POST",
+                url: API_ADD_PLAYER,
+                data: JSON.stringify(jsonData),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                }).done(function(data){
+
+                }
+            );
+
+        };
+
+////////////////////////////////// add player ////////////////////////////////////////////////////
+
+
+
+
+</script>
+<style>
+    .plus-icon{
+    background: url(/static/images/dd-icon.png) left top no-repeat;
+    padding-left: 30px;
+    line-height: 1px;
+    line-height: 21px;
+    display: block;
+    }
+
+    .cls-in-player{
+    height: 34px;
+    font-size: 14px;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    }
+
+</style>
+
+</head>
+
+<body>
+<header>
+    {% include "crkt/header.html" %}
+</header>
+
+<div id="div-editteam" class="wrapper page clearfix">
+    <div class="container">
+        <div id="div-teamnav" class="row">
+            <div class="row form-group">
+                <div class="col-xs-12">
+                    <ul class="nav nav-pills nav-justified thumbnail setup-panel">
+                        <li class="active"><a href="#step-1">
+                            <h4 class="list-group-item-heading">Team details</h4>
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="col-md-12 well setup-content text-center" id="step-1"
+                         style="display: block;background: url(/static/images/gradient-bg.gif) left bottom repeat-x #fff;">
+                        <div style="width: 90%;">
+                            <form class="form-horizontal" role="form" id="form-team" name="form1"
+                                  onsubmit="return false;">
+                                <div class="form-group">
+                                    <!-- django templating fails to set value for hidden fields, so will make this hidden on click of edit team-->
+                                    <input name="teamId" class="form-control" id="in-id-teamId" value="{{ teamId }}">
+
+                                    <label for="id-in-team-name" class="col-sm-2 control-label">Team name</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" name="teamName" class="form-control" id="id-in-team-name"
+                                               placeholder="Team name" required value="{{ teamName }}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="id-in-team-city" class="col-sm-2 control-label">City</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" name="city" class="form-control" id="id-in-team-city"
+                                               placeholder="City" required value="{{ city }}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="id-in-team-city" class="col-sm-2 control-label">State</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" name="state" class="form-control" id="id-in-team-state"
+                                               placeholder="State" required value="{{ state }}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="id-in-team-country" class="col-sm-2 control-label">Country</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" name="country" class="form-control" id="id-in-team-country"
+                                               placeholder="Country" required value="{{ country }}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="id-in-team-description"
+                                           class="col-sm-2 control-label">Description</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" name="description" class="form-control"
+                                               id="id-in-team-description" placeholder="Description" required
+                                               value="{{ description }}">
+                                    </div>
+                                </div>
+
+                                <div class="form-actions">
+                                    <input type="submit" value="Save team" id="btn-saveteam"
+                                           class="btn btn-success btn-lg" formaction="#"/>
+                                    <button type="button" id="btn-clearteam" class="btn btn-success btn-lg">Clear
+                                    </button>
+                                    <button type="button" id="btn-cancelteam" class="btn btn-success btn-lg">Cancel
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="div-team" class="wrapper page clearfix">
+<div class="pageLeft fL">
+<div class="team-details">
+    <div>
+            {% if teamEntryState == 2 %}
+                 <span>Request has been sent by the team. Please accept.</span>
+            {% elif teamEntryState == 3 %}
+                 <span>A request is already sent to the team.</span>
+            {% endif %}
+        </div>
+    <div class="player-header clearfix">
+        <div class="name-block fL">
+            <h2><span id="sp-teamName">{{ teamName }}</span></h2>
+                <span class="player-img fL"> <img src="/static/images/kings-xi-log.jpg" alt="Kings"> <span
+                        class="change-img"><a href="#">Change image</a></span> </span>
+
+            <div class="div-team-desc">
+                <ul class="country-det clearfix clear">
+                    <li><span id="sp-description">{{ description }}</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="sm-placeholder fR">
+            {% if editable == True %}
+                <span id="btn-editteam" class="edit-btn fR"><a href="#">Edit</a></span>
+            {% endif %}
+
+            {% if teamEntryState == 0%}
+               <span id="btn-jointeam" class="edit-btn fR"><a href="#">Join Team</a></span>
+            {% endif %}
+        </div>
+
+    </div>
+    <div class="div-team-info player-info clearfix">
+        <div class="player-history fL">
+            <ul class="team-profile">
+                <li><strong class="dark-col">City:</strong> <span id="sp-city" class="light-blue"><a href="#">{{ city }}</a></span></li>
+                <li><strong class="dark-col">State:</strong> <span id="sp-state" class="light-blue"><a href="#">{{ state }}</a></span></li>
+                <li><strong class="dark-col">Country:</strong> <span id="sp-country"
+                                                                     class="light-blue">{{ country }}</span>
+                </li>
+            </ul>
+            <div id="div-players">
+                <h4>Squad</h4>
+                <ul id="ul-squad-list" class="squad-list">
+                    {% for sq in teamPlayersVo %}
+                    <li><a href="#">{{sq.userInfo.firstName}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+    {% if editable == True %}
+            <button id="btn-add-player" class="btn btn-success btn-sm" data-toggle="modal"
+                    data-target="#div-playerModal">Add Player
+            </button>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- team statitics -->
+<div class="div-stat radius-box">
+    <h4 class="icons icon-statistics">Statistics</h4>
+    <table width="100%" border="0" cellpadding="8" class="txtAlnCenter">
+        <tbody>
+        <tr>
+            <th>&nbsp;</th>
+            <th>Match</th>
+            <th>Win</th>
+            <th>Loss</th>
+            <th>Tie</th>
+            <th>N.R</th>
+            <th>H.S</th>
+            <th>WIN%</th>
+        </tr>
+        {% for tst in teamStatsVo %}
+        <tr>
+            {% if tst.cricketFormat == 1 %}
+            <td>Test</td>
+            {% elif tst.cricketFormat == 2 %}
+            <td>ODI</td>
+            {% else %}
+            <td>T20</td>
+            {% endif %}
+            <td>{{tst.matches}}</td>
+            <td>{{tst.won}}</td>
+            <td>{{tst.lost}}</td>
+            <td>{{tst.draw}}</td>
+            <td>{{tst.noResult}}</td>
+            <td>{{tst.runsScored}}</td>
+            <td>{{tst.noResult}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="player-details">
+    <div class="div-player-rec radius-box">
+        <div>
+            <h4 class="icons icon-player-rec">Players records &amp; facts
+                <select id="sel-player" class="player-sel form-control">
+                    <option value="0">Select Player</option>
+                    {% for sq in teamPlayersVo %}
+                    <option value="{{sq.cricketProfileId}}">{{sq.userInfo.firstName}}</option>
+                    {% endfor %}
+                </select>
+            </h4>
+        </div>
+    </div>
+    <!-- player records -->
+    <div class="player-records">
+        <div id="div-pl-view">
+            <div><span> Please select a player to view records </span></div>
+            <div id="div-player-view">
+                <div class="player-records-inner clearfix">
+                    <div class="flexslider">
+
+                        <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                            <div class="player-rec-his-left fL txtAlnCenter">
+                                <img alt="No Image Available" src="https://lh3.googleusercontent.com/-p0tgi3ixwAU/AAAAAAAAAAI/AAAAAAAACfQ/DMX0hQFaBzA/s148-c-k/photo.jpg">
+
+                                <p><strong></strong></p>
+
+                                <p id="p-player"><br>
+                                </p>
+                            </div>
+                            <div class="player-rec-his-right fR">
+                                <ul class="tab-bbw clearfix">
+                                    <li><a id="a-batting" class="activeTab">Batting</a></li>
+                                    <li><a id="a-bowling" class="">Bowling</a></li>
+                                </ul>
+
+                                <div id="div-player-rec-right" class="tab-wrap">
+
+                                </div>
+                                    <div id="div-player-dec" class="div-player-dec">
+                                             <span class="dec-span">Description</span>
+                                     <div id="p-desc" class="p-dec">
+                                     </div>
+                                </div>
+                                <div id="add-m-btn" class="btn-wra clearfix">
+                                       <span class="addm green-btn btn-small fL">
+                                           <a id="a-add-mod" href="#">Add as Moderator</a>
+                                           </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</div>
+<div class="pageRight fR">
+    <div class="radius-box">
+        <h4><img src="/static/images/win-icon.png" alt="Win">Win %</h4>
+         <table width="100%" border="0" cellpadding="8" class="txtAlnCenter">
+        <tbody>
+        <tr>
+            <th style="text-align: center;">T20</th>
+             <th style="text-align: center;">ODI</th>
+             <th style="text-align: center;">Test</th>
+        </tr>
+          <tr>
+        {% for tst2 in teamStatsVo %}
+            {% if tst2.cricketFormat == 1 %}
+            <td><span class="win-per block txtAlnCenter"> {{tst2.winPercent}}% </span></td>
+            {% elif tst2.cricketFormat == 2 %}
+            <td><span class="win-per block txtAlnCenter"> {{tst2.winPercent}}% </span></td>
+            {% else %}
+            <td><span class="win-per block txtAlnCenter"> {{tst2.winPercent}}% </span></td>
+            {% endif %}
+
+        {% endfor %}
+
+         </tr>
+        </tbody>
+    </table>
+
+        </div>
+
+    <div class="radius-box">
+        <h4><img src="/static/images/team-icon.png" alt="Team fixtures">Team fixtures</h4>
+        <table width="100%" border="0" cellpadding="8" class="match-fix">
+            <tbody>
+            <tr>
+                <th width="4%">Match</th>
+                <th width="41%">Date &amp; time</th>
+                <th width="37%">VS</th>
+                <th width="18%">Ground</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>04-may-2003<br>
+                    20:00 1ST
+                </td>
+                <td>RR vs KXP</td>
+                <td>Jaipur</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>04-may-2003<br>
+                    20:00 1ST
+                </td>
+                <td>RR vs KXP</td>
+                <td>Jaipur</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>04-may-2003<br>
+                    20:00 1ST
+                </td>
+                <td>RR vs KXP</td>
+                <td>Jaipur</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>04-may-2003<br>
+                    20:00 1ST
+                </td>
+                <td>RR vs KXP</td>
+                <td>Jaipur</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>04-may-2003<br>
+                    20:00 1ST
+                </td>
+                <td>RR vs KXP</td>
+                <td>Jaipur</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>04-may-2003<br>
+                    20:00 1ST
+                </td>
+                <td>RR vs KXP</td>
+                <td>Jaipur</td>
+            </tr>
+            </tbody>
+        </table>
+        <span class="showMat block"> <a href="#">Show all matches</a> </span></div>
+    <div class="radius-box">
+        <h4><img src="/static/images/team-news.png" alt="Win">Team news</h4>
+        <ul class="news-list">
+            <li><a href="#">Young Mandeep takes up the challenge</a></li>
+            <li><a href="#">Time running out, Harris banks on the shortest format</a></li>
+            <li><a href="#">Kings XI Punjab in contention for playoffs berth: Hussey</a></li>
+        </ul>
+        <span class="showMat block"> <a href="#">Show all matches</a> </span></div>
+</div>
+</div>
+<footer>
+    {% include "crkt/footer.html" %}
+</footer>
+
+<!-- Add player model -->
+<div class="modal fade" id="div-playerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 id="myModalLabel" class="modal-title">Add Players</h4>
+            </div>
+            <div class="modal-body">
+                <div style="border-top: medium none; margin-top: -16px;" id="div-playernav" class="row">
+                    <div style="margin-bottom: -1px;" class="row form-group">
+                    </div>
+                    <div style="margin-top: -5px;" class="row">
+                        <div style="margin-right: -16px; margin-left: 0px;" class="col-xs-12">
+                            <div class="col-md-12 well setup-content text-center" id="step-player-1"
+                                 style="display: block; background: url(&quot;/static/images/gradient-bg.gif&quot;) repeat-x scroll left bottom rgb(255, 255, 255); border: medium none;">
+                                <div style="width: 90%;">
+                                    <form class="form-horizontal" role="form" id="form-players" name="form1"
+                                          onsubmit="return false;">
+                                        <div class="form-group">
+                                            <div class="col-sm-5">
+                                                <input type="text" name="description" class="form-control"
+                                                       id="id-in-player-email" placeholder="Description" required=""
+                                                       value="email id">
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <input type="text" name="description" class="form-control"
+                                                       id="id-in-player-name" placeholder="Description" required=""
+                                                       value="Name">
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <button id="btn-player-search" type="button" class="btn btn-default">
+                                                    <span class="glyphicon glyphicon-search"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="border: medium none; margin-top: -19px; margin-bottom: -30px;"
+                         class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Search result</h3>
+                        </div>
+                        <div style="width: 100%; border: medium none;" class="panel-body">
+                            <div style="margin-bottom: -23px;" class="row">
+                                <div style="" class="col-md-16">
+                                    <div class="" id="step-player-2"
+                                         style="display: block; background: url(&quot;/static/images/gradient-bg.gif&quot;) repeat-x scroll left bottom rgb(255, 255, 255); border: medium none; margin-top: -15px; padding: 20px;">
+                                        <div style="margin-top: 4px;">
+                                            <form class="form-horizontal" role="form" id="form-allplayers" name="form1"
+                                                  onsubmit="return false;" style="">
+                                                <div id="div-player-search">
+                                                    <!-- generated from JS search click-->
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="border: medium none; margin-top: -19px; margin-bottom: -30px;"
+                         class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Squad</h3>
+                        </div>
+                        <div style="width: 100%; border: medium none;" class="panel-body">
+                            <div id="div-player-add">
+                                <ul id="ul-player-list" class="squad-list">
+                                    <!-- generated from JS add..plus icon click-->
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                <button onclick="javascript:window.location.reload(true)" data-dismiss="modal" id="btn-save-player"
+                        class="btn btn-success" type="button">Save changes
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add moderatpr success model -->
+<div class="modal fade" id="div-add-mod-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title">Success</h4>
+            </div>
+            <div class="mod-success modal-body">
+                <h2>
+                    <p>Added <span> </span> as moderator to this team</p>
+                </h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- back born scripts -->
+<script src="/static/js/team-model.js"></script>
+<script src="/static/js/team-view.js"></script>
+
+
+<script type="text/template" id="player-rec-template">
+
+
+    <div id="div-batting" class="tab-bbw-blk def-tab-bbw" style="display: block;">
+        <table width="100%" cellpadding="8" border="0" class="txtAlnCenter">
+            <tbody>
+            <tr>
+                <th>Format</th>
+                <th>Mat</th>
+                <th>Runs</th>
+                <th>SR</th>
+                <th>Avg</th>
+                <th>HS</th>
+                <th>NO</th>
+                <th>100s</th>
+                <th>50s</th>
+            </tr>
+            <% _.each(pl.getBatting(), function(batting) { %>
+            <tr>
+                <% if (batting.cricketFormat == 1) {%>
+                <td>Test</td>
+                <% } %>
+                <% if (batting.cricketFormat == 2) {%>
+                <td>ODI</td>
+                <% } %>
+                <% if (batting.cricketFormat == 3) {%>
+                <td>T20</td>
+                <% } %>
+                <td>  <%= batting.matches %></td>
+                <td>  <%= batting.runs %></td>
+                <td>  <%= batting.strikeRate %></td>
+                <td>  <%= batting.average %></td>
+                <td>  <%= batting.average %></td>
+                <td>  <%= batting.notOuts %></td>
+                <td>  <%= batting.hundreds %></td>
+                <td>  <%= batting.fifties %></td>
+            </tr>
+            <% }); %>
+
+            </tbody>
+        </table>
+    </div>
+    <div id="div-bowling" class="tab-bbw-blk" style="display: none;">
+        <table width="100%" cellpadding="8" border="0" class="txtAlnCenter">
+            <tbody>
+            <tr>
+                <th>Format</th>
+                <th>Mat</th>
+                <th>Inn</th>
+                <th>Ba</th>
+                <th>Av</th>
+                <th>Wic</th>
+                <th>Eco</th>
+                <th>5's</th>
+                <th>best</th>
+            </tr>
+            <% _.each(pl.getBowling(), function(bowling) { %>
+            <tr>
+                <% if (bowling.cricketFormat == 1) {%>
+                <td>Test</td>
+                <% } %>
+                <% if (bowling.cricketFormat == 2) {%>
+                <td>ODI</td>
+                <% } %>
+                <% if (bowling.cricketFormat == 3) {%>
+                <td>T20</td>
+                <% } %>
+                <td>  <%= bowling.matches %></td>
+                <td>  <%= bowling.innings %></td>
+                <td>  <%= bowling.balls %></td>
+                <td>  <%= bowling.average %></td>
+                <td>  <%= bowling.wickets %></td>
+                <td>  <%= bowling.economy %></td>
+                <td>  <%= bowling.fiveWickets %></td>
+                <td>  <%= bowling.bestBowling %></td>
+            </tr>
+            <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:p1="urn:import:com.google.gwt.user.cellview.client"
+	xmlns:p2="urn:import:com.google.gwt.user.datepicker.client">
+	<ui:style>
+		.marginright{
+			margin:0px 10px 0px 0px
+
+		}
+	</ui:style>
+		<g:VerticalPanel width="100%" stylePrimaryName="panel">
+							<g:Label text="Edit Profile" styleName="title panelTitle"
+									width="100%" />
+					<g:HTMLPanel width="100%" >
+						<table width="100%">
+
+						<tr>
+							<td>
+							<p1:CellList width="100%" ui:field="errorList" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<g:Label text="Display Name" />
+							</td>
+							<td>
+								<g:TextBox ui:field="txtName" width="250px"/>
+							</td>
+							<td>
+								<g:Image url="images/error-icon.png" ui:field="nameErrorMarker"
+									visible="false" />
+							</td>
+							<td><g:Label stylePrimaryName="hText" text="Appears in Profile and Scorecard." /></td>
+						</tr>
+						<tr>
+							<td>
+								<g:Label text="Email"   />
+							</td>
+							<td style="padding:6px 0px 6px 0px">
+								<g:Label
+									ui:field="lblEmail" width="250px" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<g:Label text="Gender"  />
+							</td>
+							<td >
+								<g:ListBox ui:field="listSex" width="250px"/>
+							</td>
+							<td>
+								<g:Image url="images/error-icon.png" ui:field="listSexErrorMarker"
+									visible="false" />
+							</td>
+						</tr>
+						<tr>
+							<td >
+								<g:Label text="Date of Birth"  />
+							</td>
+							<td >
+								<g:FocusPanel ui:field="dobFocus">
+									<p2:DateBox	ui:field="dob" width="125px"/>
+								</g:FocusPanel>
+								
+							</td>
+							<td>
+								<g:Image url="images/error-icon.png" ui:field="dobErrorMarker"
+									visible="false" />
+							</td>
+							<td><g:Label stylePrimaryName="hText" text="Ex: 09 Jan 1990" /></td>
+						</tr>
+						<tr>
+							<td >
+								<g:Label text="City"  />
+							</td>
+							<td >
+								<g:TextBox ui:field="txtCity" width="250px"/>
+							</td>
+							<td>
+								<g:Image url="images/error-icon.png" ui:field="txtCityErrorMarker"
+									visible="false" />
+							</td>
+						</tr>
+
+						<tr>
+							<td>
+								<g:Label text="State/Provice"  />
+							</td>
+							<td >
+								<g:TextBox ui:field="txtState" width="250px"/>
+							</td>
+							<td>
+								<g:Image url="images/error-icon.png" ui:field="txtStateErrorMarker"
+									visible="false" />
+							</td>
+						</tr>
+						<tr>
+							<td >
+								<g:Label text="Country"  />
+							</td>
+							<td >
+								<g:ListBox ui:field="listCountry" width="250px"/>
+							</td>
+							<td>
+								<g:Image url="images/error-icon.png" ui:field="listCountryErrorMarker"
+									visible="false" />
+							</td>
+						</tr>
+						<tr>
+							<td >
+								<g:Label text="Time Zone"  width="250px"/>
+							</td>
+							<td >
+								<g:ListBox ui:field="listTimeZone" />
+							</td>
+							<td>
+								<g:Image url="images/error-icon.png" ui:field="listTimeZoneErrorMarker"
+									visible="false" />
+							</td>
+							<td>
+							<g:Label stylePrimaryName="hText" text="Used to show local time"/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<g:Label text="Batting Style"/>
+							</td>
+							<td>
+								<g:ListBox  ui:field="listBattingHand" width="125px"/>
+								<g:ListBox ui:field="listBattingStyle" width="125px"/>
+							</td>
+							<td>
+									<g:Image url="images/error-icon.png" ui:field="battingHandErrorMarker"
+										visible="false" />
+									<g:Image url="images/error-icon.png" ui:field="listBattingStyleErrorMarker"
+										visible="false" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<g:Label text="Bowling Style" width=""  />
+							</td>
+							<td>
+								<g:ListBox ui:field="listBowlingHand" width="125px"/>
+								<g:ListBox ui:field="listBowlingStyle" width="125px"/>
+							</td>
+							<td>
+								<g:Image url="images/error-icon.png" ui:field="bowlingHandErrorMarker"
+									visible="false" />
+								<g:Image url="images/error-icon.png" ui:field="listBowlingStyleErrorMarker"
+									visible="false" />
+							</td>
+						</tr>
+						<tr>
+							<td >
+								<g:Label text="Field Position"  width="125px"/>
+							</td>
+							<td >
+								<g:ListBox ui:field="listFieldPosition" />
+							</td>
+							<td>
+								<g:Image url="images/error-icon.png" ui:field="listFieldPositionErrorMarker"
+									visible="false" />
+							</td>
+						</tr>
+						</table>
+						</g:HTMLPanel>
+						<g:Cell width="100%" horizontalAlignment="ALIGN_CENTER">
+							<g:HorizontalPanel>
+								<g:Cell width="80%" horizontalAlignment="ALIGN_RIGHT">
+									<g:Button text="Save Profile" ui:field="btnProfileSave"
+										styleName="actionButton {style.marginright}" />
+								</g:Cell>
+								<g:Cell horizontalAlignment="ALIGN_RIGHT">
+									<g:Button text="Cancel" ui:field="btnCancel" styleName="gbutton" />
+								</g:Cell>
+							</g:HorizontalPanel>
+						</g:Cell>
+			</g:VerticalPanel>
+</ui:UiBinder> 

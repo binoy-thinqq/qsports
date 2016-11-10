@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	<ui:style>
+		.panel {
+
+		}
+		
+		.centralarea {
+			background-color: #FEFEFE;
+			padding-top: 25px;
+		}
+		
+
+		.pageheader{
+			
+	}
+		.footer {
+		margin-top:20px;
+		border-top-style:solid;
+		border-top-width:1px;
+		border-top-color:#DDDDDD;
+
+		}
+	</ui:style>
+
+	<g:VerticalPanel width="100%" styleName="{style.centralarea}" height="100%">
+		<g:Cell horizontalAlignment="ALIGN_CENTER">
+			<g:VerticalPanel height="120px" styleName="articlesection" width="900px">
+				<g:Cell horizontalAlignment="ALIGN_CENTER">
+					<g:Label text="Home for sports ! Live the sport !" width="850px" horizontalAlignment="ALIGN_LEFT" styleName="normaltext"/>
+				</g:Cell>
+			</g:VerticalPanel>
+		</g:Cell>
+		<g:InlineLabel text="" ui:field="lblRegSuccMsg"></g:InlineLabel>
+		</g:VerticalPanel>
+</ui:UiBinder>

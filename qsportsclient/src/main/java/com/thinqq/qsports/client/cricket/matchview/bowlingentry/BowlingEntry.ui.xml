@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns="com.thinqq.qsports.client.cricket.matchview.bowlingentry" xmlns:ui='urn:ui:com.google.gwt.uibinder' xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+	<g:HorizontalPanel ui:field="bowlingEntry" width="380px" height="30px" verticalAlignment="ALIGN_MIDDLE" horizontalAlignment="ALIGN_LEFT">
+		<g:Cell width="100px">
+			<g:Hyperlink ui:field="bowler" width="100px" height="">Rakesh Jeeva</g:Hyperlink>
+		</g:Cell>
+		<g:Cell width="40px" horizontalAlignment="ALIGN_CENTER">
+			<g:Label ui:field="overs" text="9999"/>
+		</g:Cell>
+		<g:Cell width="40px" horizontalAlignment="ALIGN_CENTER">
+			<g:Label ui:field="maidens" text="9999"/>
+		</g:Cell>
+		<g:Cell width="40px" horizontalAlignment="ALIGN_CENTER">
+			<g:Label ui:field="runs" text="9999"/>
+		</g:Cell>
+		<g:Cell width="40px" horizontalAlignment="ALIGN_CENTER">
+			<g:Label ui:field="wickets" text="9999"/>
+		</g:Cell>
+		<g:Cell width="40px" horizontalAlignment="ALIGN_CENTER">
+			<g:Label ui:field="economy" text="100.00"/>
+		</g:Cell>
+		<g:Cell width="40px" horizontalAlignment="ALIGN_CENTER">
+			<g:Label ui:field="wides" text="9999"/>
+		</g:Cell>
+		<g:Cell width="40px" horizontalAlignment="ALIGN_CENTER">
+			<g:Label ui:field="noballs" text="9999"/>
+		</g:Cell>
+	</g:HorizontalPanel>
+</ui:UiBinder>

@@ -1,0 +1,31 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:p1="urn:import:com.google.gwt.user.datepicker.client"
+	xmlns:c="urn:import:com.thinqq.qsports.client.cricket">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:HTMLPanel width="100%" height="1000px">
+	<g:Label ui:field="errorMsg"></g:Label>
+		<g:HTMLPanel styleName="actionButtonRight">
+			<g:Button ui:field="saveButton"></g:Button>
+			<g:Button ui:field="completeMatch"></g:Button>
+		</g:HTMLPanel>
+		<div  id="scorePanel" name="scorePanel">
+			<g:TabPanel ui:field="scorecardTabPanel">
+				<g:Tab text="Create Match">
+					<c:EnterMatchDetails ui:field="enterMatchDetails"></c:EnterMatchDetails>
+				</g:Tab>
+				<g:Tab text="Enter Team">
+					<c:EnterTeamDetails ui:field="enterTeamDetails"></c:EnterTeamDetails>
+				</g:Tab>
+				<g:Tab text="Enter Scorecard">
+					<c:EnterScoreCardDetails ui:field="enterScorecardDetails"></c:EnterScoreCardDetails>
+
+				</g:Tab>
+			</g:TabPanel>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

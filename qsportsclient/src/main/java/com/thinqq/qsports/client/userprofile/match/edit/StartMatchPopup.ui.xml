@@ -1,0 +1,118 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" 
+	xmlns:p2="urn:import:com.google.gwt.user.datepicker.client">
+	<ui:style>
+		.marginright {
+			margin: 0px 10px 0px 0px
+		}
+		.alignRight{
+			text-align:right;
+		}
+	</ui:style>
+	<g:VerticalPanel width="100%" stylePrimaryName="panel">
+		<g:Label text="Start Match" styleName="title panelTitle"
+			 />
+		<g:HTMLPanel width="100%">
+			<table width="100%">
+							<tr>
+					<td width="15%" style="{style.alignRight}">
+						<g:InlineLabel text="Toss won by" width="250px" />
+					</td>
+					<td width="40%">
+						<g:ListBox ui:field="tossWonList" width="250px" />
+					</td>
+					<td width="5%">
+						<g:Image url="images/error-icon.png" ui:field="tossWonListErrorMarker"
+							visible="false" />
+					</td>
+					<td width="40%">
+						<g:Label stylePrimaryName="hText"
+							text="Choose team winning the toss" />
+							<g:Label stylePrimaryName="hText"
+							text="Mandatory" />
+					</td>
+				</tr>
+				<tr>
+					<td width="15%" style="{style.alignRight}">
+						<g:Label text="Toss winning team elected to" />
+					</td>
+					<td width="40%">
+						<g:ListBox ui:field="tossChoice" width="250px" />
+					</td>
+					<td width="5%">
+						<g:Image ui:field="tossChoiceErrorMarker" url="images/error-icon.png" visible="false" />
+					</td>
+					<td width="40%">
+						<g:Label stylePrimaryName="hText"
+							text="Choose batting or bowling" />
+							<g:Label stylePrimaryName="hText"
+							text="Mandatory" />
+					</td>
+				</tr>
+				<tr>
+					<td width="15%" style="{style.alignRight}" >
+						<g:Label text="Match Officials" />
+						
+					</td>
+					<td width="45%">
+						<g:TextBox ui:field="officials" width="260px" />
+
+					</td>
+					<td width="5%">
+						<g:Image url="images/error-icon.png" ui:field="officialsErrorMarker"
+							visible="false" />
+					</td>
+					<td width="40%">
+					<g:Label stylePrimaryName="hText" text="Refree/Unpire details" />
+					<g:Label stylePrimaryName="hText" text="Optional" />
+					</td>
+				</tr>
+				<tr>
+					<td width="15%" style="{style.alignRight}">
+						<g:Label text="Weather" />
+					</td>
+					<td width="40%">
+							<g:TextBox ui:field="weatherDetails" width="250px" />
+					</td>
+					<td width="5%">
+						<g:Image url="images/error-icon.png" ui:field="weatherDetailsErrorMarker"
+							visible="false" />
+					</td>
+					<td width="40%">
+						<g:Label stylePrimaryName="hText" text="Weather" />
+						<g:Label stylePrimaryName="hText" text="Ex: Humid, Overcast, Cold" />
+					</td>
+				</tr>
+				<tr>
+					<td width="15%" style="{style.alignRight}">
+						<g:Label text="Pitch" />
+					</td>
+					<td width="40%">
+						<g:TextBox ui:field="pitchDetails" width="250px" />
+					</td>
+					<td width="5%">
+						<g:Image url="images/error-icon.png" ui:field="pitchDetailsErrorMarker"
+							visible="false" />
+					</td>
+					<td width="40%">
+						<g:Label stylePrimaryName="hText" text="Pitch condition" />
+						<g:Label stylePrimaryName="hText" text="Ex: Dry Mat pitch, Grassy turf" />
+					</td>
+				</tr>
+
+			</table>
+		</g:HTMLPanel>
+		<g:Cell width="100%" horizontalAlignment="ALIGN_CENTER">
+			<g:HorizontalPanel>
+				<g:Cell width="85%" horizontalAlignment="ALIGN_RIGHT">
+					<g:Button text="Create Match" ui:field="btnStartMatch"
+						styleName="actionButton {style.marginright}" />
+				</g:Cell>
+				<g:Cell horizontalAlignment="ALIGN_RIGHT">
+					<g:Button text="Cancel" ui:field="btnCancel" styleName="gbutton" />
+				</g:Cell>
+			</g:HorizontalPanel>
+		</g:Cell>
+	</g:VerticalPanel>
+</ui:UiBinder> 

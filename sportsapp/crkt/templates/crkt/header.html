@@ -1,0 +1,177 @@
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.js"></script>
+<script language="JavaScript">
+    var user = new Object();
+    var profile = new Object();
+    const API_SAVE_TEAM ="/crkt/api/team/";
+    const API_SEARCH ="/crkt/api/searchplayer/";
+    const API_ADD_PLAYER ="/crkt/api/addplayer/";
+    const API_ADD_MOD ="/crkt/api/addmod/";
+    const API_GET_USER_PROFILE = '/crkt/api/getuserprofile/';
+    const API_GET_TEAM = '/crkt/api/getteam/';
+    const API_GETTEAM = '/crkt/api/getallteam';
+    const API_SAVE_MATCH = '/crkt/api/savematch';
+    const API_GET_MATCH = '/crkt/api/getmatch/';
+    const API_SEARCH_TEAM = '/crkt/api/searchteam/';
+    const API_ADD_PLAYER_TO_MATCH = '/crkt/api/addplayermatch/';
+    const API_JOIN_TEAM = '/crkt/api/jointeam';
+    const API_GET_NOTIFICATIONS = '/crkt/api/getnotifications';
+    const API_ADD_TO_TEAM = '/crkt/api/addtoteam';
+
+    const API_PROFILE="/crkt/api/profile/";
+    const ALL_FIELD_POSITIONS = {1:"Third Man",2:"Slip",3:"Gully", 4:"Point", 5:"Fine Leg", 6:"Square Leg",
+                7:"Cover", 8:"Mid wicket",9:"Mid Off", 10:"Mid On", 11:"Long Off",12:"Long On",
+                13:"All Positions"}
+    const HAND_TYPE = {0: 'Right Handed', 1: 'Left Handed', 2: 'Both'}
+    const BATTING_ORDER = {1: 'Opening', 2: 'Top Order', 3: 'Middle Order', 4: 'Lower Order', 5: 'Lower Order', 6: 'Any Position'}
+    const BOWLING_STYLE = {0: 'fast bowler',1: 'spin bowler', 2: 'medium-pace bowler'}
+    const GENDER_CHOICE = {M: 'Male',F: 'Female'}
+    const COUNTRY = {"AU":"Australia", "BD":"Bangladesh", "CA":"Canada", "IN":"India", "KE":"Kenya","NL":"Netherlands",
+                        "PK":"Pakistan", "ZA":"South Africa","LK":"Sri Lanka", "GB":"United Kingdom", "US":"United States",
+                        "ZW":"Zimbabwe"}
+    const CONTACT_SHARE_SCOPE = { "T":"Team Mates","A":"All", "N":"None"}
+    const COUNTRY_TIMEZONE = {
+  "AU": [
+    "Australia/Lord_Howe",
+    "Antarctica/Macquarie",
+    "Australia/Hobart",
+    "Australia/Currie",
+    "Australia/Melbourne",
+    "Australia/Sydney",
+    "Australia/Broken_Hill",
+    "Australia/Brisbane",
+    "Australia/Lindeman",
+    "Australia/Adelaide",
+    "Australia/Darwin",
+    "Australia/Perth",
+    "Australia/Eucla"
+  ],
+  "BD": [
+    "Asia/Dhaka"
+  ],
+  "CA": [
+    "America/St_Johns",
+    "America/Halifax",
+    "America/Glace_Bay",
+    "America/Moncton",
+    "America/Goose_Bay",
+    "America/Blanc-Sablon",
+    "America/Montreal",
+    "America/Toronto",
+    "America/Nipigon",
+    "America/Thunder_Bay",
+    "America/Iqaluit",
+    "America/Pangnirtung",
+    "America/Resolute",
+    "America/Atikokan",
+    "America/Rankin_Inlet",
+    "America/Winnipeg",
+    "America/Rainy_River",
+    "America/Regina",
+    "America/Swift_Current",
+    "America/Edmonton",
+    "America/Cambridge_Bay",
+    "America/Yellowknife",
+    "America/Inuvik",
+    "America/Creston",
+    "America/Dawson_Creek",
+    "America/Vancouver",
+    "America/Whitehorse",
+    "America/Dawson"
+  ],
+  "IN": [
+    "Asia/Kolkata"
+  ],
+  "KE": [
+    "Africa/Nairobi"
+  ],
+  "NL": [
+    "Europe/Amsterdam"
+  ],
+  "PK": [
+    "Asia/Karachi"
+  ],
+  "ZA": [
+    "Africa/Johannesburg"
+  ],
+  "LK": [
+    "Asia/Colombo"
+  ],
+  "GB": [
+    "Europe/London"
+  ],
+  "US": [
+    "America/New_York",
+    "America/Detroit",
+    "America/Kentucky/Louisville",
+    "America/Kentucky/Monticello",
+    "America/Indiana/Indianapolis",
+    "America/Indiana/Vincennes",
+    "America/Indiana/Winamac",
+    "America/Indiana/Marengo",
+    "America/Indiana/Petersburg",
+    "America/Indiana/Vevay",
+    "America/Chicago",
+    "America/Indiana/Tell_City",
+    "America/Indiana/Knox",
+    "America/Menominee",
+    "America/North_Dakota/Center",
+    "America/North_Dakota/New_Salem",
+    "America/North_Dakota/Beulah",
+    "America/Denver",
+    "America/Boise",
+    "America/Shiprock",
+    "America/Phoenix",
+    "America/Los_Angeles",
+    "America/Anchorage",
+    "America/Juneau",
+    "America/Sitka",
+    "America/Yakutat",
+    "America/Nome",
+    "America/Adak",
+    "America/Metlakatla",
+    "Pacific/Honolulu"
+  ],
+  "ZW": [
+    "Africa/Harare"
+  ]
+}
+</script>
+<div class="wrapper clearfix">
+    <span class="logo fL"><a href="/crkt/1/done"><img src="/static/images/logo.png" width="124" height="24" alt="logo"></a></span>
+    <ul class="topNav fL" style="margin-bottom: auto;">
+        <li>
+            <button onClick="window.location='/crkt/1/done'" class="btn btn-primary btn-lg" type="button">
+                <span class="glyphicon glyphicon-home"></span> Home
+            </button>
+        </li>
+        <li>
+            <div class="btn-group">
+                <button data-toggle="dropdown" class="btn btn-primary btn-lg dropdown-toggle" type="button">
+                    <span class="glyphicon glyphicon-plus-sign"></span> Create new
+                </button>
+                <ul role="menu" class="dropdown-menu">
+                    <li><a href="/crkt/1/team/000">Team</a></li>
+                    <li class="divider"></li>
+                    <li><a href="/crkt/1/match/000">Match</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Score Card</a></li>
+
+                </ul>
+            </div>
+        </li>
+        <li>
+            <button class="btn btn-primary btn-lg" type="button">
+                <span class="glyphicon glyphicon-user"></span> Invite Friends
+            </button>
+        </li>
+    </ul>
+    <div class="player-login fR">
+        <a href="javascript:void(0);" class="login-trigger">
+            <img src="{{user.avatar}}?height=30&width=25" class="fL" alt="Profile"> {{user.username}}
+        </a>
+        <ul class="acc-li">
+            <li><a href="#"><img src="/static/images/icon-settings.png" alt="Setting"> Setting</a></li>
+            <li><a href="#"><img src="/static/images/icon-logout.png" alt="Logout"> Logout</a></li>
+        </ul>
+    </div>
+</div>

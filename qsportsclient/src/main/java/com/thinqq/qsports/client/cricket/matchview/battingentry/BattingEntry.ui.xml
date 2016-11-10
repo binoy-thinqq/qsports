@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns="com.thinqq.qsports.client.cricket.matchview.battingentry" xmlns:ui='urn:ui:com.google.gwt.uibinder' xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+	<g:HorizontalPanel ui:field="battingEntry" width="580px" height="30px" verticalAlignment="ALIGN_MIDDLE" horizontalAlignment="ALIGN_LEFT">
+		<g:Cell horizontalAlignment="ALIGN_CENTER" width="20px">
+			<g:Label ui:field="captain" text="S" visible="false" width=""/>
+		</g:Cell>
+		<g:Cell width="20px" horizontalAlignment="ALIGN_CENTER">
+			<g:Label ui:field="wicketKeeper" visible="false" text="W"/>
+		</g:Cell>
+		<g:Cell width="10px" horizontalAlignment="ALIGN_CENTER">
+			<g:Label ui:field="strikeMarker" visible="false" text=" * "/>
+		</g:Cell>
+		<g:Cell width="100px">
+			<g:Hyperlink ui:field="batsman" width="100px" height="">Rakesh Jeeva</g:Hyperlink>
+		</g:Cell>
+		<g:Cell width="15" horizontalAlignment="ALIGN_CENTER">
+			<g:Label ui:field="fielder1Label" text="C "/>
+		</g:Cell>
+		<g:Cell width="100px">
+			<g:Hyperlink ui:field="fielder1" width="">Raja</g:Hyperlink>
+		</g:Cell>
+		<g:Cell width="15" horizontalAlignment="ALIGN_CENTER">
+			<g:Label ui:field="bowlerOrFielder2Label" text="B "/>
+		</g:Cell>
+		<g:Cell width="100px">
+			<g:Hyperlink ui:field="bowlerOrFielder2">Raj Kumar</g:Hyperlink>
+		</g:Cell>
+		<g:Cell width="40px" horizontalAlignment="ALIGN_CENTER">
+			<g:Label ui:field="runs" text="9999"/>
+		</g:Cell>
+		<g:Cell width="40px" horizontalAlignment="ALIGN_CENTER">
+			<g:Label ui:field="ballsFaced" text="9999"/>
+		</g:Cell>
+		<g:Cell width="40px" horizontalAlignment="ALIGN_CENTER">
+			<g:Label ui:field="strikeRate" text="100.00"/>
+		</g:Cell>
+		<g:Cell width="40px" horizontalAlignment="ALIGN_CENTER">
+			<g:Label ui:field="fours" text="9999"/>
+		</g:Cell>
+		<g:Cell width="40px" horizontalAlignment="ALIGN_CENTER">
+			<g:Label ui:field="sixes" text="9999"/>
+		</g:Cell>
+	</g:HorizontalPanel>
+</ui:UiBinder>

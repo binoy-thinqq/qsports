@@ -1,0 +1,1116 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.2.4
+-- Dumped by pg_dump version 9.2.4
+-- Started on 2014-10-25 12:56:16
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 7 (class 2615 OID 33783)
+-- Name: cricket; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA cricket;
+
+
+ALTER SCHEMA cricket OWNER TO postgres;
+
+SET search_path = cricket, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 169 (class 1259 OID 33784)
+-- Name: auth_key; Type: TABLE; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE auth_key (
+    auth_key_id integer NOT NULL,
+    user_id integer NOT NULL,
+    key character varying(500) NOT NULL,
+    expires_on timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE cricket.auth_key OWNER TO postgres;
+
+--
+-- TOC entry 170 (class 1259 OID 33790)
+-- Name: auth_key_seq; Type: SEQUENCE; Schema: cricket; Owner: postgres
+--
+
+CREATE SEQUENCE auth_key_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+    CYCLE;
+
+
+ALTER TABLE cricket.auth_key_seq OWNER TO postgres;
+
+--
+-- TOC entry 171 (class 1259 OID 33792)
+-- Name: batting_stats; Type: TABLE; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE batting_stats (
+    batting_stats_id integer NOT NULL,
+    cricket_profile_id integer NOT NULL,
+    matches smallint DEFAULT 0,
+    innings smallint DEFAULT 0,
+    not_outs smallint DEFAULT 0,
+    runs smallint DEFAULT 0,
+    strike_rate double precision DEFAULT 0.0,
+    average double precision DEFAULT 0.0,
+    hundreds smallint DEFAULT 0,
+    double_hundreds smallint DEFAULT 0,
+    tripple_hundreds smallint DEFAULT 0,
+    fifties smallint DEFAULT 0,
+    thirties smallint DEFAULT 0,
+    sixes smallint DEFAULT 0,
+    fours smallint DEFAULT 0,
+    cricket_format smallint,
+    created_time timestamp without time zone,
+    updated_time timestamp without time zone NOT NULL,
+    balls_faced integer,
+    hs character varying(20)
+);
+
+
+ALTER TABLE cricket.batting_stats OWNER TO postgres;
+
+--
+-- TOC entry 172 (class 1259 OID 33808)
+-- Name: batting_stats_seq; Type: SEQUENCE; Schema: cricket; Owner: postgres
+--
+
+CREATE SEQUENCE batting_stats_seq
+    START WITH 9
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE cricket.batting_stats_seq OWNER TO postgres;
+
+--
+-- TOC entry 173 (class 1259 OID 33810)
+-- Name: bowling_stats; Type: TABLE; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE bowling_stats (
+    bowling_stats_id integer NOT NULL,
+    cricket_profile_id integer NOT NULL,
+    matches smallint DEFAULT 0,
+    innings smallint DEFAULT 0,
+    balls smallint DEFAULT 0,
+    wickets smallint DEFAULT 0,
+    average double precision DEFAULT 0.0,
+    economy double precision DEFAULT 0.0,
+    runs smallint DEFAULT 0,
+    three_wickets smallint DEFAULT 0,
+    five_wickets smallint DEFAULT 0,
+    catches smallint DEFAULT 0,
+    stumps smallint DEFAULT 0,
+    best_bowling character varying(10),
+    cricket_format smallint,
+    updated_time timestamp without time zone NOT NULL,
+    created_time timestamp without time zone
+);
+
+
+ALTER TABLE cricket.bowling_stats OWNER TO postgres;
+
+--
+-- TOC entry 174 (class 1259 OID 33824)
+-- Name: bowling_stats_seq; Type: SEQUENCE; Schema: cricket; Owner: postgres
+--
+
+CREATE SEQUENCE bowling_stats_seq
+    START WITH 9
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE cricket.bowling_stats_seq OWNER TO postgres;
+
+--
+-- TOC entry 175 (class 1259 OID 33826)
+-- Name: cricket_match; Type: TABLE; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE cricket_match (
+    match_id integer NOT NULL,
+    match_date timestamp without time zone,
+    team_id integer NOT NULL,
+    opp_team_id integer,
+    opp_team_name character varying(100),
+    ground_name character varying(100),
+    ground_loc character varying(100),
+    city character varying(100),
+    state character varying(100),
+    country character varying(100),
+    max_players smallint,
+    max_overs smallint,
+    cricket_format smallint,
+    match_status smallint,
+    toss_won_by smallint,
+    elected_to smallint,
+    match_won_by smallint,
+    win_by_margin smallint,
+    win_reason character varying(100),
+    approved_by integer,
+    approval_comments character varying(100),
+    created_time timestamp without time zone,
+    created_id integer,
+    updated_id integer,
+    updated_time timestamp without time zone
+);
+
+
+ALTER TABLE cricket.cricket_match OWNER TO postgres;
+
+--
+-- TOC entry 176 (class 1259 OID 33832)
+-- Name: cricket_match_ext; Type: TABLE; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE cricket_match_ext (
+    match_ext_id integer NOT NULL,
+    match_id integer NOT NULL,
+    weather_cond character varying(100),
+    ground_cond character varying(100),
+    pitch_type character varying(2),
+    match_officials character varying(1000),
+    created_id integer NOT NULL,
+    created_time timestamp without time zone NOT NULL,
+    updated_id integer NOT NULL,
+    updated_time timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE cricket.cricket_match_ext OWNER TO postgres;
+
+--
+-- TOC entry 177 (class 1259 OID 33838)
+-- Name: cricket_match_ext_seq; Type: SEQUENCE; Schema: cricket; Owner: postgres
+--
+
+CREATE SEQUENCE cricket_match_ext_seq
+    START WITH 9
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE cricket.cricket_match_ext_seq OWNER TO postgres;
+
+--
+-- TOC entry 178 (class 1259 OID 33840)
+-- Name: cricket_match_innings; Type: TABLE; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE cricket_match_innings (
+    innings_id integer NOT NULL,
+    match_id integer NOT NULL,
+    team_id integer,
+    team_name character varying(100),
+    byes smallint,
+    wide smallint,
+    no_ball smallint,
+    leg_byes smallint,
+    penalty_runs smallint,
+    total_runs smallint,
+    overs double precision,
+    revised_target smallint,
+    created_id integer,
+    created_time timestamp without time zone,
+    updated_id integer,
+    updated_time timestamp without time zone,
+    wickets smallint,
+    innings_order smallint,
+    follow_on boolean DEFAULT false,
+    revised_overs double precision,
+    revised_reason character varying(100)
+);
+
+
+ALTER TABLE cricket.cricket_match_innings OWNER TO postgres;
+
+--
+-- TOC entry 179 (class 1259 OID 33844)
+-- Name: cricket_match_innings_seq; Type: SEQUENCE; Schema: cricket; Owner: postgres
+--
+
+CREATE SEQUENCE cricket_match_innings_seq
+    START WITH 9
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE cricket.cricket_match_innings_seq OWNER TO postgres;
+
+--
+-- TOC entry 180 (class 1259 OID 33846)
+-- Name: cricket_match_seq; Type: SEQUENCE; Schema: cricket; Owner: postgres
+--
+
+CREATE SEQUENCE cricket_match_seq
+    START WITH 9
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE cricket.cricket_match_seq OWNER TO postgres;
+
+--
+-- TOC entry 181 (class 1259 OID 33848)
+-- Name: cricket_match_team_players; Type: TABLE; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE cricket_match_team_players (
+    match_team_player_id integer NOT NULL,
+    match_id integer NOT NULL,
+    team_id integer NOT NULL,
+    team_name character varying(100),
+    profile_id integer,
+    profile_name character varying(100),
+    sub boolean DEFAULT false,
+    created_id integer,
+    created_time timestamp without time zone,
+    updated_id integer,
+    updated_time timestamp without time zone
+);
+
+
+ALTER TABLE cricket.cricket_match_team_players OWNER TO postgres;
+
+--
+-- TOC entry 182 (class 1259 OID 33852)
+-- Name: cricket_match_team_players_seq; Type: SEQUENCE; Schema: cricket; Owner: postgres
+--
+
+CREATE SEQUENCE cricket_match_team_players_seq
+    START WITH 9
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE cricket.cricket_match_team_players_seq OWNER TO postgres;
+
+--
+-- TOC entry 183 (class 1259 OID 33854)
+-- Name: cricket_profile; Type: TABLE; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE cricket_profile (
+    cricket_profile_id integer NOT NULL,
+    user_id integer NOT NULL,
+    batting_hand_type character(1),
+    batting_order character(1),
+    bowling_hand_type character(1),
+    bowling_method character(1),
+    field_position character(1),
+    wicket_keeper boolean DEFAULT false,
+    created_id integer NOT NULL,
+    created_time timestamp without time zone,
+    updated_id integer NOT NULL,
+    updated_time timestamp without time zone
+);
+
+
+ALTER TABLE cricket.cricket_profile OWNER TO postgres;
+
+--
+-- TOC entry 184 (class 1259 OID 33858)
+-- Name: cricket_profile_seq; Type: SEQUENCE; Schema: cricket; Owner: postgres
+--
+
+CREATE SEQUENCE cricket_profile_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE cricket.cricket_profile_seq OWNER TO postgres;
+
+--
+-- TOC entry 185 (class 1259 OID 33860)
+-- Name: cricket_team; Type: TABLE; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE cricket_team (
+    team_id integer NOT NULL,
+    created_time timestamp without time zone,
+    created_id integer,
+    updated_id integer,
+    updated_time timestamp without time zone,
+    team_name character varying(100) NOT NULL,
+    city character varying(100),
+    state character varying(100),
+    country character varying(100),
+    description character varying(400)
+);
+
+
+ALTER TABLE cricket.cricket_team OWNER TO postgres;
+
+--
+-- TOC entry 186 (class 1259 OID 33866)
+-- Name: cricket_team_players; Type: TABLE; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE cricket_team_players (
+    team_id integer,
+    cricket_profile_id integer NOT NULL,
+    is_moderator boolean DEFAULT false NOT NULL,
+    created_id integer NOT NULL,
+    created_time timestamp without time zone NOT NULL,
+    updated_id integer,
+    updated_time timestamp without time zone,
+    is_active boolean DEFAULT true,
+    cricket_team_players_id integer NOT NULL,
+    status character varying(2)
+);
+
+
+ALTER TABLE cricket.cricket_team_players OWNER TO postgres;
+
+--
+-- TOC entry 187 (class 1259 OID 33871)
+-- Name: cricket_team_players_seq; Type: SEQUENCE; Schema: cricket; Owner: postgres
+--
+
+CREATE SEQUENCE cricket_team_players_seq
+    START WITH 25
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE cricket.cricket_team_players_seq OWNER TO postgres;
+
+--
+-- TOC entry 188 (class 1259 OID 33873)
+-- Name: cricket_team_seq; Type: SEQUENCE; Schema: cricket; Owner: postgres
+--
+
+CREATE SEQUENCE cricket_team_seq
+    START WITH 25
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE cricket.cricket_team_seq OWNER TO postgres;
+
+--
+-- TOC entry 189 (class 1259 OID 33875)
+-- Name: cricket_team_stats; Type: TABLE; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE cricket_team_stats (
+    team_id integer NOT NULL,
+    team_stats_id integer NOT NULL,
+    matches smallint,
+    won smallint,
+    lost smallint,
+    no_result smallint,
+    draw smallint,
+    updated_time timestamp without time zone,
+    created_time timestamp without time zone,
+    cricket_format smallint NOT NULL,
+    runs_scored smallint
+);
+
+
+ALTER TABLE cricket.cricket_team_stats OWNER TO postgres;
+
+--
+-- TOC entry 190 (class 1259 OID 33878)
+-- Name: cricket_team_stats_seq; Type: SEQUENCE; Schema: cricket; Owner: postgres
+--
+
+CREATE SEQUENCE cricket_team_stats_seq
+    START WITH 728
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE cricket.cricket_team_stats_seq OWNER TO postgres;
+
+--
+-- TOC entry 191 (class 1259 OID 33880)
+-- Name: match_fow; Type: TABLE; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE match_fow (
+    fow_id integer NOT NULL,
+    batting_entry_id integer,
+    innings_id integer,
+    runs smallint,
+    overs double precision,
+    created_id integer NOT NULL,
+    created_time timestamp without time zone NOT NULL,
+    updated_id integer NOT NULL,
+    updated_time timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE cricket.match_fow OWNER TO postgres;
+
+--
+-- TOC entry 192 (class 1259 OID 33883)
+-- Name: match_fow_seq; Type: SEQUENCE; Schema: cricket; Owner: postgres
+--
+
+CREATE SEQUENCE match_fow_seq
+    START WITH 9
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE cricket.match_fow_seq OWNER TO postgres;
+
+--
+-- TOC entry 193 (class 1259 OID 33885)
+-- Name: scorecard_batting_entry; Type: TABLE; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE scorecard_batting_entry (
+    batting_entry_id integer NOT NULL,
+    match_team_player_id integer NOT NULL,
+    innings_id integer NOT NULL,
+    batting_order smallint NOT NULL,
+    runs smallint NOT NULL,
+    balls_faced smallint NOT NULL,
+    minutes smallint NOT NULL,
+    dots smallint,
+    singles smallint,
+    doubles smallint,
+    tripples smallint,
+    fours smallint,
+    six smallint,
+    out_type character varying(2),
+    fielder integer,
+    bowler_fielder integer,
+    created_id integer NOT NULL,
+    created_time timestamp without time zone NOT NULL,
+    updated_id integer NOT NULL,
+    updated_time timestamp without time zone NOT NULL,
+    seven smallint,
+    five smallint,
+    eight smallint,
+    nine smallint
+);
+
+
+ALTER TABLE cricket.scorecard_batting_entry OWNER TO postgres;
+
+--
+-- TOC entry 2111 (class 0 OID 0)
+-- Dependencies: 193
+-- Name: COLUMN scorecard_batting_entry.nine; Type: COMMENT; Schema: cricket; Owner: postgres
+--
+
+COMMENT ON COLUMN scorecard_batting_entry.nine IS '
+';
+
+
+--
+-- TOC entry 194 (class 1259 OID 33888)
+-- Name: scorecard_batting_entry_seq; Type: SEQUENCE; Schema: cricket; Owner: postgres
+--
+
+CREATE SEQUENCE scorecard_batting_entry_seq
+    START WITH 9
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE cricket.scorecard_batting_entry_seq OWNER TO postgres;
+
+--
+-- TOC entry 195 (class 1259 OID 33890)
+-- Name: scorecard_bowling_entry; Type: TABLE; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE scorecard_bowling_entry (
+    bowling_entry_id integer NOT NULL,
+    match_team_player_id integer NOT NULL,
+    innings_id integer NOT NULL,
+    overs double precision,
+    runs smallint,
+    wickets smallint,
+    no_balls smallint,
+    wide smallint,
+    maiden smallint,
+    created_id integer NOT NULL,
+    created_time timestamp without time zone NOT NULL,
+    updated_id integer NOT NULL,
+    updated_time timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE cricket.scorecard_bowling_entry OWNER TO postgres;
+
+--
+-- TOC entry 196 (class 1259 OID 33893)
+-- Name: scorecard_bowling_entry_seq; Type: SEQUENCE; Schema: cricket; Owner: postgres
+--
+
+CREATE SEQUENCE scorecard_bowling_entry_seq
+    START WITH 9
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE cricket.scorecard_bowling_entry_seq OWNER TO postgres;
+
+--
+-- TOC entry 197 (class 1259 OID 33895)
+-- Name: user; Type: TABLE; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "user" (
+    user_id integer NOT NULL,
+    first_name character varying(50) NOT NULL,
+    last_name character varying(50),
+    email character varying(100) NOT NULL,
+    dob date,
+    gender character(1),
+    city character varying(150),
+    state character varying(150),
+    iso_country_code character varying(100),
+    timezone character varying(100),
+    locale character varying(10),
+    status character varying(15),
+    registration_type character varying(25),
+    picture_url character varying,
+    confirmation_code character varying(10),
+    created_id integer,
+    created_time timestamp without time zone,
+    updated_id integer,
+    updated_time timestamp without time zone,
+    notes character varying(400),
+    password character varying(50),
+    mobile_number character varying(15),
+    is_email_shown boolean DEFAULT true,
+    is_contact_shown character varying(1) DEFAULT true
+);
+
+
+ALTER TABLE cricket."user" OWNER TO postgres;
+
+--
+-- TOC entry 198 (class 1259 OID 33903)
+-- Name: user_seq; Type: SEQUENCE; Schema: cricket; Owner: postgres
+--
+
+CREATE SEQUENCE user_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE cricket.user_seq OWNER TO postgres;
+
+--
+-- TOC entry 2038 (class 2606 OID 33906)
+-- Name: auth_key_key_unq; Type: CONSTRAINT; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_key
+    ADD CONSTRAINT auth_key_key_unq UNIQUE (key);
+
+
+--
+-- TOC entry 2040 (class 2606 OID 33908)
+-- Name: auth_key_pk; Type: CONSTRAINT; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_key
+    ADD CONSTRAINT auth_key_pk PRIMARY KEY (auth_key_id);
+
+
+--
+-- TOC entry 2042 (class 2606 OID 33910)
+-- Name: batting_stats_pk; Type: CONSTRAINT; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY batting_stats
+    ADD CONSTRAINT batting_stats_pk PRIMARY KEY (batting_stats_id);
+
+
+--
+-- TOC entry 2044 (class 2606 OID 33912)
+-- Name: bowling_stats_pk; Type: CONSTRAINT; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY bowling_stats
+    ADD CONSTRAINT bowling_stats_pk PRIMARY KEY (bowling_stats_id);
+
+
+--
+-- TOC entry 2048 (class 2606 OID 33914)
+-- Name: cricket_match_ext_pk; Type: CONSTRAINT; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY cricket_match_ext
+    ADD CONSTRAINT cricket_match_ext_pk PRIMARY KEY (match_ext_id);
+
+
+--
+-- TOC entry 2050 (class 2606 OID 33916)
+-- Name: cricket_match_innings_pk; Type: CONSTRAINT; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY cricket_match_innings
+    ADD CONSTRAINT cricket_match_innings_pk PRIMARY KEY (innings_id);
+
+
+--
+-- TOC entry 2046 (class 2606 OID 33918)
+-- Name: cricket_match_pk; Type: CONSTRAINT; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY cricket_match
+    ADD CONSTRAINT cricket_match_pk PRIMARY KEY (match_id);
+
+
+--
+-- TOC entry 2052 (class 2606 OID 33920)
+-- Name: cricket_match_team_players_pk; Type: CONSTRAINT; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY cricket_match_team_players
+    ADD CONSTRAINT cricket_match_team_players_pk PRIMARY KEY (match_team_player_id);
+
+
+--
+-- TOC entry 2054 (class 2606 OID 33922)
+-- Name: cricket_profile_pk; Type: CONSTRAINT; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY cricket_profile
+    ADD CONSTRAINT cricket_profile_pk PRIMARY KEY (cricket_profile_id);
+
+
+--
+-- TOC entry 2056 (class 2606 OID 33924)
+-- Name: cricket_team_pk; Type: CONSTRAINT; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY cricket_team
+    ADD CONSTRAINT cricket_team_pk PRIMARY KEY (team_id);
+
+
+--
+-- TOC entry 2059 (class 2606 OID 33926)
+-- Name: cricket_team_players_pk; Type: CONSTRAINT; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY cricket_team_players
+    ADD CONSTRAINT cricket_team_players_pk PRIMARY KEY (cricket_team_players_id);
+
+
+--
+-- TOC entry 2065 (class 2606 OID 33928)
+-- Name: cricket_team_status; Type: CONSTRAINT; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY cricket_team_stats
+    ADD CONSTRAINT cricket_team_status PRIMARY KEY (team_stats_id);
+
+
+--
+-- TOC entry 2070 (class 2606 OID 33930)
+-- Name: match_fow_pk; Type: CONSTRAINT; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY match_fow
+    ADD CONSTRAINT match_fow_pk PRIMARY KEY (fow_id);
+
+
+--
+-- TOC entry 2074 (class 2606 OID 33932)
+-- Name: scorecard_batting_entry_pk; Type: CONSTRAINT; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY scorecard_batting_entry
+    ADD CONSTRAINT scorecard_batting_entry_pk PRIMARY KEY (batting_entry_id);
+
+
+--
+-- TOC entry 2078 (class 2606 OID 33934)
+-- Name: scorecard_bowling_entry_pk; Type: CONSTRAINT; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY scorecard_bowling_entry
+    ADD CONSTRAINT scorecard_bowling_entry_pk PRIMARY KEY (bowling_entry_id);
+
+
+--
+-- TOC entry 2063 (class 2606 OID 33936)
+-- Name: team_id_cricket_profile_id_unique; Type: CONSTRAINT; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY cricket_team_players
+    ADD CONSTRAINT team_id_cricket_profile_id_unique UNIQUE (team_id, cricket_profile_id);
+
+
+--
+-- TOC entry 2080 (class 2606 OID 33938)
+-- Name: user_email_unique; Type: CONSTRAINT; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "user"
+    ADD CONSTRAINT user_email_unique UNIQUE (email);
+
+
+--
+-- TOC entry 2082 (class 2606 OID 33940)
+-- Name: user_primary_key; Type: CONSTRAINT; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "user"
+    ADD CONSTRAINT user_primary_key PRIMARY KEY (user_id);
+
+
+--
+-- TOC entry 2071 (class 1259 OID 33941)
+-- Name: fki_batting_entry_innings_fk; Type: INDEX; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX fki_batting_entry_innings_fk ON scorecard_batting_entry USING btree (innings_id);
+
+
+--
+-- TOC entry 2072 (class 1259 OID 33942)
+-- Name: fki_batting_entry_match_player_fk; Type: INDEX; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX fki_batting_entry_match_player_fk ON scorecard_batting_entry USING btree (match_team_player_id);
+
+
+--
+-- TOC entry 2075 (class 1259 OID 33943)
+-- Name: fki_bowling_entry_innings_fk; Type: INDEX; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX fki_bowling_entry_innings_fk ON scorecard_bowling_entry USING btree (innings_id);
+
+
+--
+-- TOC entry 2076 (class 1259 OID 33944)
+-- Name: fki_bowling_entry_match_player_fk; Type: INDEX; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX fki_bowling_entry_match_player_fk ON scorecard_bowling_entry USING btree (match_team_player_id);
+
+
+--
+-- TOC entry 2060 (class 1259 OID 33945)
+-- Name: fki_cricket_players_cricket_profile_fk2; Type: INDEX; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX fki_cricket_players_cricket_profile_fk2 ON cricket_team_players USING btree (cricket_profile_id);
+
+
+--
+-- TOC entry 2061 (class 1259 OID 33946)
+-- Name: fki_cricket_players_cricket_team_fk1; Type: INDEX; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX fki_cricket_players_cricket_team_fk1 ON cricket_team_players USING btree (team_id);
+
+
+--
+-- TOC entry 2057 (class 1259 OID 33947)
+-- Name: fki_cricket_team_cricket_profile_fk1; Type: INDEX; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX fki_cricket_team_cricket_profile_fk1 ON cricket_team USING btree (created_id);
+
+
+--
+-- TOC entry 2066 (class 1259 OID 33948)
+-- Name: fki_cricket_team_stats_cricket_team_fk1; Type: INDEX; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX fki_cricket_team_stats_cricket_team_fk1 ON cricket_team_stats USING btree (team_id);
+
+
+--
+-- TOC entry 2067 (class 1259 OID 33949)
+-- Name: fki_fow_batting_entry_fk; Type: INDEX; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX fki_fow_batting_entry_fk ON match_fow USING btree (batting_entry_id);
+
+
+--
+-- TOC entry 2068 (class 1259 OID 33950)
+-- Name: fki_fow_innings_fk; Type: INDEX; Schema: cricket; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX fki_fow_innings_fk ON match_fow USING btree (innings_id);
+
+
+--
+-- TOC entry 2083 (class 2606 OID 33951)
+-- Name: auth_key_user_fk; Type: FK CONSTRAINT; Schema: cricket; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_key
+    ADD CONSTRAINT auth_key_user_fk FOREIGN KEY (user_id) REFERENCES "user"(user_id);
+
+
+--
+-- TOC entry 2101 (class 2606 OID 33956)
+-- Name: batting_entry_innings_fk; Type: FK CONSTRAINT; Schema: cricket; Owner: postgres
+--
+
+ALTER TABLE ONLY scorecard_batting_entry
+    ADD CONSTRAINT batting_entry_innings_fk FOREIGN KEY (innings_id) REFERENCES cricket_match_innings(innings_id);
+
+
+--
+-- TOC entry 2102 (class 2606 OID 33961)
+-- Name: batting_entry_match_player_fk; Type: FK CONSTRAINT; Schema: cricket; Owner: postgres
+--
+
+ALTER TABLE ONLY scorecard_batting_entry
+    ADD CONSTRAINT batting_entry_match_player_fk FOREIGN KEY (match_team_player_id) REFERENCES cricket_match_team_players(match_team_player_id);
+
+
+--
+-- TOC entry 2103 (class 2606 OID 33966)
+-- Name: batting_entry_match_player_fk1; Type: FK CONSTRAINT; Schema: cricket; Owner: postgres
+--
+
+ALTER TABLE ONLY scorecard_batting_entry
+    ADD CONSTRAINT batting_entry_match_player_fk1 FOREIGN KEY (fielder) REFERENCES cricket_match_team_players(match_team_player_id);
+
+
+--
+-- TOC entry 2104 (class 2606 OID 33971)
+-- Name: batting_entry_match_player_fk2; Type: FK CONSTRAINT; Schema: cricket; Owner: postgres
+--
+
+ALTER TABLE ONLY scorecard_batting_entry
+    ADD CONSTRAINT batting_entry_match_player_fk2 FOREIGN KEY (bowler_fielder) REFERENCES cricket_match_team_players(match_team_player_id);
+
+
+--
+-- TOC entry 2084 (class 2606 OID 34080)
+-- Name: batting_stats_cricket_profile_fk; Type: FK CONSTRAINT; Schema: cricket; Owner: postgres
+--
+
+ALTER TABLE ONLY batting_stats
+    ADD CONSTRAINT batting_stats_cricket_profile_fk FOREIGN KEY (cricket_profile_id) REFERENCES cricket_profile(cricket_profile_id) MATCH FULL ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2105 (class 2606 OID 33981)
+-- Name: bowling_entry_innings_fk; Type: FK CONSTRAINT; Schema: cricket; Owner: postgres
+--
+
+ALTER TABLE ONLY scorecard_bowling_entry
+    ADD CONSTRAINT bowling_entry_innings_fk FOREIGN KEY (innings_id) REFERENCES cricket_match_innings(innings_id);
+
+
+--
+-- TOC entry 2106 (class 2606 OID 33986)
+-- Name: bowling_entry_match_player_fk; Type: FK CONSTRAINT; Schema: cricket; Owner: postgres
+--
+
+ALTER TABLE ONLY scorecard_bowling_entry
+    ADD CONSTRAINT bowling_entry_match_player_fk FOREIGN KEY (match_team_player_id) REFERENCES cricket_match_team_players(match_team_player_id);
+
+
+--
+-- TOC entry 2085 (class 2606 OID 33991)
+-- Name: bowling_stats_cricket_profile_fk; Type: FK CONSTRAINT; Schema: cricket; Owner: postgres
+--
+
+ALTER TABLE ONLY bowling_stats
+    ADD CONSTRAINT bowling_stats_cricket_profile_fk FOREIGN KEY (cricket_profile_id) REFERENCES cricket_profile(cricket_profile_id) MATCH FULL ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2088 (class 2606 OID 33996)
+-- Name: cricket_match_ext_match_fk; Type: FK CONSTRAINT; Schema: cricket; Owner: postgres
+--
+
+ALTER TABLE ONLY cricket_match_ext
+    ADD CONSTRAINT cricket_match_ext_match_fk FOREIGN KEY (match_id) REFERENCES cricket_match(match_id);
+
+
+--
+-- TOC entry 2086 (class 2606 OID 34001)
+-- Name: cricket_match_team_fk; Type: FK CONSTRAINT; Schema: cricket; Owner: postgres
+--
+
+ALTER TABLE ONLY cricket_match
+    ADD CONSTRAINT cricket_match_team_fk FOREIGN KEY (team_id) REFERENCES cricket_team(team_id);
+
+
+--
+-- TOC entry 2087 (class 2606 OID 34006)
+-- Name: cricket_match_team_fk2; Type: FK CONSTRAINT; Schema: cricket; Owner: postgres
+--
+
+ALTER TABLE ONLY cricket_match
+    ADD CONSTRAINT cricket_match_team_fk2 FOREIGN KEY (opp_team_id) REFERENCES cricket_team(team_id);
+
+
+--
+-- TOC entry 2096 (class 2606 OID 34011)
+-- Name: cricket_players_cricket_profile_fk2; Type: FK CONSTRAINT; Schema: cricket; Owner: postgres
+--
+
+ALTER TABLE ONLY cricket_team_players
+    ADD CONSTRAINT cricket_players_cricket_profile_fk2 FOREIGN KEY (cricket_profile_id) REFERENCES cricket_profile(cricket_profile_id);
+
+
+--
+-- TOC entry 2097 (class 2606 OID 34016)
+-- Name: cricket_players_cricket_team_fk1; Type: FK CONSTRAINT; Schema: cricket; Owner: postgres
+--
+
+ALTER TABLE ONLY cricket_team_players
+    ADD CONSTRAINT cricket_players_cricket_team_fk1 FOREIGN KEY (team_id) REFERENCES cricket_team(team_id);
+
+
+--
+-- TOC entry 2094 (class 2606 OID 34021)
+-- Name: cricket_profile_user_fk; Type: FK CONSTRAINT; Schema: cricket; Owner: postgres
+--
+
+ALTER TABLE ONLY cricket_profile
+    ADD CONSTRAINT cricket_profile_user_fk FOREIGN KEY (user_id) REFERENCES "user"(user_id) MATCH FULL ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2095 (class 2606 OID 34026)
+-- Name: cricket_profile_user_fk2; Type: FK CONSTRAINT; Schema: cricket; Owner: postgres
+--
+
+ALTER TABLE ONLY cricket_profile
+    ADD CONSTRAINT cricket_profile_user_fk2 FOREIGN KEY (created_id) REFERENCES "user"(user_id) MATCH FULL ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2098 (class 2606 OID 34031)
+-- Name: cricket_team_stats_cricket_team_fk1; Type: FK CONSTRAINT; Schema: cricket; Owner: postgres
+--
+
+ALTER TABLE ONLY cricket_team_stats
+    ADD CONSTRAINT cricket_team_stats_cricket_team_fk1 FOREIGN KEY (team_id) REFERENCES cricket_team(team_id);
+
+
+--
+-- TOC entry 2099 (class 2606 OID 34036)
+-- Name: fow_batting_entry_fk; Type: FK CONSTRAINT; Schema: cricket; Owner: postgres
+--
+
+ALTER TABLE ONLY match_fow
+    ADD CONSTRAINT fow_batting_entry_fk FOREIGN KEY (batting_entry_id) REFERENCES scorecard_batting_entry(batting_entry_id);
+
+
+--
+-- TOC entry 2100 (class 2606 OID 34041)
+-- Name: fow_innings_fk; Type: FK CONSTRAINT; Schema: cricket; Owner: postgres
+--
+
+ALTER TABLE ONLY match_fow
+    ADD CONSTRAINT fow_innings_fk FOREIGN KEY (innings_id) REFERENCES cricket_match_innings(innings_id);
+
+
+--
+-- TOC entry 2089 (class 2606 OID 34095)
+-- Name: innings_cricket_match_fk; Type: FK CONSTRAINT; Schema: cricket; Owner: postgres
+--
+
+ALTER TABLE ONLY cricket_match_innings
+    ADD CONSTRAINT innings_cricket_match_fk FOREIGN KEY (match_id) REFERENCES cricket_match(match_id);
+
+
+--
+-- TOC entry 2090 (class 2606 OID 34100)
+-- Name: innings_cricket_team_fk1; Type: FK CONSTRAINT; Schema: cricket; Owner: postgres
+--
+
+ALTER TABLE ONLY cricket_match_innings
+    ADD CONSTRAINT innings_cricket_team_fk1 FOREIGN KEY (team_id) REFERENCES cricket_team(team_id);
+
+
+--
+-- TOC entry 2091 (class 2606 OID 34056)
+-- Name: match_team_players_cricket_match_fk; Type: FK CONSTRAINT; Schema: cricket; Owner: postgres
+--
+
+ALTER TABLE ONLY cricket_match_team_players
+    ADD CONSTRAINT match_team_players_cricket_match_fk FOREIGN KEY (match_id) REFERENCES cricket_match(match_id);
+
+
+--
+-- TOC entry 2092 (class 2606 OID 34061)
+-- Name: match_team_players_cricket_profile_fk; Type: FK CONSTRAINT; Schema: cricket; Owner: postgres
+--
+
+ALTER TABLE ONLY cricket_match_team_players
+    ADD CONSTRAINT match_team_players_cricket_profile_fk FOREIGN KEY (profile_id) REFERENCES cricket_profile(cricket_profile_id);
+
+
+--
+-- TOC entry 2093 (class 2606 OID 34066)
+-- Name: match_team_players_team_fk; Type: FK CONSTRAINT; Schema: cricket; Owner: postgres
+--
+
+ALTER TABLE ONLY cricket_match_team_players
+    ADD CONSTRAINT match_team_players_team_fk FOREIGN KEY (team_id) REFERENCES cricket_team(team_id);
+
+
+-- Completed on 2014-10-25 12:56:16
+
+--
+-- PostgreSQL database dump complete
+--
+

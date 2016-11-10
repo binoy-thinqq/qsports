@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"><![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"><![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"><![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=100%; initial-scale=1; maximum-scale=1; minimum-scale=1; user-scalable=no;"/>
+<title>Cricketq</title>
+<link rel="stylesheet" type="text/css" href="css/common.css">
+<link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.js"></script>
+<script type="text/javascript" src="js/jquery.fancybox.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<!--[if lt IE 9]>
+    <script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+
+<body>
+<header>
+	<div class="wrapper clearfix">
+    	<span class="logo fL"><a href="index.html"><img src="images/logo.png" width="124" height="24" alt="logo"></a></span>
+        <ul class="topNav fL">
+        	<li><a href="index.html"><h3>Home</h3></a></li>
+            <li>
+            	<a class="menu" href="javascript:void(0);"><h3>Create New</h3></a>
+                <ul class="subNav">
+                	<li><a class="fancybox fancybox.ajax" href="create-new-match.html">Cricket Match</a></li>
+                    <li><a class="fancybox fancybox.ajax" href="create-team.html">Cricket Team</a></li>
+                </ul>
+            </li>
+            <li><a href="team-profile.html"><h3>Invite Friends</h3></a></li>
+        </ul>
+        <div class="player-login fR">
+        	<a href="javascript:void(0);" class="login-trigger">
+            	<img src="images/player-profile-img.jpg" class="fL" alt="Profile"> Alastair
+            </a>
+            <ul class="acc-li">
+            	<li><a href="#"><img src="images/icon-settings.png" alt="Setting"> Setting</a></li>
+                <li><a href="#"><img src="images/icon-logout.png" alt="Logout"> Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+<div class="wrapper page clearfix">
+  <div class="pageLeft fL">
+    <div class="player-details">
+      <div class="player-info clearfix"> <span class="player-img fL"> <img src="images/player-img.jpg" alt="Alastair cook"> <span class="change-img"><a href="#">Change image</a></span> </span>
+        <div class="player-history fL">
+        <div><span class="edit-btn fR"><a class="fancybox" href="#edit-profile">Edit</a></span> </div>
+         <h1>Alastair Nathan Cook</h1>
+		 <h4>
+          Left Handed Top Order Batsman &nbsp;&nbsp;<br/>
+		  Right Arm Spin Bowler &nbsp;&nbsp;<br/>
+		  <span class="gray">Fields at </span> Cover, Point<br>
+		  </h4>
+		  </div>
+		  <div>
+          <p><span class="gray">Born on</span> December 25, 1984. <br/>
+		  <span class="gray">Lives at</span> Gloucester, State/Province, United Kingdom<br>
+		  <span class="gray">Email</span> <a href="mailto:alastairncook@gmail.com">alastairncook@gmail.com</a><br>
+		  <span class="gray">Phone</span> +91 9840090988<br>
+		  
+		   <p>Like to play cricket in Weekends. For me cricket is not just batting and bowling. It starts with planning strategy, mindset, attitude and execution. </p>
+		</div>
+		</div>
+    </div>
+   <div class="radius-box txtAlnLeft clearfix">
+      <h4 class="icons icon-team">Alastair's performance (Last 5 matches)</h4>
+      <table width="100%" border="0" cellpadding="8">
+        <tr>
+		<th width="14%">Form-Date</th>
+          <th width="20%">Played For</th>
+          <th width="20%">Against</th>
+          <th width="18%">Batting</th>
+          <th width="18%">Bowling</th>
+		  <th width="10%">Link</th>
+        </tr>
+        <tr>
+		  <td><span style="font-size:9px">T20 - 23 Feb 2014</span></td>
+          <td><span class="location"><a href="#">Fear the XI</a></span></td>
+          <td><a href="#">Infosys A Team</a></td>
+          <td>30 (25 balls)*</td>
+		  <td>4/45 (7.2 Overs)</td>
+		  <td><a style="font-size:9px" href="#">View Match</a></td>
+        </tr>
+		<tr>
+		  <td><span style="font-size:9px">OD - 23 Feb 2014</span></td>
+          <td><span class="location"><a href="#">Crappy Team</a></span></td>
+          <td><a href="#">Good and Great Team</a></td>
+          <td>50 (25 balls)*</td>
+		  <td>4/45 (7.5 Overs)</td>
+		  <td><a style="font-size:9px" href="#">View Match</a></td>
+        </tr>
+		<tr>
+		  <td><span style="font-size:9px">TST - 23 Feb 2014</span></td>
+          <td><span class="location"><a href="#">Fear the XI</a></span></td>
+          <td><a href="#">Infosys A Team</a></td>
+          <td>100 (25 balls)*</td>
+		  <td>4/60 (4.2 Overs)</td>
+		  <td><a style="font-size:9px" href="#">View Match</a></td>
+        </tr>
+		<tr>
+		  <td><span style="font-size:9px">TST - 23 Feb 2014</span></td>
+          <td><span class="location"><a href="#">Fear the XI</a></span></td>
+          <td><a href="#">Infosys A Team</a></td>
+          <td>30 (25 balls)*</td>
+		  <td>4/60 (9.2 Overs)</td>
+		  <td><a style="font-size:9px" href="#">View Match</a></td>
+        </tr>
+		<tr>
+		  <td><span style="font-size:9px">TST - 23 Feb 2014</span></td>
+          <td><span class="location"><a href="#">Fear the XI</a></span></td>
+          <td><a href="#">Infosys A Team</a></td>
+          <td>100 (25 balls)*</td>
+		  <td>4/60 (4.2 Overs)</td>
+		  <td><a style="font-size:9px" href="#">View Match</a></td>
+        </tr>
+		</table>
+    </div>
+ 
+    <div class="radius-box">
+      <h4 class="icons bat-icon">Batting</h4>
+      <table width="100%" border="0" cellpadding="8" class="txtAlnCenter">
+        <tr>
+          <th>&nbsp;</th>
+          <th>M</th>
+          <th>Inn</th>
+          <th>Runs</th>
+          <th>HS</th>
+          <th>Avg</th>
+          <th>SR</th>
+          <th>NO</th>
+          <th>100</th>
+          <th>50</th>
+          <th>4s</th>
+          <th>6s</th>
+        </tr>
+        <tr>
+          <td>Test</td>
+          <td>92</td>
+          <td>163</td>
+          <td>7200</td>
+          <td>294</td>
+          <td>49.8</td>
+          <td>47.55</td>
+          <td>10</td>
+          <td>25</td>
+          <td>29</td>
+          <td>863</td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <td>ODI</td>
+          <td>92</td>
+          <td>163</td>
+          <td>7200</td>
+          <td>294</td>
+          <td>49.8</td>
+          <td>47.55</td>
+          <td>10</td>
+          <td>25</td>
+          <td>29</td>
+          <td>863</td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <td>T20</td>
+          <td>92</td>
+          <td>163</td>
+          <td>7200</td>
+          <td>294</td>
+          <td>49.8</td>
+          <td>47.55</td>
+          <td>10</td>
+          <td>25</td>
+          <td>29</td>
+          <td>863</td>
+          <td>10</td>
+        </tr>
+      </table>
+    </div>
+    <div class="radius-box">
+      <h4 class="icons ball-icon">Bowling</h4>
+      <table width="100%" border="0" cellpadding="8" class="txtAlnCenter">
+        <tr>
+          <th>&nbsp;</th>
+          <th>M</th>
+          <th>Inn</th>
+          <th>Runs</th>
+          <th>HS</th>
+          <th>Avg</th>
+          <th>SR</th>
+          <th>NO</th>
+          <th>100</th>
+          <th>50</th>
+          <th>4s</th>
+          <th>6s</th>
+        </tr>
+        <tr>
+          <td>Test</td>
+          <td>92</td>
+          <td>163</td>
+          <td>7200</td>
+          <td>294</td>
+          <td>49.8</td>
+          <td>47.55</td>
+          <td>10</td>
+          <td>25</td>
+          <td>29</td>
+          <td>863</td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <td>ODI</td>
+          <td>92</td>
+          <td>163</td>
+          <td>7200</td>
+          <td>294</td>
+          <td>49.8</td>
+          <td>47.55</td>
+          <td>10</td>
+          <td>25</td>
+          <td>29</td>
+          <td>863</td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <td>T20</td>
+          <td>92</td>
+          <td>163</td>
+          <td>7200</td>
+          <td>294</td>
+          <td>49.8</td>
+          <td>47.55</td>
+          <td>10</td>
+          <td>25</td>
+          <td>29</td>
+          <td>863</td>
+          <td>10</td>
+        </tr>
+      </table>
+    </div>
+    <div class="radius-box txtAlnLeft clearfix">
+      <h4 class="icons icon-team">Team(s)</h4>
+      <table width="100%" border="0" cellpadding="8">
+        <tr>
+          <th width="27%">Team Name</th>
+          <th width="23%">Location</th>
+          <th width="30%">Quick Statictics</th>
+          <th width="20%" class="txtAlnCenter">Win Percentage</th>
+        </tr>
+        <tr>
+          <td><span class="location"><a href="#">NED, Group A, Tunbridge</a></span></td>
+          <td>Chennai, Tamil Nadu</td>
+          <td><span class="quickStats match-bg">Match: 15</span> <span class="quickStats won-bg">Won: 10</span> <span class="quickStats lost-bg">Lost: 5</span></td>
+          <td class="txtAlnCenter">90%</td>
+        </tr>
+        <tr>
+          <td><span class="location"><a href="#">Yorkshire, County Div 1</a></span></td>
+          <td>Chennai, Tamil Nadu</td>
+          <td><span class="quickStats match-bg">Match: 15</span> <span class="quickStats won-bg">Won: 10</span> <span class="quickStats lost-bg">Lost: 5</span></td>
+          <td class="txtAlnCenter">90%</td>
+        </tr>
+        <tr>
+          <td><span class="location"><a href="#">Leicestershire, County Div 2</a></span></td>
+          <td>Chennai, Tamil Nadu</td>
+          <td><span class="quickStats match-bg">Match: 15</span> <span class="quickStats won-bg">Won: 10</span> <span class="quickStats lost-bg">Lost: 5</span></td>
+          <td class="txtAlnCenter">90%</td>
+        </tr>
+      </table>
+      <ul class="pagination fR">
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">....</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="pageRight fR">
+  	<div class="radius-box right-search-blk">
+    	<div class="search-blk clearfix">
+        	<input type="text" placeholder="Search" class="fL">
+            <input type="image" src="images/go-btn.gif" class="fR" alt="go">
+        </div>
+        <ul class="search-list clearfix">
+            <li><a class="active" href="#">Team</a></li>
+            <li><a href="#">Players</a></li>
+          </ul>
+    </div>
+    <div class="radius-box">
+      <h4>Last Match</h4>
+      <div class="last-match">
+   	  	<img src="images/player-img-02.jpg" alt="cook" class="img-blk">
+        <p>Cook was caught behind trying to pull out of a shot as England's batsmen stuttered in the first ODI.</p>
+        <span class="block clearfix">
+        	<a href="#" class="fL">View big</a>
+            <span class="more-photos fR">[<a href="#">more photos</a>]</span>
+        </span>
+      </div>
+    </div>
+    <div class="radius-box">
+      <h4>Tweets</h4>
+      <ul class="tweetLi">
+        <li> <span class="image-loader"><a href="#"><img src="images/image-user.jpg" alt="image"></a></span> <span class="block"><strong>Cricbuzz</strong> <span class="gray">@cricbuzz</span></span> Now that the IPL is over, it's business as usual for Indian fans. <a href="#">#IPLfinal</a> </li>
+        <li> <span class="image-loader"><a href="#"><img src="images/image-user.jpg" alt="image"></a></span> <span class="block"><strong>Cricbuzz</strong> <span class="gray">@cricbuzz</span></span> Now that the IPL is over, it's business as usual for Indian fans. <a href="#">#IPLfinal</a> </li>
+        <li> <span class="image-loader"><a href="#"><img src="images/image-user.jpg" alt="image"></a></span> <span class="block"><strong>Cricbuzz</strong> <span class="gray">@cricbuzz</span></span> Now that the IPL is over, it's business as usual for Indian fans. <a href="#">#IPLfinal</a> </li>
+      </ul>
+      <span class="tweet-search block">
+      <input type="text" placeholder="Tweet to @cricbuzz">
+      </span> </div>
+    <div class="radius-box">
+      <h4>Matches</h4>
+      <ul class="tab-match clearfix">
+        <li><a class="activeTab" href="#cur-match">Current Matches</a></li>
+        <li><a href="#cum-up">Coming Up</a></li>
+      </ul>
+      <div class="tab-wrap">
+        <div class="tab-block def-tab" id="cur-match"> <span class="block"><strong>ENG vs NZ, 2nd Test, Leeds</strong></span> <span class="tour-det block"><a href="#">New Zealand tour of England 2013</a></span>
+          <p><strong>NZ :</strong> 219/8, 65.3 Overs<br>
+            <strong>ENG :</strong> 354, 287/5 d<br>
+            New Zealand need 249 runs</p>
+        </div>
+        <div class="tab-block" id="cum-up"> <span class="block"><strong>ENG vs NZ, 2nd Test, Leeds</strong></span> </div>
+      </div>
+      <span class="showMat block"> <a href="#">Show all matches</a> </span> </div>
+  </div>
+</div>
+<footer>
+	<div class="wrapper clearfix">
+    	<span class="fL">Copyright &copy; 2013 cricketQ.com. All Rights Reserved | Designed by <a href="#">Ada Textus</a></span>
+        <span class="social-wrap fR">
+        	<a target="_blank" title="Facebook" href="#"><img src="images/facebook.png" width="16" height="16" alt="Facebook"></a>
+            <a target="_blank" title="Twitter" href="#"><img src="images/twitter.png" width="16" height="16" alt="Twitter"></a>
+            <a target="_blank" title="Linked-in" href="#"><img src="images/linked-in.png" width="16" height="16" alt="linked"></a>
+            <a target="_blank" title="G-plus" href="#"><img src="images/g-plus.png" width="15" height="15" alt="G-plus"></a>
+        </span>
+    </div>
+</footer>
+<div id="edit-profile" class="edit-lbox dispNone">
+  <h1>Edit Profile</h1>
+    <ul>
+    	<li class="clearfix">
+        	<label>Display Name</label>
+            <input type="text" class="formBox textBox" placeholder="Name">
+            <span class="icon-alert fL">
+            	<a href="#"><img src="images/icon-question.png" alt="icon"></a>
+                <span class="tooltip-box">Young Mandeep takes up the challenge</span>
+            </span>
+        </li>
+        <li class="clearfix">
+        	<label>Email</label>
+            <input type="text" class="formBox textBox" placeholder="Email">
+        </li>
+        <li class="clearfix">
+        	<label>Gender</label>
+            <select class="selectBox selectBig">
+            	<option>Male</option>
+                <option>Female</option>
+            </select>
+            <span class="icon-alert fL">
+            	<a href="#"><img src="images/icon-question.png" alt="icon"></a>
+                <span class="tooltip-box">Young Mandeep takes up the challenge</span>
+            </span>
+        </li>
+        <li class="clearfix">
+        	<label>Date of Birth</label>
+            <input type="text" class="formBox textBox" id="datePicker">
+            <span class="icon-alert fL">
+            	<a href="#"><img src="images/icon-question.png" alt="icon"></a>
+                <span class="tooltip-box">Young Mandeep takes up the challenge</span>
+            </span>
+        </li>
+        <li class="clearfix">
+        	<label>Country</label>
+            <select class="selectBox selectBig">
+            	<option>India</option>
+            </select>
+            <span class="icon-alert fL">
+            	<a href="#"><img src="images/icon-question.png" alt="icon"></a>
+                <span class="tooltip-box">Young Mandeep takes up the challenge</span>
+            </span>
+        </li>
+        <li class="clearfix">
+        	<label>State</label>
+            <select class="selectBox selectBig">
+            	<option>Tamilnadu</option>
+            </select>
+            <span class="icon-alert fL">
+            	<a href="#"><img src="images/icon-question.png" alt="icon"></a>
+                <span class="tooltip-box">Young Mandeep takes up the challenge</span>
+            </span>
+        </li>
+        <li class="clearfix">
+        	<label>City</label>
+            <select class="selectBox selectBig">
+            	<option>Chennai</option>
+            </select>
+            <span class="icon-alert fL">
+            	<a href="#"><img src="images/icon-question.png" alt="icon"></a>
+                <span class="tooltip-box">Young Mandeep takes up the challenge</span>
+            </span>
+        </li>
+        <li class="clearfix">
+        	<label>Time Zone</label>
+            <select class="selectBox selectBig">
+            	<option>Asia/Kolkata</option>
+            </select>
+            <span class="icon-alert fL">
+            	<a href="#"><img src="images/icon-question.png" alt="icon"></a>
+                <span class="tooltip-box">Young Mandeep takes up the challenge</span>
+            </span>
+        </li>
+        <li class="clearfix">
+        	<label>Batting Style</label>
+            <select class="selectBox selectSmall">
+            	<option>Right Hand</option>
+            </select>
+            <select class="selectBox selectSmall">
+            	<option>Middle Order</option>
+            </select>
+            <span class="icon-alert fL">
+            	<a href="#"><img src="images/icon-question.png" alt="icon"></a>
+                <span class="tooltip-box">Young Mandeep takes up the challenge</span>
+            </span>
+        </li>
+        <li class="clearfix">
+        	<label>Bowling Style</label>
+            <select class="selectBox selectSmall">
+            	<option>Right Arm</option>
+            </select>
+            <select class="selectBox selectSmall">
+            	<option>Medium</option>
+            </select>
+            <span class="icon-alert fL">
+            	<a href="#"><img src="images/icon-question.png" alt="icon"></a>
+                <span class="tooltip-box">Young Mandeep takes up the challenge</span>
+            </span>
+        </li>
+        <li class="clearfix">
+        	<label>Field Position</label>
+            <select class="selectBox selectBig">
+            	<option>Mid On</option>
+            </select>
+            <span class="icon-alert fL">
+            	<a href="#"><img src="images/icon-question.png" alt="icon"></a>
+                <span class="tooltip-box">Young Mandeep takes up the challenge</span>
+            </span>
+        </li>
+        <li>
+        	<span class="btn-block block clearfix">
+            	<input type="submit" value="Save Profile" class="fL submit-btn">
+                <input type="reset" value="Cancel" class="fL cancel-btn">
+            </span>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

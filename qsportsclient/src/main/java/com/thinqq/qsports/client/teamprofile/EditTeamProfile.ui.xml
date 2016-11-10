@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:p2="urn:import:com.google.gwt.user.datepicker.client">
+	<g:VerticalPanel horizontalAlignment="ALIGN_CENTER"
+		styleName="panel">
+		<g:Label stylePrimaryName="title panelTitle" text="Create New Team" />
+		<g:HTMLPanel width="100%">
+			<table>
+				<tr>
+					<td width="25%">
+						<g:Label text="Name" />
+					</td>
+					<td width="65%">
+						<g:TextBox width="250px" ui:field="txtName" />
+					</td>
+					<td width="10%">
+						<g:Image url="images/error-icon.png" ui:field="nameErrorMarker"
+							visible="false" />
+					</td>
+				</tr>
+				<tr>
+					<td width="25%">
+						<g:Label text="Date Established" />
+					</td>
+					<td width="65%">
+						<g:FocusPanel ui:field="doeFocus">
+							<p2:DateBox width="125px" ui:field="doe" />
+						</g:FocusPanel>
+					</td>
+					<td width="10%">
+						<g:Image url="images/error-icon.png" ui:field="doeErrorMarker"
+							visible="false" />
+					</td>
+				</tr>
+				<tr>
+					<td width="25%">
+						<g:Label text="City" />
+					</td>
+					<td width="65%">
+						<g:TextBox width="250px" ui:field="txtCity" />
+					</td>
+					<td width="10%">
+						<g:Image url="images/error-icon.png" ui:field="txtCityErrorMarker"
+							visible="false" />
+					</td>
+				</tr>
+				<tr>
+					<td width="25%">
+						<g:Label text="State/Provice" />
+					</td>
+					<td width="65%">
+						<g:TextBox width="250px" ui:field="txtState" />
+					</td>
+					<td width="10%">
+						<g:Image url="images/error-icon.png" ui:field="txtStateErrorMarker"
+							visible="false" />
+					</td>
+				</tr>
+				<tr>
+					<td width="25%">
+						<g:Label text="Country" />
+					</td>
+					<td width="65%">
+						<g:ListBox width="260px" ui:field="listCountry" />
+					</td>
+					<td width="10%">
+						<g:Image url="images/error-icon.png" ui:field="listCountryErrorMarker"
+							visible="false" />
+					</td>
+				</tr>
+				<tr>
+					<td width="25%">
+						<g:Label text="About" />
+					</td>
+					<td width="65%">
+						<g:TextArea width="250px" height="100px" ui:field="taAbout" />
+					</td>
+					<td width="10%">
+						<g:Image url="images/error-icon.png" ui:field="taAboutErrorMarker"
+							visible="false" />
+					</td>
+				</tr>
+			</table>
+		</g:HTMLPanel>
+		<g:Cell width="100%" horizontalAlignment="ALIGN_CENTER">
+			<g:HorizontalPanel>
+				<g:Cell width="90%" horizontalAlignment="ALIGN_RIGHT">
+					<g:Button stylePrimaryName="actionButton" text="Create Team"
+						ui:field="btnProfileSave" />
+				</g:Cell>
+				<g:Cell horizontalAlignment="ALIGN_RIGHT">
+					<g:Button stylePrimaryName="gbutton" text="Cancel"
+						ui:field="btnCancel" />
+				</g:Cell>
+			</g:HorizontalPanel>
+		</g:Cell>
+	</g:VerticalPanel>
+</ui:UiBinder>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder
+xmlns:q='urn:import:com.thinqq.qsports.client.cricket.matchview.battingcard' 
+xmlns:ui='urn:ui:com.google.gwt.uibinder' 
+xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	<ui:style>
+		.panel {
+			background-color: ivory;
+		}
+	</ui:style>
+
+	<g:VerticalPanel ui:field="battingCard"  styleName="greypanel" width="650px">
+		<g:Cell width="100%">
+			<g:HorizontalPanel>
+				<g:Image ui:field="inProgressImage" url="images/green-blink-0.gif"/>
+				<g:Label ui:field="teamName" styleName="teamname" text="Weekend Warriors's Batting" />
+			</g:HorizontalPanel>
+		</g:Cell>
+		<g:VerticalPanel ui:field="battingEntries" width="600px">
+		<g:SimplePanel width="100%" styleName="simple_heading_panel">
+		<g:HorizontalPanel ui:field="battingEntryHeading" width="580px"
+				height="30px" verticalAlignment="ALIGN_MIDDLE" horizontalAlignment="ALIGN_LEFT">
+				<g:Cell horizontalAlignment="ALIGN_CENTER" width="20px">
+					<g:Label text=" " visible="false"  />
+				</g:Cell>
+				<g:Cell width="20px" horizontalAlignment="ALIGN_CENTER">
+					<g:Label visible="false" text=" " />
+				</g:Cell>
+				<g:Cell width="10px" horizontalAlignment="ALIGN_CENTER">
+					<g:Label visible="false" text=" " />
+				</g:Cell>
+				<g:Cell width="100px">
+					<g:Label text="Batsman" styleName="simple_heading_label" horizontalAlignment="ALIGN_LEFT"/>
+				</g:Cell>
+				<g:Cell width="15px" horizontalAlignment="ALIGN_CENTER">
+					<g:Label text=" " />
+				</g:Cell>
+				<g:Cell width="100px">
+					<g:Label width="100px"/>
+				</g:Cell>
+				<g:Cell width="15px" horizontalAlignment="ALIGN_CENTER">
+					<g:Label text=" " />
+				</g:Cell>
+				<g:Cell width="100px">
+					<g:Label width="100px"/>
+				</g:Cell>
+				<g:Cell width="40px" horizontalAlignment="ALIGN_CENTER">
+					<g:Label text="Runs" />
+				</g:Cell>
+				<g:Cell width="40px" horizontalAlignment="ALIGN_CENTER">
+					<g:Label text="Balls"  />
+				</g:Cell>
+				<g:Cell width="40px" horizontalAlignment="ALIGN_CENTER">
+					<g:Label text="S.R." />
+				</g:Cell>
+				<g:Cell width="40px" horizontalAlignment="ALIGN_CENTER">
+					<g:Label text="4(s)" />
+				</g:Cell>
+				<g:Cell width="40px" horizontalAlignment="ALIGN_CENTER">
+					<g:Label text="6(s)" />
+				</g:Cell>
+			</g:HorizontalPanel>
+			</g:SimplePanel>
+			<g:HorizontalPanel ui:field="battingEntry" width="580px"
+				height="30px" verticalAlignment="ALIGN_MIDDLE" horizontalAlignment="ALIGN_LEFT">
+				<g:Cell horizontalAlignment="ALIGN_CENTER" width="20px">
+					<g:Label ui:field="captain" text="S" visible="false" width="" />
+				</g:Cell>
+				<g:Cell width="20px" horizontalAlignment="ALIGN_CENTER">
+					<g:Label ui:field="wicketKeeper" visible="false" text="W" />
+				</g:Cell>
+				<g:Cell width="10px" horizontalAlignment="ALIGN_CENTER">
+					<g:Label ui:field="strikeMarker" visible="false" text=" * " />
+				</g:Cell>
+				<g:Cell width="100px">
+					<g:Hyperlink ui:field="batsman" width="100px" height="">Rakesh
+						Jeeva</g:Hyperlink>
+				</g:Cell>
+				<g:Cell width="15px" horizontalAlignment="ALIGN_CENTER">
+					<g:Label ui:field="fielder1Label" text="C " />
+				</g:Cell>
+				<g:Cell width="100px">
+					<g:Hyperlink ui:field="fielder1" width="">Raja</g:Hyperlink>
+				</g:Cell>
+				<g:Cell width="15px" horizontalAlignment="ALIGN_CENTER">
+					<g:Label ui:field="bowlerOrFielder2Label" text="B " />
+				</g:Cell>
+				<g:Cell width="100px">
+					<g:Hyperlink ui:field="bowlerOrFielder2">Raj Kumar</g:Hyperlink>
+				</g:Cell>
+				<g:Cell width="40px" horizontalAlignment="ALIGN_CENTER">
+					<g:Label ui:field="runs" text="9999" />
+				</g:Cell>
+				<g:Cell width="40px" horizontalAlignment="ALIGN_CENTER">
+					<g:Label ui:field="ballsFaced" text="9999" />
+				</g:Cell>
+				<g:Cell width="40px" horizontalAlignment="ALIGN_CENTER">
+					<g:Label ui:field="strikeRate" text="100.00" />
+				</g:Cell>
+				<g:Cell width="40px" horizontalAlignment="ALIGN_CENTER">
+					<g:Label ui:field="fours" text="9999" />
+				</g:Cell>
+				<g:Cell width="40px" horizontalAlignment="ALIGN_CENTER">
+					<g:Label ui:field="sixes" text="9999" />
+				</g:Cell>
+			</g:HorizontalPanel>
+			<g:HorizontalPanel ui:field="battingEntry1" width="580px"
+				height="30px" verticalAlignment="ALIGN_MIDDLE" horizontalAlignment="ALIGN_LEFT">
+				<g:Cell horizontalAlignment="ALIGN_CENTER" width="20px">
+					<g:Label ui:field="captain1" text="S" visible="false"
+						width="" />
+				</g:Cell>
+				<g:Cell width="20px" horizontalAlignment="ALIGN_CENTER">
+					<g:Label ui:field="wicketKeeper1" visible="false" text="W" />
+				</g:Cell>
+				<g:Cell width="10px" horizontalAlignment="ALIGN_CENTER">
+					<g:Label ui:field="strikeMarker1" visible="false" text=" * " />
+				</g:Cell>
+				<g:Cell width="100px">
+					<g:Hyperlink ui:field="batsman1" width="100px" height="">Rakesh
+						Jeeva</g:Hyperlink>
+				</g:Cell>
+				<g:Cell width="15" horizontalAlignment="ALIGN_CENTER">
+					<g:Label ui:field="fielder1Label1" text="C " />
+				</g:Cell>
+				<g:Cell width="100px">
+					<g:Hyperlink ui:field="fielder11" width="">Raja</g:Hyperlink>
+				</g:Cell>
+				<g:Cell width="15px" horizontalAlignment="ALIGN_CENTER">
+					<g:Label ui:field="bowlerOrFielder2Label1" text="B " />
+				</g:Cell>
+				<g:Cell width="100px">
+					<g:Hyperlink ui:field="bowlerOrFielder21">Raj Kumar</g:Hyperlink>
+				</g:Cell>
+				<g:Cell width="40px" horizontalAlignment="ALIGN_CENTER">
+					<g:Label ui:field="runs1" text="9999" />
+				</g:Cell>
+				<g:Cell width="40px" horizontalAlignment="ALIGN_CENTER">
+					<g:Label ui:field="ballsFaced1" text="9999" />
+				</g:Cell>
+				<g:Cell width="40px" horizontalAlignment="ALIGN_CENTER">
+					<g:Label ui:field="strikeRate1" text="100.00" />
+				</g:Cell>
+				<g:Cell width="40px" horizontalAlignment="ALIGN_CENTER">
+					<g:Label ui:field="fours1" text="9999" />
+				</g:Cell>
+				<g:Cell width="40px" horizontalAlignment="ALIGN_CENTER">
+					<g:Label ui:field="sixes1" text="9999" />
+				</g:Cell>
+			</g:HorizontalPanel>
+		</g:VerticalPanel>
+		<g:HorizontalPanel ui:field="extrasEntry" width="420px"
+			height="30px" verticalAlignment="ALIGN_MIDDLE" horizontalAlignment="ALIGN_LEFT">
+			<g:Cell width="50px">
+				<g:Label text="Extra(s)" width="50px" />
+			</g:Cell>
+			<g:Cell width="33px" horizontalAlignment="ALIGN_CENTER"
+				verticalAlignment="ALIGN_MIDDLE">
+				<g:Label text="NB" />
+			</g:Cell>
+			<g:Cell width="33px">
+				<g:Label ui:field="noBalls" text="999" />
+			</g:Cell>
+			<g:Cell width="33px" horizontalAlignment="ALIGN_CENTER">
+				<g:Label text="WD" />
+			</g:Cell>
+			<g:Cell width="33px">
+				<g:Label ui:field="wides" text="999" />
+			</g:Cell>
+			<g:Cell width="33px" horizontalAlignment="ALIGN_CENTER">
+				<g:Label text="B" />
+			</g:Cell>
+			<g:Cell width="33px">
+				<g:Label ui:field="byes" text="999" />
+			</g:Cell>
+			<g:Cell width="33px" horizontalAlignment="ALIGN_CENTER">
+				<g:Label text="LB" />
+			</g:Cell>
+			<g:Cell width="33px">
+				<g:Label ui:field="legByes" text="999" />
+			</g:Cell>
+			<g:Cell width="33px" horizontalAlignment="ALIGN_CENTER">
+				<g:Label text="PR" />
+			</g:Cell>
+			<g:Cell width="33px">
+				<g:Label ui:field="penaltyRuns" text="999" />
+			</g:Cell>
+			<g:Cell width="40px" horizontalAlignment="ALIGN_CENTER">
+				<g:Label ui:field="extrasTotal" text="9999" />
+			</g:Cell>
+		</g:HorizontalPanel>
+		<g:HorizontalPanel ui:field="totalEntry" width="420px"
+			height="30px" verticalAlignment="ALIGN_MIDDLE" horizontalAlignment="ALIGN_LEFT">
+			<g:Cell width="380px" horizontalAlignment="ALIGN_RIGHT">
+				<g:Label ui:field="totalOvers" text="Total in 50.0 overs  -" width="370px" />
+			</g:Cell>
+			<g:Cell width="40px" horizontalAlignment="ALIGN_CENTER">
+				<g:Label ui:field="grandTotal" text="9999" />
+			</g:Cell>
+		</g:HorizontalPanel>
+		<g:FlowPanel ui:field="didNotBat">
+			<g:Label text="To Bat"/>
+		</g:FlowPanel>
+	</g:VerticalPanel>
+</ui:UiBinder>

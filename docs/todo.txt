@@ -1,0 +1,12 @@
+
+set hardcoded datas
+============= team profile =============
+call APIS
+set all Data
+============== my profile =============
+
+1) include the facebook oauth
+2) Ask user to create password ? --not required
+3) develop userid/password flow? --not required
+4) create pipeline and get some more data, google + data
+============ social oauth ================

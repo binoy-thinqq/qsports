@@ -1,0 +1,22 @@
+<dataConfig>
+<dataSource name="qsports" driver="org.postgresql.Driver" url="jdbc:postgresql://localhost:5432/qsports" user="postgres" password="admin"/>
+ <document name="playerDocs">    
+            <entity dataSource="qsports" name="players" query="select first_name,last_name,email,cricket_profile_id,u.user_id,dob,gender,city,state,iso_country_code,status,picture_url from cricket.user as u join cricket.cricket_profile as c on (u.user_id = c.user_id)"
+			deltaImportQuery="select first_name,last_name,email,cricket_profile_id,u.user_id,dob,gender,city,state,iso_country_code,status,picture_url from cricket.user as u join cricket.cricket_profile as c on (u.user_id = c.user_id) where u.user_id='${dih.delta.user_id}'"
+			deltaQuery="select user_id from cricket.user where updated_time = null or updated_time > '${dih.last_index_time}'">
+                <field column="user_id" name="id" />
+                <field column="cricket_profile_id" name="profileid" />
+                <field column="first_name" name="fname" />
+				 <field column="last_name" name="lname" />
+				 <field column="email" name="email" />
+				 <field column="dob" name="dob" />
+				 <field column="gender" name="gender" />
+				 <field column="city" name="city" />
+				 <field column="state" name="state" />
+				 <field column="iso_country_code" name="country" />
+				 <field column="status" name="status" />
+				  <field column="picture_url" name="picurl" />
+            </entity>
+      
+   </document>
+</dataConfig>

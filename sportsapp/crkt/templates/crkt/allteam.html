@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=100%; initial-scale=1; maximum-scale=1; minimum-scale=1; user-scalable=no;"/>
+    <title>Cricketq</title>
+
+
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+
+<script src="/static/js/bootstrap.min.js"></script>
+<link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="/static/css/common.css">
+
+    <script language="JavaScript">
+       $(document).ready(function(){
+            $("#div-teamform").hide()
+            $("#div-teamnav").hide()
+            $("#anc-createteam").click(function(){
+                $("#div-teamlist").hide();
+                $("#div-teamform").show();
+                $("#div-teamnav").show();
+            });
+
+
+
+
+            var navListItems = $('ul.setup-panel li a'),
+            allWells = $('.setup-content');
+
+            allWells.hide();
+
+            navListItems.click(function(e){
+                e.preventDefault();
+                var $target = $($(this).attr('href')),
+                $item = $(this).closest('li');
+
+                if (!$item.hasClass('disabled')) {
+                    navListItems.closest('li').removeClass('active');
+                     $item.addClass('active');
+                     allWells.hide();
+                     $target.show();
+                }
+            });
+
+            $('ul.setup-panel li.active a').trigger('click');
+            // DEMO ONLY //
+            $('#activate-step-2').on('click', function(e) {
+                $('ul.setup-panel li:eq(1)').removeClass('disabled');
+                $(this).remove();
+            });
+
+            var MaxInputs       = 15; //maximum input boxes allowed
+            var playerinfo   = $("#div-playerinfo"); //Input boxes wrapper ID
+            var addplayer       = $("#anc-addplayer"); //Add button ID
+
+            var x = playerinfo.length; //initlal text box count
+            var FieldCount=1; //to keep track of text box added
+
+            $(addplayer).click(function (e) { //on add input button click
+            if(x <= MaxInputs) { //max input box allowed
+                FieldCount++; //text box added increment
+                //add input box
+                $(playerinfo).append('<div style="margin-bottom: 10px;"> \
+                    <a href="#" class="removeteam">X</a> \
+                    <input class="cls-in-player" type="text" name="mytext[]" id="field_'+ FieldCount +'" placeholder="player '+ FieldCount +'" style="width: 290px;"/> \
+                    <input class="cls-in-player" type="text" name="mytext[]" id="playeremail_'+ FieldCount +'" placeholder="email" style="width: 350px;"/> \
+                    <a href="#" class="inviteclass">invite</a> \
+                    </div>');
+                x++; //text box increment
+            }
+            return false;
+            });
+
+            $("body").on("click",".removeteam", function(e){ //user click on remove text
+            if( x > 1 ) {
+                $(this).parent('div').remove(); //remove text box
+                x--; //decrement textbox
+            }
+            return false;
+            });
+
+
+
+    });
+
+    </script>
+    <style>
+        .plus-icon{
+          background: url(/static/images/dd-icon.png) left top no-repeat;
+          padding-left: 30px;
+          line-height: 1px;
+          line-height: 21px;
+          display: block;
+        }
+
+        .cls-in-player{
+          height: 34px;
+          font-size: 14px;
+          color: #555;
+          background-color: #fff;
+          background-image: none;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+          box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+          -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+          transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        }
+
+    </style>
+
+</head>
+
+<body>
+<header>
+    {% include "crkt/header.html" %}
+</header>
+<div class="wrapper page clearfix">
+<!--<div class="pageLeft fL">-->
+<!--<div class="player-details">-->
+<!--Show all teams-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="pageRight fR">-->
+<!--right div-->
+<!--</div>-->
+<div class="container">
+<div id="div-teamnav" class="row">
+	<div class="row form-group">
+        <div class="col-xs-12">
+            <ul class="nav nav-pills nav-justified thumbnail setup-panel">
+                <li class="active"><a href="#step-1">
+                    <h4 class="list-group-item-heading">Step 1</h4>
+                    <p class="list-group-item-text">Create Team</p>
+                </a></li>
+                <li class="disabled"><a href="#step-2">
+                    <h4 class="list-group-item-heading">Step 2</h4>
+                    <p class="list-group-item-text">Match details</p>
+                </a></li>
+                <li class="disabled"><a href="#step-3">
+                    <h4 class="list-group-item-heading">Step 3</h4>
+                    <p class="list-group-item-text">Match score</p>
+                </a></li>
+            </ul>
+        </div>
+	</div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="col-md-12 well setup-content text-center" id="step-1" style="display: block;background: url(/static/images/gradient-bg.gif) left bottom repeat-x #fff;">
+                <h1> STEP 1</h1>
+
+                <div style="width: 90%;">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="id-in-team-name" class="col-sm-2 control-label">Team name</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="id-in-team-name" placeholder="Team name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="id-in-team-city" class="col-sm-2 control-label">City</label>
+
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="id-in-team-city" placeholder="City">
+                            </div>
+                        </div>
+                        <div>
+                            <a href="#" id="anc-addplayer">Add more players</a>
+
+                            <div id="div-playerinfo">
+                                <div style="margin-bottom: 10px;">
+                                    <a href="#" class="removeteam">X</a>
+                                    <input type="text" name="mytext[]" id="field_1" placeholder="player 1"  style="width: 290px;" class="cls-in-player">
+                                    <input type="text" name="mytext[]" id="email_1" placeholder="email"  style="width: 350px;" class="cls-in-player">
+                                    <a href="#" class="removeteam">invite</a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-actions">
+                            <button id="btn-st1-cancel" class="btn btn-primary btn-lg">Go back to team view</button>
+                            <button id="btn-st1-clear" class="btn btn-primary btn-lg">Clear</button>
+                            <button id="activate-step-2" type="submit" class="btn btn-primary btn-lg">Next</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="col-md-12 well setup-content text-center" id="step-2" style="display: block;background: url(/static/images/gradient-bg.gif) left bottom repeat-x #fff;">
+                <h1 class="text-center"> STEP 2</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="col-md-12 well setup-content text-center" id="step-3" style="display: block;background: url(/static/images/gradient-bg.gif) left bottom repeat-x #fff;">
+                <h1 class="text-center"> STEP 3</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="div-teamlist" class="row">
+<div class="col-md-9 team-details">
+<div class="row">
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <h4><a href="#">Looking for your team ?</a>
+    </h4>
+
+    <p> You can invite your team members to Qsports while creating team... </p>
+    <a id="anc-createteam" class="btn btn-primary" href="#">Create new team</a>
+</div>
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">
+        <img src="http://placehold.it/320x100" alt="">
+
+        <div class="caption">
+            <h4><a href="#">Fear the Eleven Cricket team</a>
+            </h4> <h5> Chennai, TN, Team(Subbu(cp), Binoy, ...)</h5>
+        </div>
+        <div class="ratings">
+            <p class="pull-right">Lost 1 </p>
+
+            <p class="">Won 10</p>
+
+            <p>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">
+        <img src="http://placehold.it/320x100" alt="">
+
+        <div class="caption">
+            <h4><a href="#">Fear the Eleven Cricket team</a>
+            </h4> <h5> Chennai, TN, Team(Subbu(cp), Binoy, ...)</h5>
+        </div>
+        <div class="ratings">
+            <p class="pull-right">Lost 1 </p>
+
+            <p class="">Won 10</p>
+
+            <p>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">
+        <img src="http://placehold.it/320x100" alt="">
+
+        <div class="caption">
+            <h4><a href="#">Fear the Eleven Cricket team</a>
+            </h4> <h5> Chennai, TN, Team(Subbu(cp), Binoy, ...)</h5>
+        </div>
+        <div class="ratings">
+            <p class="pull-right">Lost 1 </p>
+
+            <p class="">Won 10</p>
+
+            <p>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">
+        <img src="http://placehold.it/320x100" alt="">
+
+        <div class="caption">
+            <h4><a href="#">Fear the Eleven Cricket team</a>
+            </h4> <h5> Chennai, TN, Team(Subbu(cp), Binoy, ...)</h5>
+        </div>
+        <div class="ratings">
+            <p class="pull-right">Lost 1 </p>
+
+            <p class="">Won 10</p>
+
+            <p>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">
+        <img src="http://placehold.it/320x100" alt="">
+
+        <div class="caption">
+            <h4><a href="#">Fear the Eleven Cricket team</a>
+            </h4> <h5> Chennai, TN, Team(Subbu(cp), Binoy, ...)</h5>
+        </div>
+        <div class="ratings">
+            <p class="pull-right">Lost 1 </p>
+
+            <p class="">Won 10</p>
+
+            <p>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">
+        <img src="http://placehold.it/320x100" alt="">
+
+        <div class="caption">
+            <h4><a href="#">Fear the Eleven Cricket team</a>
+            </h4> <h5> Chennai, TN, Team(Subbu(cp), Binoy, ...)</h5>
+        </div>
+        <div class="ratings">
+            <p class="pull-right">Lost 1 </p>
+
+            <p class="">Won 10</p>
+
+            <p>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">
+        <img src="http://placehold.it/320x100" alt="">
+
+        <div class="caption">
+            <h4><a href="#">Fear the Eleven Cricket team</a>
+            </h4> <h5> Chennai, TN, Team(Subbu(cp), Binoy, ...)</h5>
+        </div>
+        <div class="ratings">
+            <p class="pull-right">Lost 1 </p>
+
+            <p class="">Won 10</p>
+
+            <p>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">
+        <img src="http://placehold.it/320x100" alt="">
+
+        <div class="caption">
+            <h4><a href="#">Fear the Eleven Cricket team</a>
+            </h4> <h5> Chennai, TN, Team(Subbu(cp), Binoy, ...)</h5>
+        </div>
+        <div class="ratings">
+            <p class="pull-right">Lost 1 </p>
+
+            <p class="">Won 10</p>
+
+            <p>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">
+        <img src="http://placehold.it/320x100" alt="">
+
+        <div class="caption">
+            <h4><a href="#">Fear the Eleven Cricket team</a>
+            </h4> <h5> Chennai, TN, Team(Subbu(cp), Binoy, ...)</h5>
+        </div>
+        <div class="ratings">
+            <p class="pull-right">Lost 1 </p>
+
+            <p class="">Won 10</p>
+
+            <p>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">
+        <img src="http://placehold.it/320x100" alt="">
+
+        <div class="caption">
+            <h4><a href="#">Fear the Eleven Cricket team</a>
+            </h4> <h5> Chennai, TN, Team(Subbu(cp), Binoy, ...)</h5>
+        </div>
+        <div class="ratings">
+            <p class="pull-right">Lost 1 </p>
+
+            <p class="">Won 10</p>
+
+            <p>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">
+        <img src="http://placehold.it/320x100" alt="">
+
+        <div class="caption">
+            <h4><a href="#">Fear the Eleven Cricket team</a>
+            </h4> <h5> Chennai, TN, Team(Subbu(cp), Binoy, ...)</h5>
+        </div>
+        <div class="ratings">
+            <p class="pull-right">Lost 1 </p>
+
+            <p class="">Won 10</p>
+
+            <p>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">
+        <img src="http://placehold.it/320x100" alt="">
+
+        <div class="caption">
+            <h4><a href="#">Fear the Eleven Cricket team</a>
+            </h4> <h5> Chennai, TN, Team(Subbu(cp), Binoy, ...)</h5>
+        </div>
+        <div class="ratings">
+            <p class="pull-right">Lost 1 </p>
+
+            <p class="">Won 10</p>
+
+            <p>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">
+        <img src="http://placehold.it/320x100" alt="">
+
+        <div class="caption">
+            <h4><a href="#">Fear the Eleven Cricket team</a>
+            </h4> <h5> Chennai, TN, Team(Subbu(cp), Binoy, ...)</h5>
+        </div>
+        <div class="ratings">
+            <p class="pull-right">Lost 1 </p>
+
+            <p class="">Won 10</p>
+
+            <p>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">
+        <img src="http://placehold.it/320x100" alt="">
+
+        <div class="caption">
+            <h4><a href="#">Fear the Eleven Cricket team</a>
+            </h4> <h5> Chennai, TN, Team(Subbu(cp), Binoy, ...)</h5>
+        </div>
+        <div class="ratings">
+            <p class="pull-right">Lost 1 </p>
+
+            <p class="">Won 10</p>
+
+            <p>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">
+        <img src="http://placehold.it/320x100" alt="">
+
+        <div class="caption">
+            <h4><a href="#">Fear the Eleven Cricket team</a>
+            </h4> <h5> Chennai, TN, Team(Subbu(cp), Binoy, ...)</h5>
+        </div>
+        <div class="ratings">
+            <p class="pull-right">Lost 1 </p>
+
+            <p class="">Won 10</p>
+
+            <p>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">
+        <img src="http://placehold.it/320x100" alt="">
+
+        <div class="caption">
+            <h4><a href="#">Fear the Eleven Cricket team</a>
+            </h4> <h5> Chennai, TN, Team(Subbu(cp), Binoy, ...)</h5>
+        </div>
+        <div class="ratings">
+            <p class="pull-right">Lost 1 </p>
+
+            <p class="">Won 10</p>
+
+            <p>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">
+        <img src="http://placehold.it/320x100" alt="">
+
+        <div class="caption">
+            <h4><a href="#">Fear the Eleven Cricket team</a>
+            </h4> <h5> Chennai, TN, Team(Subbu(cp), Binoy, ...)</h5>
+        </div>
+        <div class="ratings">
+            <p class="pull-right">Lost 1 </p>
+
+            <p class="">Won 10</p>
+
+            <p>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">
+        <img src="http://placehold.it/320x100" alt="">
+
+        <div class="caption">
+            <h4><a href="#">Fear the Eleven Cricket team</a>
+            </h4> <h5> Chennai, TN, Team(Subbu(cp), Binoy, ...)</h5>
+        </div>
+        <div class="ratings">
+            <p class="pull-right">Lost 1 </p>
+
+            <p class="">Won 10</p>
+
+            <p>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <h4><a href="#">Show more teams ?</a>
+    </h4>
+</div>
+
+
+</div>
+
+</div>
+</div>
+</div>
+</div>
+<footer>
+    {% include "crkt/footer.html" %}
+</footer>
+</body>
+</html>

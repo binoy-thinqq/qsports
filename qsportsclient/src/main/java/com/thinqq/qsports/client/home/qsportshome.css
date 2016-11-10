@@ -1,0 +1,51 @@
+@external .maintopic:hover,.maintopic,.articletopic,.articletopic:hover,.gobutton,.gobutton:hover,.menuitem,.maintopicimgpanel:hover,.maintopicimgpanel;
+.maintopic:hover {
+	background-image: URL("images/background_blue.png");
+	background-repeat: repeat-x;
+	border-width: 1px;
+	cursor: pointer;
+}
+
+.maintopic {
+	background-image: URL("images/background_grey.png");
+	background-repeat: repeat-x;
+	background-color: #FFFFFF;
+	border-width: 1px;
+}
+.maintopicimgpanel:hover{
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 5px;
+	border-color: #DBEEF4;
+}
+.maintopicimgpanel{
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 5px;
+	border-color: #DDDDDD;
+}
+
+
+		.gobutton {
+			font-family: Verdana;
+			font-size: 20px;
+			font-weight: bold;
+			border-width: 1px;
+			border-style: solid;
+			border-radius: 0px 5px 5px 0px;
+			border-color: #DDDDDD;
+			color: #999999;
+		}
+
+		.gobutton:hover {
+			background-image: URL("images/background_dark_green.png");
+			background-repeat: repeat-x;
+			font-family: Verdana;
+			font-size: 20px;
+			font-weight: bold;
+			color: #999999;
+			border-width: 1px;
+			border-style: solid;
+			border-radius: 0px 5px 5px 0px;
+			border-color: #FFFFFF;
+		}

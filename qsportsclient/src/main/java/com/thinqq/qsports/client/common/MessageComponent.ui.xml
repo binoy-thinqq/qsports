@@ -1,0 +1,17 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<g:HTMLPanel width="80%">
+		<table>
+			<tr>
+				<td width="95%">
+					<g:Label stylePrimaryName="messageTxt" ui:field="message" text=""></g:Label>
+				</td>
+				<td width="5%">
+					<g:Button ui:field="close" stylePrimaryName="gbuttonSmall"
+						text="Hide"></g:Button>
+				</td>
+			</tr>
+		</table>
+	</g:HTMLPanel>
+</ui:UiBinder> 

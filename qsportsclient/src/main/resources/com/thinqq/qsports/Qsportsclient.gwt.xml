@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='qsportsclient'>
+  <!-- Inherit the core Web Toolkit stuff.                        -->
+  <inherits name='com.google.gwt.user.User'/>
+
+  <!-- Inherit the default GWT style sheet.  You can change       -->
+  <!-- the theme of your GWT application by uncommenting          -->
+  <!-- any one of the following lines.                            -->
+  <inherits name='com.google.gwt.user.theme.clean.Clean'/>
+  <inherits name='com.google.gwt.uibinder.UiBinder' />
+  <inherits name="com.google.gwt.i18n.I18N"/>
+  <!-- <inherits name='com.google.gwt.user.theme.standard.Standard'/> -->
+  <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
+  <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
+  <inherits name="com.google.gwt.place.Place"/>
+  <inherits name="com.google.gwt.activity.Activity"/>
+  <!-- Other module inherits                                      -->
+<inherits name="com.google.gwt.logging.Logging"/>
+<set-property name="gwt.logging.enabled" value="FALSE"/>  
+  <!-- Specify the app entry point class.                         -->
+  <entry-point class='com.thinqq.qsports.client.Qsportsclient'/>
+  <!-- set-property name="user.agent" value="gecko1_8"/-->
+  <!-- set-property name="user.agent" value="compatible"/-->
+<!-- set-property name="user.agent" value="compatible"/-->
+  <!-- Specify the paths for translatable code                    -->
+  <source path='client'/>
+  <source path='shared'/>
+  
+  	<!-- Use ClientFactoryImpl by default -->
+	<replace-with class="com.thinqq.qsports.client.ClientFactoryImpl">
+		<when-type-is class="com.thinqq.qsports.client.ClientFactory" />
+	</replace-with>
+	<!--  Place History Impl -->
+	<replace-with class="com.thinqq.qsports.client.QSportsPlaceHistoryMapperImpl">
+		<when-type-is class="com.thinqq.qsports.client.QSportsPlaceHistoryMapper" />
+	</replace-with>
+	
+	
+	<servlet path="/qsportsclient/svc" class="com.thinqq.qsports.server.svcimpl.QSportsCricketSVCImpl" />
+</module>

@@ -1,0 +1,89 @@
+
+1. Copy solr.war for deployment
+
+2. Create a folder solrcore in C folder. You can create solrcore anywhere but we need to change the env variable path configured in web.xml of solr.war. 
+There will be an env variable solr.solr.home which has to be changed if you are copying to a different folder. 
+Name also can be changed. This will be called as solrHome.
+
+3. Copy folder team and player folder to solrHome. These are two cores for solr
+
+4. Copy solr.xml to solrHome
+
+5. copy lib folder inside player and team folder.
+ 
+6. Folder structure would be
+
+-solrHome
+
+ ----team
+ --------conf
+ -----------schema.xml
+ -----------solrconfig.xml
+ -----------dataconfig.xml
+
+ --------lib
+
+ ----player
+ --------conf
+ -----------schema.xml
+ -----------solrconfig.xml
+ -----------dataconfig.xml
+ --------lib
+
+ ----solr.xml
+
+
+7. Start server. Check if solr is initialized properly by hitting <server_url>/<ctxtpath>/admin.
+
+==== Creating Cores ===============
+
+8. If you are able to admin page then solr is up and running. Now we need to create two solr cores team and player
+
+9. Hit the below url to create solr cores
+Creating a core
+
+<server_url>/<ctxtpath>/admin/cores?action=CREATE&name=player&instanceDir=<solrHome>\player&config=solrconfig.xml&schema=schema.xml&dataDir=data
+
+<server_url>/<ctxtpath>/admin/cores?action=CREATE&name=team&instanceDir=<solrHome>\team&config=solrconfig.xml&schema=schema.xml&dataDir=data
+
+10. Open solr.xml inside solrHome and check if there are two entries. one for player and other for team
+
+=========== Indexing ===============
+
+11. Next step is to start indexing the data. Before indexing open dataconfig.xml inside each core and check for DB credentials. If they are correct then proceed
+
+12. Hit below url to start indexing
+
+<server_url>/<ctxtpath>/player/dataimport?command=full-import
+
+<server_url>/<ctxtpath>/team/dataimport?command=full-import
+
+===== Checking status of indexing ============
+
+<server_url>/<ctxtpath>/player/dataimport?command=status
+
+<server_url>/<ctxtpath>/team/dataimport?command=status
+
+13. Other important commands
+
+============= Querying data ===============
+
+<server_url>/<ctxtpath>/team/select?q=(*:*)&wt=json&indent=on
+
+<server_url>/<ctxtpath>/player/select?q=(*:*)&wt=json&intend=on
+
+
+======== For Delta import . To index new and modified data =============
+
+<server_url>/<ctxtpath>/player/dataimport?command=delta-import
+
+<server_url>/<ctxtpath>/team/dataimport?command=delta-import
+
+============= Check the solr logs =================
+
+<server_url>/<ctxtpath>/#/~logging
+
+
+
+
+

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+   xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+   <ui:style>
+      .floatRight{
+      float:right; 
+      }
+      .menuStyle {
+		border: none;
+		background: none;
+
+	}
+   </ui:style>
+   <g:HTMLPanel styleName="paddingNone">
+      <header>
+         <div class="wrapper clearfix">
+            <span class="logo fL"><a href="index.html"><img src="images/logo.png" width="124" height="24" alt="logo"/></a></span>
+            
+             <g:MenuBar ui:field="testMenu" styleName="menuStyle">
+            	<!-- <g:MenuItem ui:field="home">
+            		<img src="images/icon-home.png"/>
+            		<g:Image ui:field="goHome" url="images/icon-home.png" styleName="handCursor"></g:Image>
+            	</g:MenuItem>
+            	<g:MenuItem ui:field="addMatch">
+            		<img src="images/icon-batsman.png"/>
+            	</g:MenuItem> -->
+            
+            </g:MenuBar>
+            <!-- <ul class="topNav fL">
+               <li>
+                  <g:Image ui:field="goHome" url="images/icon-home.png" styleName="handCursor"></g:Image>
+                  <span class="tooltip">Home</span>
+               </li>
+               <li ui:field="addTeam">
+                  <a href="javascript:void(0);"><img src="images/icon-batsman.png" alt="icon"/></a>
+                  <span class="tooltip">Add New Match / Team</span>
+                  <ul class="subNav">
+                     <li>
+                        <g:Anchor styleName="fancybox fancybox.ajax" ui:field="createMatch" text="New Match" visible="false"></g:Anchor>
+                     </li>
+                     <li>
+                        <g:Anchor styleName="fancybox fancybox.ajax" ui:field="createTeam" text="New Team" visible="false"></g:Anchor>
+                     </li>
+                  </ul>
+               </li>
+               <li>
+                  <g:Image url="images/icon-people.png" ui:field="invite" styleName="handCursor"></g:Image>
+                  <span class="tooltip">Invite</span>
+               </li>
+            </ul>  -->
+            <div class="player-login fR">
+               <a href="javascript:void(0);" class="login-trigger">
+                  <g:Label ui:field="userGreeting"  text=""></g:Label>
+               </a>
+               <ul class="acc-li" id="greetingMenu">
+                  <li><a href="#"><img src="images/icon-settings.png" alt="Setting"/> Setting</a></li>
+                  <li>
+                     <g:Image url="images/icon-logout.png" ui:field="logout"/>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </header>
+      <div class="wrapper page clearfix">
+         <div class="pageLeft fL">
+            <g:HTMLPanel>
+               <g:FlowPanel styleName="messagePanel" ui:field="messagePanel"
+                  width="100%" visible="false"/>
+               <g:SimplePanel styleName="centralarea" ui:field="centralArea"
+                  width="100%"/>
+            </g:HTMLPanel>
+         </div>
+         <div class="pageRight fR">
+            <div class="radius-box right-search-blk">
+               <div class="search-blk clearfix">
+                  <input type="text" placeholder="Search" class="fL"/>
+                  <input type="image" src="images/go-btn.gif" class="fR" alt="go"/>
+               </div>
+               <ul class="search-list clearfix">
+                  <li><a class="active" href="#">Team</a></li>
+                  <li><a href="#">Players</a></li>
+               </ul>
+            </div>
+        <div class="radius-box">
+      <h4>Last Match</h4>
+      <div class="last-match"> 
+   	  	<g:HTMLPanel ui:field="leftPnl1"></g:HTMLPanel>
+      </div>
+    </div>
+    <div class="radius-box">
+    <g:HTMLPanel ui:field="tweet"></g:HTMLPanel>
+    
+      </div>
+    <div class="radius-box">
+      <h4>Matches</h4>
+      
+      <div class="tab-wrap">
+        <div class="tab-block def-tab" id="cur-match"> 
+        <div class="tab-block" id="cum-up"> <span class="block"><strong>ENG vs NZ, 2nd Test, Leeds</strong></span> </div>
+      </div>
+      <span class="showMat block"> <a href="#">Show all matches</a> </span> </div>
+  </div>
+         </div>
+      </div>
+      <footer>
+         <div class="wrapper clearfix">
+            <span class="fL">Copyright &copy; 2013 cricketQ.com. All Rights Reserved | Designed by <a href="#">Ada Textus</a></span>
+            <span class="social-wrap fR">
+            <a target="_blank" title="Facebook" href="#"><img src="images/facebook.png" width="16" height="16" alt="Facebook"/></a>
+            <a target="_blank" title="Twitter" href="#"><img src="images/twitter.png" width="16" height="16" alt="Twitter"/></a>
+            <a target="_blank" title="Linked-in" href="#"><img src="images/linked-in.png" width="16" height="16" alt="linked"/></a>
+            <a target="_blank" title="G-plus" href="#"><img src="images/g-plus.png" width="15" height="15" alt="G-plus"/></a>
+            </span>
+         </div>
+      </footer>
+   </g:HTMLPanel>
+</ui:UiBinder>

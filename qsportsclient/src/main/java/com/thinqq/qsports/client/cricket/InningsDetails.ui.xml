@@ -1,0 +1,28 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:com.google.gwt.user.cellview.client">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:HTMLPanel ui:field="inningsPanel" height="900px">
+		<c:CellTable ui:field="battingTable"></c:CellTable>
+		<g:Label ui:field="bowlingCaption"></g:Label>
+		<g:HTMLPanel>
+			<c:DataGrid ui:field="bowlingTable"></c:DataGrid>
+		</g:HTMLPanel>
+		<g:Button ui:field="addBowler" text="+"></g:Button>
+		<g:HTMLPanel>
+		<g:Label text="Byes"></g:Label>
+			<g:TextBox ui:field="byes"></g:TextBox> 
+			
+		</g:HTMLPanel>
+		<g:HTMLPanel>
+			<g:Label text="Leg Byes"></g:Label>
+			<g:TextBox ui:field="legbyes"></g:TextBox> 
+		</g:HTMLPanel>
+	</g:HTMLPanel>
+
+
+</ui:UiBinder> 

@@ -1,0 +1,484 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+  xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:p1="urn:import:com.google.gwt.user.cellview.client">
+  <ui:style>
+    .lighterborder {
+    border-bottom: 1px solid #F0F0F0;
+    }
+    .lefttopbold {
+    padding: 10px 0px 0px 10px;
+    }
+    .fontsize {
+    font-size: 22px;
+    }
+    .fontsize_sosmall {
+    font-size: 12px;
+    }
+  </ui:style>
+  <g:HTMLPanel>
+    <div class="player-details">
+      <div class="player-header clearfix">
+        <div class="name-block fL">
+          <h2>
+            <g:Label ui:field="name"
+              text="Cricket Profile"></g:Label>
+          </h2>
+          <ul class="country-det clearfix clear">
+            <li>
+              <g:Label ui:field="country"></g:Label>
+            </li>
+            <li>
+              <g:Label ui:field="age"></g:Label>
+            </li>
+          </ul>
+        </div>
+        <div class="sm-placeholder fR">
+          <span class="edit-btn fR">
+            <g:Anchor styleName="fancybox" text="Edit" ui:field="editProfile"></g:Anchor>
+          </span>
+          <span class="fR"><div class="fb-like" data-href="http://127.0.0.1:8888/qsportsclient.jsp?gwt.codesvr=127.0.0.1:9997" data-width="450" data-show-faces="true" data-send="false" data-layout="button_count"></div></span> 
+        </div>
+      </div>
+      <div class="player-info clearfix">
+        <span class="player-img fL">
+          <g:Image ui:field="profileImage"></g:Image>
+          <span class="change-img"><a href="#">Change image</a></span> 
+        </span>
+        <div class="player-history fL">
+          <!-- h1>Alastair Nathan Cook</h1> -->
+          <p>
+            <g:Label ui:field="dateOfBirth"></g:Label>
+            <br/>
+            <g:Label text="" ui:field="batting"></g:Label>
+            <br/>
+            <g:Label text="" ui:field="bowling"></g:Label>
+            <br/>
+            <g:Label ui:field="city"></g:Label>
+            <br/>
+            <g:Label ui:field="state"></g:Label>
+            <br/>
+            <g:Label ui:field="gender"></g:Label>
+            <br/>
+            <g:Label ui:field="email"></g:Label>
+            <br/>
+            <g:Label text="" ui:field="fielding"></g:Label>
+            <br/>
+          </p>
+          <p>
+            <g:Label ui:field="desc"></g:Label>
+          </p>
+          <span class="fR"><a class="btn-blue" href="#">View full profile</a></span> 
+        </div>
+      </div>
+    </div>
+    <div class="radius-box">
+      <h4 class="icons bat-icon">Batting</h4>
+      <table width="100%" border="0" cellpadding="8" class="txtAlnCenter">
+        <tr>
+          <th>
+            <g:Label ui:field="formatLabel" text="Format"></g:Label>
+          </th>
+          <th>
+            <g:Label ui:field="matchesLabel" text="Mat"></g:Label>
+          </th>
+          <th>
+            <g:Label ui:field="inningsLabel" text="Inn"></g:Label>
+          </th>
+          <th>
+            <g:Label ui:field="notoutLabel" text="N.O"></g:Label>
+          </th>
+          <th>
+            <g:Label ui:field="runsLabel" text="Runs"></g:Label>
+          </th>
+          <th>
+            <g:Label ui:field="strikeRateLabel" text="S.R"></g:Label>
+          </th>
+          <th>
+            <g:Label ui:field="averBatLabel" text="Avg."></g:Label>
+          </th>
+          <th>
+            <g:Label ui:field="highScoreLabel" text="H.S."></g:Label>
+          </th>
+          <th>
+            <g:Label ui:field="hundredsLabel" text="100s"></g:Label>
+          </th>
+          <th>
+            <g:Label ui:field="fiftiesLabel" text="50s"></g:Label>
+          </th>
+          <th>
+            <g:Label ui:field="thirtiesLabel" text="30s"></g:Label>
+          </th>
+          <th>
+            <g:Label ui:field="sixesLabel" text="6s"></g:Label>
+          </th>
+          <th>
+            <g:Label ui:field="foursLabel" text="4s"></g:Label>
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <g:Label ui:field="formatTst" title="Unlimited Overs" text="Test"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="matchesTst" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="inningsTst" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="notoutTst" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="runsTst" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="strikeRateTst" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="averBatTst" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="highScoreTst" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="hundredsTst" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="fiftiesTst" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="thirtiesTst" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="sixesTst" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="foursTst" text="-"></g:Label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <g:Label  ui:field="formatOD" title="21 Overs to 50 Overs" text="ODI"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="matchesOD" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="inningsOD" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="notoutOD" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="runsOD" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="strikeRateOD" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="averBatOD" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="highScoreOD" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="hundredsOD" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="fiftiesOD" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="thirtiesOD" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="sixesOD" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="foursOD" text="-"></g:Label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <g:Label ui:field="formatT20" title="5 Overs to 20 Overs" text="T20"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="matchesT20" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="inningsT20" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="notoutT20" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="runsT20" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="strikeRateT20" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="averBatT20" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="highScoreT20" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="hundredsT20" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="fiftiesT20" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="thirtiesT20" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="sixesT20" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="foursT20" text="-"></g:Label>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="radius-box">
+      <h4 class="icons ball-icon">
+        <g:Label ui:field="b_statsHeading"
+          text="Bowling"></g:Label>
+      </h4>
+      <table width="100%" border="0" cellpadding="8" class="txtAlnCenter">
+        <tr>
+          <th>
+            <g:Label ui:field="b_formatLabel" text="Format"></g:Label>
+          </th>
+          <th>
+            <g:Label ui:field="b_matchesLabel" text="Mat"></g:Label>
+          </th>
+          <th>
+            <g:Label ui:field="b_inningsLabel" text="Inn"></g:Label>
+          </th>
+          <th>
+            <g:Label ui:field="b_ballsLabel" text="Balls"></g:Label>
+          </th>
+          <th>
+            <g:Label ui:field="b_wicketsLabel" text="Wkts"></g:Label>
+          </th>
+          <th>
+            <g:Label ui:field="b_avgLAbel" text="Avg"></g:Label>
+          </th>
+          <th>
+            <g:Label ui:field="b_econLabel" text="Econ"></g:Label>
+          </th>
+          <th>
+            <g:Label ui:field="b_runsLabel" text="Runs"></g:Label>
+          </th>
+          <th>
+            <g:Label ui:field="b_3WicketsLabel" text="3Wks"></g:Label>
+          </th>
+          <th>
+            <g:Label ui:field="b_5WicketsLabel" text="5Wks"></g:Label>
+          </th>
+          <th>
+            <g:Label ui:field="b_bestBowlingLabel" text="Best"></g:Label>
+          </th>
+          <th>
+            <g:Label ui:field="b_CatchesLabel" text="Ctch"></g:Label>
+          </th>
+          <th>
+            <g:Label ui:field="b_StumpingsLabel" text="Stmp"></g:Label>
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <g:Label ui:field="b_formatTest" text="Test"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_matchesTest" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_inningsTest" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_ballsTest" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_wicketsTest" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_avgTest" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_econTest" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_runsTest" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_3WicketsTest" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_5WicketsTest" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_bestBowlingTest" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_CatchesTest" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_StumpingsTest" text="-"></g:Label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <g:Label ui:field="b_formatOD" text="OD"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_matchesOD" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_inningsOD" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_ballsOD" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_wicketsOD" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_avgOD" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_econOD" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_runsOD" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_3WicketsOD" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_5WicketsOD" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_bestBowlingOD" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_CatchesOD" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_StumpingsOD" text="-"></g:Label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <g:Label ui:field="b_formatT20" text="T20"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_matchesT20" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_inningsT20" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_ballsT20" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_wicketsT20" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_avgT20" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_econT20" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_runsT20" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_3WicketsT20" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_5WicketsT20" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_bestBowlingT20" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_CatchesT20" text="-"></g:Label>
+          </td>
+          <td>
+            <g:Label ui:field="b_StumpingsT20" text="-"></g:Label>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="radius-box txtAlnLeft clearfix">
+      <h4 class="icons icon-team"><g:Label stylePrimaryName="subtitle" text="Team(s)"></g:Label></h4>
+    <g:VerticalPanel>
+      <g:Cell width="100%" height="100%" horizontalAlignment="ALIGN_CENTER">
+        <g:HTMLPanel width="100%" stylePrimaryName="panel">
+          
+          <table width="100%">
+            <tr>
+              <td width="100%">
+                <table width="100%">
+                  <tr>
+                    <td height="95%" width="100%">
+                      <table style="width:100%;border-bottom:1px solid #EEEEEE">
+                        <tr>
+                          <td width="30%">
+                            <div class="dark">Team Name</div>
+                          </td>
+                          <td width="30%">
+                            <div class="dark">Location</div>
+                          </td>
+                          <td width="25%">
+                            <div class="dark">Quick Statistics</div>
+                          </td>
+                          <td width="15%">
+                            <div class="dark">Win Percentage</div>
+                          </td>
+                        </tr>
+                      </table>
+                      <p1:CellList pageSize="5" ui:field="teamsList"></p1:CellList>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="100%">
+                      <p1:SimplePager ui:field="teamsListPager"
+                        pageStart="0" location='CENTER' />
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </g:HTMLPanel>
+      </g:Cell>
+      <g:Cell width="100%" height="100%" horizontalAlignment="ALIGN_CENTER">
+        <g:HTMLPanel width="100%" stylePrimaryName="panel">
+          <g:Label stylePrimaryName="subtitle panelTitle" ui:field="matchesHeading"
+            text="Matches"></g:Label>
+          <table width="100%">
+            <tr stylePrimaryName="{style.lighterborder}">
+              <td>
+                <p1:CellTable pageSize="5" ui:field="matchesTable"></p1:CellTable>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p1:SimplePager ui:field="pager" location='CENTER' />
+              </td>
+            </tr>
+          </table>
+        </g:HTMLPanel>
+      </g:Cell>
+    </g:VerticalPanel>
+    </div>
+  </g:HTMLPanel>
+  <!-- g:VerticalPanel width="100%" height="100%"
+    horizontalAlignment="ALIGN_CENTER">
+    
+    
+    -->
+</ui:UiBinder>

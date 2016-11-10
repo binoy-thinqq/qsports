@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"><![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"><![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"><![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=100%; initial-scale=1; maximum-scale=1; minimum-scale=1; user-scalable=no;"/>
+<title>Cricketq</title>
+
+
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<script src="js/common.js"></script>
+<script src="js/login.js"></script>
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="css/common.css">
+
+<!--[if lt IE 9]>
+    <script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<style>
+    #user-auth-dialog-container  .social-button-container {
+        position: relative;
+        color: #373737;
+        white-space: nowrap;
+        margin: 0;
+        cursor: pointer;
+    }
+
+    #user-auth-dialog-container  .buttonText {
+        vertical-align: top;
+        font-size: 18px;
+        background: #f4f0ef;
+        height: 44px;
+        line-height: 44px;
+        padding-right: 16px;
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+        border-radius: 6px;
+        border: 1px solid #c2c1bf;
+        border-left: 0;
+    }
+
+    #user-auth-dialog-container  #customFBBtn .icon {
+        background: #3b579d;
+    }
+
+    #user-auth-dialog-container  #customFBBtn .icon span {
+        background: url(images/fb-f2.png) transparent center center no-repeat;
+    }
+
+    #user-auth-dialog-container  .social-button-container .icon {
+        position: relative;
+        top: -1px;
+        margin-right: 16px;
+        vertical-align: top;
+        display: inline-block;
+        width: 54px;
+        height: 43px;
+        -webkit-border-radius: 6px 0 0 6px;
+        -moz-border-radius: 6px 0 0 6px;
+        border-radius: 6px 0 0 6px;
+    }
+
+    #user-auth-dialog-container #customGPBtn .icon span {
+        background: url(images/btn_red_32.png) transparent center center no-repeat;
+    }
+
+    #user-auth-dialog-container  #customGPBtn .icon {
+        background: #dd4b39;
+    }
+
+    a.anc-login{
+        text-decoration: none;
+    }
+
+</style>
+
+</head>
+
+<body>
+<header>
+  <div class="wrapper clearfix">
+  	<span class="logo fL"><a href="index.html"><img src="images/logo.png" width="124" height="24" alt="logo"></a></span>
+    <div class="login-top-section fR">
+    	<a href="#" class="sign-in">Sign in</a> or
+        <a href="register.html" class="createAcc">Create an account</a>
+    </div>
+  </div>
+</header>
+<div class="botShadow">
+  <div class="wrapper page clearfix">
+    <h1>Cricket Q - Statictics</h1>
+    <div class="column-one fL">
+      <ul class="stats-list">
+        <li> <span class="statistics-icon"><img src="images/icon-save.png" alt="save"></span>
+          <h2>Save a match Scorecard</h2>
+          <p>Worried about managing your score books. Create and Save with QSports</p>
+        </li>
+        <li> <span class="statistics-icon"><img src="images/icon-player-stats.png" alt="Player Statistics"></span>
+          <h2>Player Statistics</h2>
+          <p>Any little contribution is worth a pat. With QSports you never miss a run or wicket</p>
+        </li>
+        <li> <span class="statistics-icon"><img src="images/icon-team-stats.png" alt="Team Statistics"></span>
+          <h2>Team Statistics</h2>
+          <p>Get statistics of your team and plan accordingly.</p>
+        </li>
+      </ul>
+    </div>
+    <div class="column-two login-section fR">
+      <div class="sign-in-gmail">
+          <h2>Welcome to QCricket!</h2>
+
+          <div id="user-auth-dialog-container">
+		  <div id="errorDiv"/>
+		  <div style="float:left;padding-right:40px;" class="form-group">
+              <table style="width:250px;">
+                  <tbody>
+                  <tr >
+                      <td>
+                         <input type="text" id="username" class="form-control"/>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                        <input type="password" id="password" class="form-control"/></td>
+
+                  </tr>
+				   <tr>
+                      <td>
+                        <input type="button" name="btnsignin" id="btnsignin" value="Sign In" class="btn btn-signin"/>
+
+                  </tr>
+				  
+				   <tr>
+                      <td>
+                         Forgot password? Don't Worry <a name="frgtPassword" id="frgtPassword" href="forgotpwd.html"> Click here </a>
+						</td>
+
+                  </tr>
+                  </tbody>
+              </table>
+			    </div>
+				  <div>
+			   <table>
+                  <tbody>
+                  <tr class="social-button-container">
+                      <td>
+                          <a class="anc-login" href="/login/facebook/   ">
+                          <div id="customFBBtn" class="buttonText">
+                            <span class="icon">
+                              <img src="images/fb-f2.png" style="margin-left: 20px;"/>
+                            </span>
+                              Sign in with Facebook
+                          </div>
+                          <label name="fb" class="input-box-desc hidden-element error-message"></label>
+                          </a>
+                      </td>
+                  </tr>
+                  <tr class="social-button-container">
+                      <td>
+                         <a class="anc-login"  href="/login/google-oauth2/">
+                          <div id="customGPBtn" class="buttonText" data-gapiattached="true">
+                            <span class="icon">
+                                <img src="images/btn_red_32.png" style="margin-left: 12px;"/>
+                            </span>
+                                 Sign in with Google
+                          </div>
+                          <label name="gapi" class="input-box-desc hidden-element error-message"></label></td>
+                      </a>
+                  </tr>
+                  </tbody>
+              </table>
+			      </div>
+          </div>
+          <!--<a href="/login/google-oauth2/"><p><img src="images/google-logo.png" alt="Google"></p><br></a>-->
+          <!--<p>Cricket Q uses your Google account information to identify you</p>-->
+          <!--<ul class="acc-create-sec">-->
+          <!--<li><a href="#">Why should I give my  Google account information?</a></li>-->
+          <!--<li><a href="#">I don't have Google account</a></li>-->
+          <!--</ul>-->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="wrapper acc-info">
+	<h5>Why should I give my  Google account information?</h5>
+    <p>15,000 Test runs and 50 Test centuries are not beyond him" – Sunil Gavaskar, about Alastair Cook. It is not easy for a batsman to receive such high praise from a former cricketer, especially when the concerned persons are from different countries.  The fact that those words came from a batsman who is considered one of the best openers Test cricket has ever seen makes it even praiseworthy. </p>
+    <h5>Why should I give my  Google account information?</h5>
+    <p>15,000 Test runs and 50 Test centuries are not beyond him" – Sunil Gavaskar, about Alastair Cook. It is not easy for a batsman to receive such high praise from a former cricketer, especially when the concerned persons are from different countries.</p>
+</div>
+<footer>
+  <div class="wrapper clearfix"> <span class="fL">Copyright &copy; 2013 cricketQ.com. All Rights Reserved | Designed by <a href="#">Ada Textus</a></span> <span class="social-wrap fR"> <a target="_blank" title="Facebook" href="#"><img src="images/facebook.png" width="16" height="16" alt="Facebook"></a> <a target="_blank" title="Twitter" href="#"><img src="images/twitter.png" width="16" height="16" alt="Twitter"></a> <a target="_blank" title="Linked-in" href="#"><img src="images/linked-in.png" width="16" height="16" alt="linked"></a> <a target="_blank" title="G-plus" href="#"><img src="images/g-plus.png" width="15" height="15" alt="G-plus"></a> </span> </div>
+</footer>
+</body>
+</html>

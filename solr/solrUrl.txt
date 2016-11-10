@@ -1,0 +1,26 @@
+Creating a core
+
+http://localhost:8080/solr/admin/cores?action=CREATE&name=player&instanceDir=C:\solrcore\player&config=solrconfig.xml&schema=schema.xml&dataDir=data
+
+http://localhost:8080/solr/admin/cores?action=CREATE&name=team&instanceDir=C:\solrcore\team&config=solrconfig.xml&schema=schema.xml&dataDir=data
+
+======== Logging ==========
+
+http://localhost:8080/solr/#/~logging
+
+========For Player ==========
+
+localhost:8080/solr/player/select?q=(*:*)&wt=json
+
+http://localhost:8080/solr/player/dataimport?command=full-import
+
+http://localhost:8080/solr/player/dataimport?command=delta-import
+
+
+=======For Team =========
+
+localhost:8080/solr/team/select?q=(*:*)&wt=json
+
+http://localhost:8080/solr/team/dataimport?command=full-import
+
+http://localhost:8080/solr/team/dataimport?command=delta-import

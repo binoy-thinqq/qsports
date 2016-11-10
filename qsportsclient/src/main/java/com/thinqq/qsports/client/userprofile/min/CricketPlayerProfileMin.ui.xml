@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	<ui:style>
+		.lefttopbold {
+			padding: 10px 0px 0px 10px;
+		}
+	</ui:style>
+
+	<g:VerticalPanel width="100%" height="100%"
+		horizontalAlignment="ALIGN_CENTER">
+		<g:Cell width="100%" height="100%" horizontalAlignment="ALIGN_CENTER">
+			<g:HTMLPanel width="100%">
+				<table style="width:100%;height:100%">
+					<tr>
+						<td width="70%">
+							<g:Label stylePrimaryName="subtitle" ui:field="name"
+								text=""></g:Label>
+						</td>
+						<td width="10%">
+							<g:Image ui:field="loadingProfileImage"></g:Image>
+						</td>
+					</tr>
+				</table>
+				<br />
+			</g:HTMLPanel>
+		</g:Cell>
+		<g:Cell width="100%" height="100%" horizontalAlignment="ALIGN_CENTER">
+			<g:HTMLPanel width="100%">
+				<table style="width:100%;height:100%">
+					<tr>
+						<td width="90%">
+							<g:Label stylePrimaryName="subtitle" ui:field="statsHeading"
+								text="Batting"></g:Label>
+						</td>
+					</tr>
+				</table>
+				<table width="100%">
+					<tr>
+						<td style="width:10%;">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="formatLabel"
+								text="Format"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+								ui:field="matLabel" text="Mat."></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="runsLabel"
+								text="Runs"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="strikeRateLabel"
+								text="S.R"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="averBatLabel"
+								text="Avg."></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="highScoreLabel"
+								text="H.S."></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="hundredsLabel"
+								text="100s"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="fiftiesLabel"
+								text="50s"></g:Label>
+						</td>
+					</tr>
+					<tr>
+						<td style="width:10%;">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="formatT20"
+								title="5 Overs to 20 Overs" text="T20"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+								ui:field="matchesT20" text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+								ui:field="runsT20" text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+								ui:field="strikeRateT20" text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+								ui:field="averBatT20" text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+								ui:field="highScoreT20" text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+								ui:field="hundredsT20" text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+								ui:field="fiftiesT20" text="-"></g:Label>
+						</td>
+					</tr>
+					<tr>
+						<td style="width:10%; ">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="formatOD"
+								title="21 Overs to 50 Overs" text="OD"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+								ui:field="matchesOD" text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+								ui:field="runsOD" text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+								ui:field="strikeRateOD" text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+								ui:field="averBatOD" text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+								ui:field="highScoreOD" text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+								ui:field="hundredsOD" text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+								ui:field="fiftiesOD" text="-"></g:Label>
+						</td>
+					</tr>
+					<tr>
+						<td style="width:10%; ">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="formatTst"
+								title="Unlimited Overs" text="Test"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+								ui:field="matchesTst" text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+								ui:field="runsTst" text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+								ui:field="strikeRateTst" text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+								ui:field="averBatTst" text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+								ui:field="highScoreTst" text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+								ui:field="hundredsTst" text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+								ui:field="fiftiesTst" text="-"></g:Label>
+						</td>
+					</tr>
+				</table>
+				<br />
+			</g:HTMLPanel>
+		</g:Cell>
+		<g:Cell width="100%" height="100%" horizontalAlignment="ALIGN_CENTER">
+			<g:HTMLPanel width="100%">
+				<table width="100%">
+					<tr>
+						<td width="90%">
+							<g:Label stylePrimaryName="subtitle" ui:field="b_statsHeading"
+								text="Bowling"></g:Label>
+						</td>
+					</tr>
+				</table>
+
+				<table width="100%">
+					<tr>
+						<td style="width:10%;">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="b_formatLabel"
+								text="Format"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+								ui:field="b_matchesLabel" text="Mat."></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="b_wicketsLabel"
+								text="Wkts"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="b_avgLAbel"
+								text="Avg"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="b_econLabel"
+								text="Econ"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="b_5WicketsLabel"
+								text="5Wks"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="b_bestBowlingLabel"
+								text="Best"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="b_CatchesLabel"
+								text="Ctch"></g:Label>
+						</td>
+					</tr>
+					<tr>
+						<td style="width:10%;">
+							<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+								ui:field="b_formatT20" text="T20"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+								ui:field="b_matchesT20" text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="b_wicketsT20"
+								text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="b_avgT20"
+								text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="b_econT20"
+								text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="b_5WicketsT20"
+								text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="b_bestBowlingT20"
+								text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="b_CatchesT20"
+								text="-"></g:Label>
+						</td>
+					</tr>
+					<tr>
+						<td style="width:10%;">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="b_formatOD"
+								text="OD"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+								ui:field="b_matchesOD" text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="b_wicketsOD"
+								text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="b_avgOD"
+								text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="b_econOD"
+								text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="b_5WicketsOD"
+								text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="b_bestBowlingOD"
+								text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="b_CatchesOD"
+								text="-"></g:Label>
+						</td>
+					</tr>
+					<tr>
+						<td style="width:10%;">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="b_formatTest"
+								text="Test"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+								ui:field="b_matchesTest" text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="b_wicketsTest"
+								text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="b_avgTest"
+								text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="b_econTest"
+								text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="b_5WicketsTest"
+								text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="b_bestBowlingTest"
+								text="-"></g:Label>
+						</td>
+						<td style="width:7%;text-align:left">
+							<g:Label stylePrimaryName="{style.lefttopbold}" ui:field="b_CatchesTest"
+								text="-"></g:Label>
+						</td>
+					</tr>
+				</table>
+				<br />
+			</g:HTMLPanel>
+		</g:Cell>
+		<g:Cell width="100%" height="100%" horizontalAlignment="ALIGN_RIGHT">
+			<g:HTMLPanel>
+				<table width="100%">
+					<tr>
+						<td style="text-align:left;width:70%">
+							<g:Button stylePrimaryName="gbuttonSmall" text="Remove Player"
+								ui:field="removeProfile" />
+							<g:Button stylePrimaryName="gbuttonSmall" text="Add as Owner"
+								ui:field="makeOwner" />
+						</td>
+						<td style="text-align:right;width:30%">
+							<g:Button stylePrimaryName="actionSButton" text="View full profile"
+								ui:field="viewProfile" />
+						</td>
+					</tr>
+				</table>
+
+			</g:HTMLPanel>
+		</g:Cell>
+	</g:VerticalPanel>
+</ui:UiBinder>

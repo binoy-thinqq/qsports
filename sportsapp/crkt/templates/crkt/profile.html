@@ -1,0 +1,688 @@
+
+
+<!DOCTYPE html>
+<head xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=100%; initial-scale=1; maximum-scale=1; minimum-scale=1; user-scalable=no;"/>
+<title>Cricket Konnect</title>
+
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"/>
+
+<script src="/static/js/bootstrap.min.js"></script>
+
+<link href="/static/css/bootstrap.min.css" rel="stylesheet"/>
+<link rel="stylesheet" type="text/css" href="/static/css/common.css"/>
+
+<style>
+body {
+	background-color:#f6f6f6;
+	color:#403e3d;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	line-height:16px;
+}
+
+</style>
+
+<script>
+
+ function acceptJoinTeam(id,teamId,isrejected) {
+      var jsonData = { };
+      jsonData['teamId']=teamId;
+      jsonData['profileId']=id;
+      jsonData['isRejected']=isrejected;
+      var divToHide = "li_" + id +"_"+ teamId;
+      alert(divToHide);
+      $.ajax({
+        type: "POST",
+        url: API_ADD_TO_TEAM,
+        data: JSON.stringify(jsonData),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+    }).done(function(data){
+             $("#li_'+ id +'_'+ teamId").hide();
+       }
+    );
+
+ }
+
+function refreshUserData(){
+            $("#sp-displayname").text(user.firstName+" "+user.lastName);
+            $("#sp-dob").text(user.dob);
+            $("#sp-gender").text(GENDER_CHOICE["{{gender}}"]);
+            $("#sp-mobileNumber").text(user.mobileNumber);
+            $("#sp-city").text(user.city);
+            $("#sp-state").text(user.state);
+            $("#sp-country").text(COUNTRY["{{country|default:'IN'}}"]);
+            $("#sp-timezone").text(user.timezone);
+            $("#a-aboutme").text(user.aboutme);
+            $("#sp-batting").text(HAND_TYPE[profile.battingHand]+ " " + BATTING_ORDER[profile.battingOrder]);
+            $("#sp-bowling").text(HAND_TYPE[profile.bowlingHand]+ " " + BOWLING_STYLE[profile.bowlingMethod]);
+            $("#sp-fielding").text(ALL_FIELD_POSITIONS[profile.fielding]);
+            if(user.contactShown){
+                $("#parent-sp-email").show();
+                $("#sp-email").text(user.email);
+                $("#parent-sp-mobileNumber").show();
+                $("#sp-mobileNumber").text(user.mobileNumber);
+            } else {
+                $("#parent-sp-email").hide();
+                $("#parent-sp-mobileNumber").hide();
+            }
+}
+
+function refreshUserDataInEditMode(){
+            $("#firstName").val(user.firstName);
+            $("#lastName").val(user.lastName);
+            $("#dob").val(user.dob);
+            $('#gender option[value="'+user.gender+'"]').attr("selected", "selected");
+            $("#mobileNumber").val(user.mobileNumber);
+            $("#city").val(user.city);
+            $("#state").val(user.state);
+            $('#country option[value="'+user.country+'"]').attr("selected", "selected");
+            $('#timezone option[value="'+user.timezone+'"]').attr("selected", "selected");
+            $("#aboutme").val(user.aboutme);
+            $("#contactShown").val(user.contactShown);
+            $('#batting-hand option[value="'+profile.battingHand+'"]').attr("selected", "selected");
+            $('#batting-order option[value="'+profile.battingOrder+'"]').attr("selected", "selected");
+            $('#bowling-hand option[value="'+profile.bowlingHand+'"]').attr("selected", "selected");
+            $('#bowling-method option[value="'+profile.bowlingMethod+'"]').attr("selected", "selected");
+            $('#fielding option[value="'+profile.fielding+'"]').attr("selected", "selected");
+}
+
+$(document).ready(function(){
+  $("#div-editprofile").hide();
+  $("#dob").datepicker();
+
+  $("#btn-editprofile").click(function(){
+    $("#div-profile").hide();
+    $("#btn-editprofile").hide();
+    $("#div-editprofile").show();
+    refreshUserDataInEditMode();
+  });
+
+  $("#btn-cancelprofile").click(function(){
+    $("#div-editprofile").hide();
+    $("#div-profile").show();
+    $("#btn-editprofile").show();
+  });
+ /////////////// Initialise User Data///////////////////////////////
+user.firstName = "{{ firstName|default:"" }}";
+user.lastName = "{{ lastName|default:"" }}";
+user.dob = "{{ dob|default:''}}";
+user.gender = "{{ gender|default:''}}";
+user.city = "{{ city|default:''}}";
+user.state = "{{ state|default:''}}";
+user.country = "{{ country|default:''}}";
+user.timezone = "{{timezone|default:""}}";
+user.email = "{{ email|default:"" }}";
+user.mobileNumber = "{{ mobileNumber|default:"" }}";
+user.aboutme = "{{ aboutme|default:''}}";
+user.contactShown = "{{ contactShown|default:'false'}}";
+profile.battingHand = "{{battingHand}}";
+profile.battingOrder = "{{battingOrder}}";
+profile.bowlingHand = "{{bowlingHand}}";
+profile.bowlingMethod = "{{bowlingMethod}}";
+profile.fielding = "{{fielding}}";
+
+//////////////////////////////////Start Populate Dropdowns//////////////////////////////////////////////
+    $("#fielding").append("<option value=''> - Choose - </option>");
+    $.each(ALL_FIELD_POSITIONS, function(i,val){
+        $("#fielding").append("<option value='" + i +"'>" + val + "</option>");
+    });
+    $.each(HAND_TYPE, function(i,val){
+        $("#batting-hand").append("<option value='" + i +"'>" + val + "</option>");
+    });
+    $.each(BATTING_ORDER, function(i,val){
+        $("#batting-order").append("<option value='" + i +"'>" + val + "</option>");
+    });
+    $.each(HAND_TYPE, function(i,val){
+        $("#bowling-hand").append("<option value='" + i +"'>" + val + "</option>");
+    });
+    $.each(BOWLING_STYLE, function(i,val){
+        $("#bowling-style").append("<option value='" + i +"'>" + val + "</option>");
+    });
+    $("#gender").append("<option value=''> - Choose - </option>");
+    $.each(GENDER_CHOICE, function(i,val){
+        $("#gender").append("<option value='" + i +"'>" + val + "</option>");
+    });
+    $("#country").append("<option > - Choose - </option>");
+    $.each(COUNTRY, function(i,val){
+        $("#country").append("<option value='" + i +"'>" + val + "</option>");
+    });
+    $.each(CONTACT_SHARE_SCOPE, function(i,val){
+        $("#contactShown").append("<option value='" + i +"'>" + val + "</option>");
+    });
+    $("#country").change(function (eventObject) {
+        var countryValue = eventObject.target.value;
+        var timeZones = COUNTRY_TIMEZONE[countryValue];
+        $("#timezone").empty();
+        $.each(timeZones, function(i,val){
+            $("#timezone").append("<option value='" + val +"'>" + val + "</option>");
+        });
+        $('#timezone option[value="'+user.timezone+'"]').attr("selected", "selected");
+    });
+    refreshUserData();
+    refreshUserDataInEditMode();
+///////////////////////////////////////End Populate Dropdowns//////////////////////////////////////////////
+////////////////////////////////// save profile start ////////////////////////////////////////////////////
+
+
+
+  $("#btn-saveprofile").click(function(){
+    $("#form-profile").validate({
+submitHandler: function(){
+    $("#div-editprofile").hide();
+    var postData = $("#form-profile").serializeArray();
+    var jsonData = { };
+
+    for(var i = 0, l = postData.length; i < l; i++) {
+        if(postData[i].name == 'dob'){
+            jsonData[postData[i].name] = postData[i].value;
+        }else{
+            jsonData[postData[i].name] = postData[i].value;
+        }
+    }
+    jsonData['email'] = $("#lb-email").text();
+    $.ajax({
+        type: "POST",
+        url: API_PROFILE,
+        data: JSON.stringify(jsonData),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+    }).done(function(data){
+            user.firstName = data.firstName;
+            user.lastName = data.lastName;
+            user.dob = data.dob;
+            user.gender = data.gender;
+            user.city = data.city;
+            user.state = data.state;
+            user.country = data.country;
+            user.timezone = data.timezone;
+            user.email = data.email;
+            user.mobileNumber = data.mobileNumber;
+            user.aboutme = data.aboutme;
+            profile.battingHand = data.battingHand;
+            profile.battingOrder = data.battingOrder;
+            profile.bowlingHand = data.bowlingHand;
+            profile.bowlingMethod = data.bowlingMethod;
+            profile.fielding = data.fielding;
+            refreshUserData();
+            refreshUserDataInEditMode();
+            $("#div-profile").show();
+            $("#btn-editprofile").show();
+        }
+    );
+  }
+});
+  });
+  ////////////////////////////////// save  profile end ////////////////////////////////////////////////////
+
+
+  //////////////////////////////////get all team start////////////////////////////////////////////////////
+
+        $.ajax({
+            type: "GET",
+            url: API_GETTEAM,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+        }).done(function(data){
+               $.each(data, function(idx, obj) {
+                    $('#tbl-team').append('<tr>   <td style="text-align: center;"><span class="location"><a href="/crkt/1/team/'+ obj.teamId+'"> &nbsp;&nbsp;&nbsp;&nbsp;\
+                                          '+ obj.teamName +'</a></span></td>   <td style="text-align: center;"> \
+                                          '+ obj.city + '</td>   <td><span class="quickStats match-bg"> \
+                                          Match: 15</span> <span class="quickStats won-bg"> \
+                                          Won: 10</span> <span class="quickStats lost-bg"> \
+                                          Lost: 5</span></td> <td class="txtAlnCenter"> \
+                                          90%</td> </tr>');
+
+               });
+            }
+        );
+
+    //////////////////////////////////get all team end////////////////////////////////////////////////////
+
+    //////////////////////////////////get all notifications start////////////////////////////////////////////////////
+
+        $.ajax({
+            type: "GET",
+            url: API_GET_NOTIFICATIONS,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+        }).done(function(data){
+               teamRequest = 0;
+               joinTeam = 0;
+               $.each(data, function(idx, obj) {
+                    notificationData=obj.notificationData;
+                    notificationType=obj.notificationType;
+                    if(notificationType == 'ADD_TO_TEAM_REQUEST'){
+                        $('#div-notification-player-ul').append(' <li class="vcard " id="li_'+ notificationData.profileId +'_'+ notificationData.teamId +'">  <div class="profile-summary"><h4>\
+            <span><strong>      <a href="https://www.linkedin.com/profile/view?id=14632539&amp;authType=name&amp;authToken=2D8R&amp;trk=nmp_pymk_name">\
+           '+ notificationData.profileName +'</a> </strong></span> </h4> <p class="headline">Requested to Join : \
+           <a href="/crkt/1/team/'+ notificationData.teamId +'"> '+ notificationData.teamName +'</a></p></div>  <ul class="actions"><li class="remove">\
+            <input type="button" id="btn" value="Accept"onclick="acceptJoinTeam('+ notificationData.profileId +',' + notificationData.teamId +',false)"/>\
+            <input type="button" id="btn" value="Reject"onclick="acceptJoinTeam('+ notificationData.profileId +',' + notificationData.teamId +',true)"/> </li>  </ul> </li>');
+                        teamRequest = teamRequest + 1;
+                    } else if (notificationType == 'JOIN_TEAM_REQUEST') {
+                         $('#div-notification-team').append(notificationData.teamName);
+                        joinTeam=joinTeam+1;
+                    }
+               });
+               if (teamRequest == 0) {
+                 $("#div-notification-player").hide();
+               }
+                if (joinTeam == 0) {
+                 $("#div-notification-team").hide();
+               }
+
+            }
+        );
+
+});
+
+//////////////////////////////////get all notifications end////////////////////////////////////////////////////
+</script>
+</head>
+
+<body>
+<header>
+    {% include "crkt/header.html" %}
+</header>
+<div class="wrapper page clearfix">
+  <div class="pageLeft fL">
+    <!-- Player details section -->
+    <div class="player-details">
+      <div class="player-info clearfix">
+        <div class="player-history fL">
+            <div class="sm-placeholder fR"> <span id="btn-editprofile"  class="edit-btn fR"><a class="fancybox" href="#">Edit</a></span> </div>
+            <div id="div-profile">
+              <div id="div-cricket-p">
+                <span class="player-img fL"> <img src="{{avatar_url}}?height=200&width=205" alt="Image"></span>
+                <span><h2 id="sp-displayname"></h2></span>
+                <h4>
+                    <div><span class=""><span id="sp-batting"></span></span></div>
+                    <div><span class=""><span id="sp-bowling"></span> </span></div>
+                    <div><span class=""><span class="gray">Fields at: </span><span id="sp-fielding"></span> </span></div>
+                </h4>
+              </div>
+              <div id="div-user-p">
+
+                <div><span class="gray">Born on:</span> <span id="sp-dob"></span></div>
+
+                <div><span class="gray">Gender:</span> <span id="sp-gender"></span></div>
+
+                <div>
+
+                    <span class="gray">Lives at:</span> <span id="sp-city"> </span>
+
+                    <span id="sp-state"></span>
+
+                    <span id="sp-country"> </span>
+
+                </div>
+                    <div>
+
+                    <span class="gray">Preferred TimeZone:</span> <span id="sp-timezone"> </span>
+                </div>
+
+                <div id="parent-sp-email"><span class="gray">Email: </span> <span id="sp-email"></span> </div>
+                <div><span id="parent-sp-mobileNumber" class="gray">Phone: </span> <span id="sp-mobileNumber"></span> </div>
+            </div>
+
+                <p><div id="a-aboutme"></div></p>
+
+            </div>
+            <div id="div-editprofile">
+                <form class="form-horizontal" role="form" id="form-profile" name="form1" onsubmit="return false;">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                        <p>
+                            <label class="row-sm-3 control-label" for="firstName">First name:</label>
+                            <input class="form-control" placeholder="First Name" type="text"
+                                   name="firstName" id="firstName"
+                                   required minlength="2" maxlength="50"/>
+                        </p>
+                        </div>
+                        <div class="col-xs-6">
+                        <p>
+                            <label class="row-sm-3 control-label" for="lastName">Last Name:</label>
+                            <input class="form-control" placeholder="Last Name" type="text"
+                                   name="lastName" id="lastName" required
+                                     maxlength="50"/>
+                        </p>
+                        </div>
+                        <div class="col-xs-6">
+                            <label class="row-sm-3 control-label" for="gender">Gender</label>
+                            <select class="form-control" id="gender" name="gender" required>
+                            </select>
+                        </div>
+                        <div class="col-xs-6">
+                            <p>
+                                <label class="row-sm-3 control-label" for="dob">Date of birth :</label>
+                                <input class="form-control" type="text" id="dob" name="dob" required />
+                            </p>
+                        </div>
+                        <div class="col-xs-6">
+                            <p>
+                                <label class="row-sm-3 control-label" for="city">City :</label>
+                                <input class="form-control" type="text" id="city" name="city" required/>
+                            </p>
+                        </div>
+                        <div class="col-xs-6">
+                            <p>
+                                <label class="row-sm-3 control-label" for="state">State :</label>
+                                <input class="form-control" type="text" id="state"  name="state" required/>
+                            </p>
+                        </div>
+                        <div class="col-xs-6">
+                            <p>
+                                <label class="row-sm-3 control-label" for="country">Country :</label>
+                                <select class="form-control" id="country" name="country" required>
+                                </select>
+                            </p>
+                        </div>
+                         <div class="col-xs-6">
+                            <p>
+                                <label class="row-sm-3 control-label" for="timezone">Time Zone :</label>
+                                <select class="form-control" id="timezone" name="timezone" required>
+                                </select>
+                            </p>
+                        </div>
+                        <div class="col-xs-6">
+                            <p>
+                                <label class="row-sm-3 control-label" for="mobileNumber">Phone Number :</label>
+                                <input class="form-control"  pattern="[0-9]{10}" id="mobileNumber" name="mobileNumber" required/>
+                            </p>
+                        </div>
+                        <div class="col-xs-6">
+                            <p>
+                                <label class="row-sm-3 control-label" for="contactShown">Share my contacts with:</label>
+                                <select class="form-control" id="contactShown" name="contactShown" required>
+                                </select>
+                            </p>
+                        </div>
+                        <div class="col-xs-12">
+                        <p>
+                            <label class="row-sm-3 control-label" for="aboutme">About me :</label>
+                            <textarea class="form-control" rows="3" type="text" id="aboutme" name="aboutme">
+                            </textarea>
+                        </p>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <p>
+                            <label class="row-sm-3 control-labell" for="batting-hand">Batting Style :</label>
+                            <select class="form-control" id="batting-hand" name="batting-hand">
+                            </select>
+                            </p>
+                        </div>
+                        <div class="col-xs-6">
+                            <p>
+                            <label class="row-sm-3 control-label" for="batting-order">Batting Order :</label>
+                            <select class="form-control" id="batting-order" name="batting-order">
+                            </select>
+                            </p>
+                        </div>
+                        <div class="col-xs-6">
+                            <p>
+                            <label class="row-sm-3 control-label" for="bowling-hand">Bowling Arm :</label>
+                            <select class="form-control" id="bowling-hand" name="bowling-hand">
+                            </select>
+                            </p>
+                        </div>
+                        <div class="col-xs-6">
+                            <p>
+                            <label class="row-sm-3 control-label" for="bowling-style">Bowling Style :</label>
+                            <select class="form-control" id="bowling-style" name="bowling-style">
+                            </select>
+                            </p>
+                        </div>
+                        </p>
+                        <p>
+
+                        <div class="col-xs-6">
+                            <p>
+                            <label class="row-sm-3 control-label" for="fielding">Field position :</label>
+                            <select class="form-control" id="fielding" name="fielding" >
+                            </select>
+                            </p>
+                        </div>
+                        <div class="col-xs-6" style="margin:25px 0px 25px 0px">
+                        <label class="control-label" for="optionsRadios1">Do you keep wickets?</label>
+                               <label style="width:20%">
+                                    <input type="radio" name="wick-keeper" id="optionsRadios1" value="true" checked>
+                                    Yes
+                                </label>
+                                <label style="width:20%">
+                                    <input type="radio" name="wick-keeper" id="optionsRadios2" value="false">
+                                    No
+                                </label>
+                        </div>
+
+
+                    <div class=" btn-group col-xs-6 fR">
+                        <input type="submit" value="Save Changes" id="btn-saveprofile" class="btn btn-success btn-lg" formaction="#"/>
+                        <button type="button" id="btn-cancelprofile"  class="btn btn-lg">Cancel</button>
+                    </div>
+                   </div>
+                </form>
+            </div>
+          <!--<p><span class="gray">Born on</span> December 25, 1984 <span class="gray">at</span> Gloucester<br>-->
+            <!--Left Handed Batsman<br>-->
+            <!--First International <span class="gray">against</span> India <span class="gray">on</span> Mar 01, 2006 <a href="#">Scorecard</a></p>-->
+          <!--<p>15,000 Test runs and 50 Test centuries are not beyond him" – Sunil Gavaskar, about Alastair Cook. It is not easy for a batsman to receive such high praise from a former cricketer, especially when the concerned persons are from different countries.  The fact that those words came from a batsman who is considered one of the best openers Test cricket has ever seen makes it even praiseworthy. </p>-->
+          <!--<span class="fR"><a class="btn-blue" href="#">View full profile</a></span>-->
+        </div>
+      </div>
+    </div>
+    <!-- first 5 matches section -->
+    <div class="div-match radius-box txtAlnLeft clearfix">
+      <h4 class="icons icon-team">{{displayname}}'s performance (Last 5 matches)</h4>
+      <table width="100%" border="0" cellpadding="8">
+        <tbody><tr>
+		  <th width="14%">Form-Date</th>
+          <th width="20%">Played For</th>
+          <th width="20%">Against</th>
+          <th width="18%">Batting</th>
+          <th width="18%">Bowling</th>
+		  <th width="10%">Link</th>
+        </tr>
+        <tr>
+		  <td><span>T20 - 23 Feb 2014</span></td>
+          <td><span class="location"><a href="#">Fear the XI</a></span></td>
+          <td><a href="#">Infosys A Team</a></td>
+          <td>30 (25 balls)*</td>
+		  <td>4/45 (7.2 Overs)</td>
+		  <td><a href="#">View Match</a></td>
+        </tr>
+		<tr>
+		  <td><span>OD - 23 Feb 2014</span></td>
+          <td><span class="location"><a href="#">Crappy Team</a></span></td>
+          <td><a href="#">Good and Great Team</a></td>
+          <td>50 (25 balls)*</td>
+		  <td>4/45 (7.5 Overs)</td>
+		  <td><a href="#">View Match</a></td>
+        </tr>
+		<tr>
+		  <td><span>TST - 23 Feb 2014</span></td>
+          <td><span class="location"><a href="#">Fear the XI</a></span></td>
+          <td><a href="#">Infosys A Team</a></td>
+          <td>100 (25 balls)*</td>
+		  <td>4/60 (4.2 Overs)</td>
+		  <td><a href="#">View Match</a></td>
+        </tr>
+		<tr>
+		  <td><span>TST - 23 Feb 2014</span></td>
+          <td><span class="location"><a href="#">Fear the XI</a></span></td>
+          <td><a href="#">Infosys A Team</a></td>
+          <td>30 (25 balls)*</td>
+		  <td>4/60 (9.2 Overs)</td>
+		  <td><a href="#">View Match</a></td>
+        </tr>
+		<tr>
+		  <td><span>TST - 23 Feb 2014</span></td>
+          <td><span class="location"><a href="#">Fear the XI</a></span></td>
+          <td><a href="#">Infosys A Team</a></td>
+          <td>100 (25 balls)*</td>
+		  <td>4/60 (4.2 Overs)</td>
+		  <td><a href="#">View Match</a></td>
+        </tr>
+		</tbody></table>
+    </div>
+
+    <!-- Batting section -->
+    <div class="div-bat radius-box">
+      <h4 class="icons bat-icon">Batting</h4>
+      <table width="100%" border="0" cellpadding="8" class="txtAlnCenter">
+        <tr>
+          <th>&nbsp;</th>
+          <th>M</th>
+          <th>Inn</th>
+          <th>Runs</th>
+          <th>HS</th>
+          <th>Avg</th>
+          <th>SR</th>
+          <th>NO</th>
+          <th>100</th>
+          <th>50</th>
+          <th>4s</th>
+          <th>6s</th>
+        </tr>
+        {% for bt in battingStats %}
+            <tr>
+                {% if bt.cricketFormat == 1 %}
+                    <td>Test</td>
+                {% elif bt.cricketFormat == 2 %}
+                    <td>ODI</td>
+                {% else %}
+                    <td>T20</td>
+                {% endif %}
+                <td>{{bt.matches}}</td>
+                <td>{{bt.innings}}</td>
+                <td>{{bt.runs}}</td>
+                <td>{{bt.runs}}</td>
+                <td>{{bt.average}}</td>
+                <td>{{bt.strikeRate}}</td>
+                <td>{{bt.notOuts}}</td>
+                <td>{{bt.hundreds}}</td>
+                <td>{{bt.fifties}}</td>
+                <td>{{bt.fours}}</td>
+                <td>{{bt.sixes}}</td>
+            </tr>
+          {% endfor %}
+      </table>
+    </div>
+    <!-- Bowling section -->
+    <div class="div-dow radius-box">
+      <h4 class="icons ball-icon">Bowling</h4>
+      <table width="100%" border="0" cellpadding="8" class="txtAlnCenter">
+        <tr>
+          <th>&nbsp;</th>
+          <th>M</th>
+          <th>Inn</th>
+          <th>BL</th>
+          <th>WK</th>
+          <th>Avg</th>
+          <th>ECO</th>
+          <th>RN</th>
+          <th>3WKs</th>
+          <th>5WKs</th>
+          <th>CAT</th>
+          <th>BST</th>
+        </tr>
+           {% for bw in bowlingStats %}
+            <tr>
+                {% if bt.cricketFormat == 1 %}
+                    <td>Test</td>
+                {% elif bw.cricketFormat == 2 %}
+                    <td>ODI</td>
+                {% else %}
+                    <td>T20</td>
+                {% endif %}
+                <td>{{bw.matches}}</td>
+                <td>{{bw.innings}}</td>
+                <td>{{bw.balls}}</td>
+                <td>{{bw.wickets}}</td>
+                <td>{{bw.average}}</td>
+                <td>{{bw.economy}}</td>
+                <td>{{bw.runs}}</td>
+                <td>{{bw.threeWickets}}</td>
+                <td>{{bw.fiveWickets}}</td>
+                <td>{{bw.catches}}</td>
+                <td>{{bw.bestBowling}}</td>
+            </tr>
+          {% endfor %}
+      </table>
+    </div>
+    <!-- Team table section -->
+    <div class="div-team radius-box txtAlnLeft clearfix">
+       <h4 class="icons icon-team">Team(s)</h4>
+        <table id="tbl-team" width="100%" border="0" cellpadding="8">
+        <tbody>
+        <tr>
+          <th width="27%">Team Name</th>
+          <th width="23%">Location</th>
+          <th width="35%">Quick Statictics</th>
+          <th width="20%" class="txtAlnCenter">Win Percentage</th>
+        </tr>
+      </tbody></table>
+    </div>
+  </div>
+  <div class="pageRight fR">
+  	<div class="radius-box right-search-blk">
+    	<div class="search-blk clearfix">
+        	<input type="text" placeholder="Search" class="fL">
+            <input type="image" src="/static/images/go-btn.gif" class="fR" alt="go">
+        </div>
+        <ul class="search-list clearfix">
+            <li><a class="active" href="#">Team</a></li>
+            <li><a href="#">Players</a></li>
+          </ul>
+    </div>
+    <div class="radius-box">
+      <h4>Last Match</h4>
+      <div class="last-match">
+   	  	<img src="/static/images/player-img-02.jpg" alt="cook" class="img-blk">
+        <p>Cook was caught behind trying to pull out of a shot as England's batsmen stuttered in the first ODI.</p>
+        <span class="block clearfix">
+        	<a href="#" class="fL">View big</a>
+            <span class="more-photos fR">[<a href="#">more photos</a>]</span>
+        </span>
+      </div>
+    </div>
+    <div class="radius-box" id="div-notification-team">
+
+<ul class="div-notification-team-ul">
+
+</ul>
+</div>
+    <div class="radius-box" id="div-notification-player">
+        <ul class="div-notification-team-ul"  id="div-notification-player-ul">
+
+        </ul>
+
+    </div>
+    <div class="radius-box">
+      <h4>Matches</h4>
+      <ul class="tab-match clearfix">
+        <li><a class="activeTab" href="#cur-match">Current Matches</a></li>
+        <li><a href="#cum-up">Coming Up</a></li>
+      </ul>
+      <div class="tab-wrap">
+        <div class="tab-block def-tab" id="cur-match"> <span class="block"><strong>ENG vs NZ, 2nd Test, Leeds</strong></span> <span class="tour-det block"><a href="#">New Zealand tour of England 2013</a></span>
+          <p><strong>NZ :</strong> 219/8, 65.3 Overs<br>
+            <strong>ENG :</strong> 354, 287/5 d<br>
+            New Zealand need 249 runs</p>
+        </div>
+        <div class="tab-block" id="cum-up"> <span class="block"><strong>ENG vs NZ, 2nd Test, Leeds</strong></span> </div>
+      </div>
+      <span class="showMat block"> <a href="#">Show all matches</a> </span> </div>
+  </div>
+</div>
+<footer>
+    {% include "crkt/footer.html" %}
+</footer>
+</body>
+</html>

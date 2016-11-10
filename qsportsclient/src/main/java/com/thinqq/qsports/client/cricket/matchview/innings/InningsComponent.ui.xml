@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder 
+xmlns:btc='urn:import:com.thinqq.qsports.client.cricket.matchview.battingcard' 
+xmlns:bwc='urn:import:com.thinqq.qsports.client.cricket.matchview.bowlingcard' 
+xmlns:ui='urn:ui:com.google.gwt.uibinder' 
+xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	<g:VerticalPanel>
+		<g:DisclosurePanel open="true" animationEnabled="true">
+			<g:header>Innings 1 - Weekend Warriors 198/6 in 28 overs</g:header>
+			<g:VerticalPanel>
+			<btc:BattingCard width="5cm" height="4cm"></btc:BattingCard>
+			<bwc:BowlingCard></bwc:BowlingCard>
+			</g:VerticalPanel>
+		</g:DisclosurePanel>
+	</g:VerticalPanel>
+</ui:UiBinder>

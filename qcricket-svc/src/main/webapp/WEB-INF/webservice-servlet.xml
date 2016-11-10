@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+	<mvc:annotation-driven />
+	<bean
+		class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="jsonConverter" />
+				<ref bean="stringHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+	<bean id="jsonConverter"
+		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes" value="application/json" />
+	</bean>
+	<!--Configure process Bean here -->
+	<bean id="userProcess" class="com.thinqq.qsports.server.process.UserProfileProcess" />
+	<bean id="cricketTeamProcess" class="com.thinqq.qsports.server.process.CricketTeamProcess" />
+	<bean id="authenticationProcess"
+		class="com.thinqq.qsports.server.process.AuthenticateUserProcess" />
+	<bean id="notificationProcess" class="com.thinqq.qsports.server.process.NotificationProcess" />
+	<bean id="cricketMatchProcess" class="com.thinqq.qsports.server.process.CricketMatchProcess">
+		<property name="validator">
+			<ref local="validator" />
+		</property>
+	</bean>
+	<bean id="utilProcess" class="com.thinqq.qsports.server.process.UtilProcess" />
+
+	<!--Configure DAO Bean here -->
+	<bean id="userDao" class="com.thinqq.qsports.persistence.dao.UserDAO" />
+	<bean id="authenticateProcess" class="com.thinqq.qsports.persistence.dao.CricketProfileDAO" />
+	<bean id="battingStatsDao" class="com.thinqq.qsports.persistence.dao.BattingStatisticsDAO" />
+	<bean id="bowlingStatsDao" class="com.thinqq.qsports.persistence.dao.BowlingStatisticsDAO" />
+	<bean id="cricketTeamDao" class="com.thinqq.qsports.persistence.dao.CricketTeamDAO" />
+	<bean id="cricketTeamPDao"
+		class="com.thinqq.qsports.persistence.dao.CricketTeamPlayersDAO" />
+	<bean id="cricketTeamSDao" class="com.thinqq.qsports.persistence.dao.CricketTeamStatusDAO" />
+
+	<bean id="cricketMatchDao" class="com.thinqq.qsports.persistence.dao.CricketMatchDAO" />
+	<bean id="cricketMatchExtDao" class="com.thinqq.qsports.persistence.dao.CricketMatchExtDAO" />
+	<bean id="battingEntryDao"
+		class="com.thinqq.qsports.persistence.dao.BattingScorecardEntryDAO" />
+	<bean id="bowlingEntryDao"
+		class="com.thinqq.qsports.persistence.dao.BowlingScorecardEntryDAO" />
+	<bean id="cricketMatchTeamPlayerDao"
+		class="com.thinqq.qsports.persistence.dao.CricketMatchTeamPlayersDAO" />
+	<bean id="inningsDao" class="com.thinqq.qsports.persistence.dao.InningsDAO" />
+	<bean id="matchFowDao" class="com.thinqq.qsports.persistence.dao.MatchFowDAO" />
+
+	<bean id="countryDao" class="com.thinqq.qsports.persistence.dao.CountryDAO" />
+
+
+	<!-- Controller -->
+	<bean id="cricketRDController"
+		class="com.thinqq.qsports.server.controller.QCricketRDSController">
+		<property name="validator">
+			<ref local="validator" />
+		</property>
+	</bean>
+	<bean id="exceptionHandler"
+		class="com.thinqq.qsports.server.error.controller.QsportsExceptionHandler" />
+	<bean id="stringHttpMessageConverter"
+		class="org.springframework.http.converter.StringHttpMessageConverter" />
+	<!--Validation Configuration Starts here -->
+	<bean id="validator"
+		class="com.thinqq.qsports.persistence.validation.BasicValidatorAdapter">
+		<property name="validationRules">
+			<set>
+				<value>ExpectedValue</value>
+				<value>NotNull</value>
+				<value>Size</value>
+				<value>ValidateEmail</value>
+			</set>
+		</property>
+		<property name="validationRuleExecutor">
+			<map>
+				<entry key="NotNull" value-ref="NotNull" />
+				<entry key="ValidateEmail" value-ref="ValidateEmail" />
+				<entry key="ExpectedValue" value-ref="ExpectedValue" />
+				<entry key="Size" value-ref="Size" />
+			</map>
+		</property>
+	</bean>
+	<bean id="NotNull"
+		class="com.thinqq.qsports.persistence.validation.NotNullValidator" />
+	<bean id="ValidateEmail"
+		class="com.thinqq.qsports.persistence.validation.EmailPatternValidator" />
+	<bean id="ExpectedValue"
+		class="com.thinqq.qsports.persistence.validation.ExpectedValueValidator" />
+	<bean id="Size" class="com.thinqq.qsports.persistence.validation.SizeValidator" />
+	<!--Validation Configuration Ends here -->
+</beans>

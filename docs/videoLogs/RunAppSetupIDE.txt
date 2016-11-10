@@ -1,0 +1,19 @@
+Step-1:
+	import django
+	django.get_version()
+	print(django.get_version())
+
+Step-2:
+	git clone git@github.com:thinqq/QSports.git QSports
+
+Step-3:
+	Uncomment/ comment lines in sportsapp/sportsapp/settings.py
+Step-3:
+	 python manage.py syncdb
+	 python manage.py runserver localhost:8080
+   http://localhost:8080/crkt/
+
+Step-4:
+	Download IDE
+http://www.jetbrains.com/pycharm/download/
+

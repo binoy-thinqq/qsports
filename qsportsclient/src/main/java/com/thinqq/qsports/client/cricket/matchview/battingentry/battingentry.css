@@ -1,0 +1,13 @@
+.battingEntry {
+	color:#333333;
+	border-bottom-style:solid;
+	border-bottom-color:#F0F0F0;
+	border-bottom-width:1px;
+}
+.battingEntryGreen{
+	border-style:solid;
+	border-color:#A6FFA6;
+	border-width:1px;
+	border-radius:5px;
+	background-color:#C8FFC8;
+}

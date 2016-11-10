@@ -1,0 +1,176 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" 
+	xmlns:p2="urn:import:com.google.gwt.user.datepicker.client">
+	<ui:style>
+		.marginright {
+			margin: 0px 10px 0px 0px
+		}
+		.alignRight{
+			text-align:right;
+		}
+	</ui:style>
+	<g:VerticalPanel width="100%" stylePrimaryName="panel">
+		<g:Label text="Create New Match" styleName="title panelTitle"
+			 />
+		<g:HTMLPanel width="100%">
+			<table width="100%">
+				<tr>
+					<td width="15%" style="{style.alignRight}" >
+						<g:Label text="My Team" />
+						
+					</td>
+					<td width="45%">
+						<g:ListBox ui:field="listMyTeam" width="260px" />
+
+					</td>
+					<td width="5%">
+						<g:Image url="images/error-icon.png" ui:field="listMyTeamErrorMarker"
+							visible="false" />
+					</td>
+					<td width="40%">
+					<g:Label stylePrimaryName="hText" text="Choose your team" />
+					<g:Label stylePrimaryName="hText" text="Mandatory" />
+					</td>
+				</tr>
+				<tr>
+					<td width="15%" style="{style.alignRight}">
+						<g:Label text="Opponent Team" />
+					</td>
+					<td width="40%">
+						<g:FocusPanel ui:field="focusOpponentTeamPanel">
+							<g:TextBox ui:field="suggestOtherTeam" width="250px" />
+						</g:FocusPanel>
+					</td>
+					<td width="5%">
+						<g:Image url="images/error-icon.png" ui:field="suggestOtherTeamErrorMarker"
+							visible="false" />
+					</td>
+					<td width="40%">
+						<g:Label stylePrimaryName="hText" text="Choose the opponent team" />
+						<g:Label stylePrimaryName="hText" text="If the team is registered with cricie.com, Choose from the suggestions" />
+					</td>
+				</tr>
+				<tr>
+					<td width="15%" style="{style.alignRight}">
+						<g:Label text="Date" />
+					</td>
+					<td width="40%">
+						<g:FocusPanel ui:field="matDateFocus">
+							<p2:DateBox ui:field="matDate" width="125px" />
+						</g:FocusPanel>
+					</td>
+					<td width="5%">
+						<g:Image url="images/error-icon.png" ui:field="matDateErrorMarker"
+							visible="false" />
+					</td>
+					<td width="40%">
+						<g:Label stylePrimaryName="hText" text="Match date" />
+						<g:Label stylePrimaryName="hText" text="Ex: 14 Apr 2013" />
+					</td>
+				</tr>
+				<tr>
+					<td width="15%" style="{style.alignRight}">
+						<g:Label text="Match Format" width="250px" />
+					</td>
+					<td width="40%">
+						<g:ListBox ui:field="formatList" width="250px" />
+					</td>
+					<td width="5%">
+						<g:Image url="images/error-icon.png" ui:field="formatListErrorMarker"
+							visible="false" />
+					</td>
+					<td width="40%">
+						<g:Label stylePrimaryName="hText"
+							text="Choose the format (T20 or OD or Test)" />
+							<g:Label stylePrimaryName="hText"
+							text="You should choose a format" />
+					</td>
+				</tr>
+				<tr>
+					<td width="15%" style="{style.alignRight}">
+						<g:Label text="Ground(Optional)" />
+					</td>
+					<td width="40%">
+						<g:TextBox ui:field="txtGround" width="250px" />
+					</td>
+					<td width="5%">
+						<g:Image ui:field="txtGroundErrorMarker" url="images/error-icon.png" visible="false" />
+					</td>
+					<td width="40%">
+						<g:Label stylePrimaryName="hText"
+							text="Name of the ground" />
+							<g:Label stylePrimaryName="hText"
+							text="2(Min) to 100(Max) Characters" />
+					</td>
+				</tr>
+				<tr>
+					<td width="15%" style="{style.alignRight}">
+						<g:Label text="City(Optional)" />
+					</td>
+					<td width="40%">
+						<g:TextBox ui:field="txtCity" width="250px" />
+					</td>
+					<td width="5%">
+						<g:Image url="images/error-icon.png" ui:field="txtCityErrorMarker"
+							visible="false" />
+					</td>
+					<td width="40%">
+						<g:Label stylePrimaryName="hText"
+							text="Name of the city" />
+							<g:Label stylePrimaryName="hText"
+							text="2(Min) to 100(Max) Characters" />
+					</td>
+				</tr>
+
+				<tr>
+					<td width="15%" style="{style.alignRight}">
+						<g:Label text="State/Provice(Optional)" />
+					</td>
+					<td width="40%">
+						<g:TextBox ui:field="txtState" width="250px" />
+					</td>
+					<td width="5%">
+						<g:Image url="images/error-icon.png" ui:field="txtStateErrorMarker"
+							visible="false" />
+					</td>
+					<td width="40%">
+						<g:Label stylePrimaryName="hText"
+							text="Name of the state" />
+							<g:Label stylePrimaryName="hText"
+							text="2(Min) to 100(Max) Characters" />
+					</td>
+				</tr>
+				<tr>
+					<td width="15%" style="{style.alignRight}">
+						<g:Label text="Country" />
+					</td>
+					<td width="40%">
+						<g:ListBox ui:field="listCountry" width="260px" />
+					</td>
+					<td width="5%">
+						<g:Image url="images/error-icon.png" ui:field="listCountryErrorMarker"
+							visible="false" />
+					</td>
+					<td width="40%">
+						<g:Label stylePrimaryName="hText"
+							text="Choose the country" />
+							<g:Label stylePrimaryName="hText"
+							text="Choose the country in which the match is played" />
+					</td>
+				</tr>
+			</table>
+		</g:HTMLPanel>
+		<g:Cell width="100%" horizontalAlignment="ALIGN_CENTER">
+			<g:HorizontalPanel>
+				<g:Cell width="85%" horizontalAlignment="ALIGN_RIGHT">
+					<g:Button text="Create Match" ui:field="btnSaveMatch"
+						styleName="actionButton {style.marginright}" />
+				</g:Cell>
+				<g:Cell horizontalAlignment="ALIGN_RIGHT">
+					<g:Button text="Cancel" ui:field="btnCancel" styleName="gbutton" />
+				</g:Cell>
+			</g:HorizontalPanel>
+		</g:Cell>
+	</g:VerticalPanel>
+</ui:UiBinder> 

@@ -1,0 +1,327 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:p1="urn:import:com.google.gwt.user.cellview.client"
+	xmlns:pd="urn:import:com.thinqq.qsports.client.userprofile.min">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+		
+		.playerdetails {
+			border: 3px solid #f2f2f2;
+			border-radius: 3px;
+		}
+		
+		.lefttopbold {
+			padding: 10px 0px 0px 10px;
+		}
+		
+		.txtalign {
+			text-align: justified;
+		}
+	</ui:style>
+	<g:VerticalPanel width="100%" height="100%"
+		horizontalAlignment="ALIGN_CENTER">
+		<g:Cell width="100%" height="100%" horizontalAlignment="ALIGN_CENTER">
+			<g:HTMLPanel width="100%">
+				<tr>
+					<td>
+						<g:HTMLPanel width="100%" stylePrimaryName="panel">
+							<table width="100%" class="panelTitle">
+								<tr>
+									<td width="80%">
+										<g:Label stylePrimaryName="title" ui:field="name"
+											text="Cricket Team Profile"></g:Label>
+									</td>
+									<td width="10%">
+										<g:Image ui:field="loadingProfileImage"></g:Image>
+									</td>
+									<td width="10%">
+										<g:Button styleName="gbuttonSmall" ui:field="editProfile"
+											text="Edit" visible="false"></g:Button>
+										<g:Button styleName="gbuttonSmall" ui:field="editOwners"
+											text="Add/Remove Owners" visible="false"></g:Button>
+									</td>
+								</tr>
+							</table>
+							<table width="100%">
+								<tr>
+									<td style="width:15%;text-align:right">
+										<g:Image stylePrimaryName="imageThumbnail" ui:field="profileImage"></g:Image>
+									</td>
+									<td style="width:40%text-align:left">
+										<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+											ui:field="tDoe"></g:Label>
+										<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+											text="Owner(s):"></g:Label>
+										<g:FlowPanel stylePrimaryName="greyInfo {style.lefttopbold}"
+											ui:field="owners"></g:FlowPanel>
+									</td>
+									<td style="width:25%text-align:left">
+										<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+											ui:field="city"></g:Label>
+										<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+											ui:field="state"></g:Label>
+										<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+											ui:field="country"></g:Label>
+									</td>
+									<td width="20%">
+										<g:HTMLPanel width="100%" stylePrimaryName="panel">
+											<table width="100%">
+												<tr>
+													<td width="90%">
+														<g:Label stylePrimaryName="subtitle" text="Win %"></g:Label>
+													</td>
+												</tr>
+											</table>
+											<table width="100%">
+												<tr>
+													<td style="width:100%;text-align:center">
+														<g:Label stylePrimaryName="reallyBigText"
+															ui:field="winPercentage" text="-%"></g:Label>
+													</td>
+												</tr>
+											</table>
+										</g:HTMLPanel>
+									</td>
+								</tr>
+							</table>
+						</g:HTMLPanel>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<g:HTMLPanel width="100%">
+							<table width="100%">
+								<tr>
+									<td width="60%">
+										<g:HTMLPanel width="100%" stylePrimaryName="panel">
+											<table width="100%" class="panelTitle">
+												<tr>
+													<td width="90%">
+														<g:Label stylePrimaryName="subtitle" ui:field="statsHeading"
+															text="Statistics"></g:Label>
+													</td>
+													<td width="10%">
+														<g:Image ui:field="loadingStatsImage" visible="true"></g:Image>
+													</td>
+
+												</tr>
+											</table>
+											<table width="100%">
+												<tr>
+													<td style="width:10%;">
+														<g:Label stylePrimaryName="{style.lefttopbold}"
+															ui:field="formatLabel" text="Format"></g:Label>
+													</td>
+													<td style="width:15%;text-align:left">
+														<g:Label stylePrimaryName="{style.lefttopbold}"
+															ui:field="matchesLabel" text="Mat"></g:Label>
+													</td>
+													<td style="width:15%;text-align:left">
+														<g:Label stylePrimaryName="{style.lefttopbold}"
+															ui:field="winLabel" text="Win"></g:Label>
+													</td>
+													<td style="width:15%;text-align:left">
+														<g:Label stylePrimaryName="{style.lefttopbold}"
+															ui:field="lossLabel" text="Loss"></g:Label>
+													</td>
+													<td style="width:15%;text-align:left">
+														<g:Label stylePrimaryName="{style.lefttopbold}"
+															ui:field="tiedLabel" text="Tie"></g:Label>
+													</td>
+													<td style="width:15%;text-align:left">
+														<g:Label stylePrimaryName="{style.lefttopbold}"
+															ui:field="noResultLabel" text="N.R"></g:Label>
+													</td>
+													<td style="width:15%;text-align:left">
+														<g:Label stylePrimaryName="{style.lefttopbold}"
+															ui:field="hsLabel" text="H.S."></g:Label>
+													</td>
+												</tr>
+												<tr>
+													<td style="width:10%;">
+														<g:Label stylePrimaryName="{style.lefttopbold}"
+															ui:field="formatT20" title="5 Overs to 20 Overs" text="T20"></g:Label>
+													</td>
+													<td style="width:15%;text-align:left">
+														<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+															ui:field="matchesT20" text="-"></g:Label>
+													</td>
+													<td style="width:15%;text-align:left">
+														<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+															ui:field="winT20" text="-"></g:Label>
+													</td>
+													<td style="width:15%;text-align:left">
+														<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+															ui:field="lossT20" text="-"></g:Label>
+													</td>
+													<td style="width:15%;text-align:left">
+														<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+															ui:field="tiedT20" text="-"></g:Label>
+													</td>
+													<td style="width:15%;text-align:left">
+														<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+															ui:field="noResultT20" text="-"></g:Label>
+													</td>
+													<td style="width:15%;text-align:left">
+														<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+															ui:field="hsT20" text="-"></g:Label>
+													</td>
+												</tr>
+												<tr>
+													<td style="width:10%; ">
+														<g:Label stylePrimaryName="{style.lefttopbold}"
+															ui:field="formatOD" title="21 Overs to 50 Overs" text="OD"></g:Label>
+													</td>
+													<td style="width:15%;text-align:left">
+														<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+															ui:field="matchesOD" text="-"></g:Label>
+													</td>
+													<td style="width:15%;text-align:left">
+														<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+															ui:field="winOD" text="-"></g:Label>
+													</td>
+													<td style="width:15%;text-align:left">
+														<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+															ui:field="lossOD" text="-"></g:Label>
+													</td>
+													<td style="width:15%;text-align:left">
+														<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+															ui:field="tiedOD" text="-"></g:Label>
+													</td>
+													<td style="width:15%;text-align:left">
+														<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+															ui:field="noResultOD" text="-"></g:Label>
+													</td>
+													<td style="width:15%;text-align:left">
+														<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+															ui:field="hsOD" text="-"></g:Label>
+													</td>
+												</tr>
+												<tr>
+													<td style="width:10%; ">
+														<g:Label stylePrimaryName="{style.lefttopbold}"
+															ui:field="formatTst" title="Unlimited Overs" text="Test"></g:Label>
+													</td>
+													<td style="width:15%;text-align:left">
+														<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+															ui:field="matchesTst" text="-"></g:Label>
+													</td>
+													<td style="width:15%;text-align:left">
+														<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+															ui:field="winTst" text="-"></g:Label>
+													</td>
+													<td style="width:15%;text-align:left">
+														<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+															ui:field="lossTst" text="-"></g:Label>
+													</td>
+													<td style="width:15%;text-align:left">
+														<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+															ui:field="tiedTst" text="-"></g:Label>
+													</td>
+													<td style="width:15%;text-align:left">
+														<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+															ui:field="noResultTst" text="-"></g:Label>
+													</td>
+													<td style="width:15%;text-align:left">
+														<g:Label stylePrimaryName="greyInfo {style.lefttopbold}"
+															ui:field="hsTst" text="-"></g:Label>
+													</td>
+												</tr>
+											</table>
+										</g:HTMLPanel>
+									</td>
+									<td width="40%" style="vertical-align:top">
+									<g:HTMLPanel width="100%" stylePrimaryName="panel">
+										<table width="100%" class="panelTitle">
+											<tr>
+												<td width="90%">
+													<g:Label stylePrimaryName="subtitle" text="About the team"></g:Label>
+												</td>
+											</tr>
+										</table>
+										<table width="100%">
+											<tr>
+												<td style="width:100%;text-align:justify">
+													<g:Label stylePrimaryName="greyInfo {style.txtalign}"
+														ui:field="about"></g:Label>
+												</td>
+											</tr>
+										</table>
+										</g:HTMLPanel>
+									</td>
+								</tr>
+							</table>
+						</g:HTMLPanel>
+					</td>
+				</tr>
+			</g:HTMLPanel>
+		</g:Cell>
+		<g:Cell width="100%" height="100%" horizontalAlignment="ALIGN_CENTER">
+			<g:HTMLPanel width="100%" stylePrimaryName="panel">
+				<table width="100%" class="panelTitle">
+					<tr>
+						<td width="70%">
+							<g:Label stylePrimaryName="subtitle" text="Players"></g:Label>
+						</td>
+						<td width="10%">
+							<g:Image ui:field="loadingPlayers" visible="true"></g:Image>
+						</td>
+						<td width="20%">
+							<g:Button styleName="actionSButton" ui:field="addPlayerToTeam"
+								text="Add Player" visible="false"></g:Button>
+						</td>
+					</tr>
+				</table>
+				<table width="100%">
+					<tr>
+						<td width="40%">
+							<table width="100%">
+								<tr>
+									<td width="100%">
+										<p1:CellList pageSize="5" ui:field="playersList"></p1:CellList>
+									</td>
+								</tr>
+								<tr>
+									<td width="100%">
+										<p1:SimplePager ui:field="playerListPager"
+											pageStart="0" location='CENTER' />
+									</td>
+								</tr>
+							</table>
+						</td>
+						<td width="60%" class="{style.playerdetails}">
+							<pd:CricketPlayerProfileMin ui:field="minProfile"></pd:CricketPlayerProfileMin>
+						</td>
+					</tr>
+
+				</table>
+			</g:HTMLPanel>
+		</g:Cell>
+		<g:Cell width="100%" height="100%" horizontalAlignment="ALIGN_CENTER">
+			<g:HTMLPanel width="100%" stylePrimaryName="panel">
+				<table width="100%" class="panelTitle">
+					<tr>
+						<td width="90%">
+							<g:Label stylePrimaryName="subtitle" text="Matches"></g:Label>
+						</td>
+					</tr>
+				</table>
+				<table width="100%">
+					<tr>
+						<td width="100%">
+							<p1:CellList pageSize="5" ui:field="matchesList"></p1:CellList>
+						</td>
+					</tr>
+					<tr>
+						<td width="100%">
+							<p1:SimplePager ui:field="matchesListPager"
+								pageStart="0" location='CENTER' />
+						</td>
+					</tr>
+				</table>
+			</g:HTMLPanel>
+		</g:Cell>
+	</g:VerticalPanel>
+</ui:UiBinder> 

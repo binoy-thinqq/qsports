@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=100%; initial-scale=1; maximum-scale=1; minimum-scale=1; user-scalable=no;"/>
+    <title>Cricket Konnect</title>
+
+    <!-- css&js. Used bootstrap, jquery, underscore & backbone -->
+
+    <script src="//code.jquery.com/jquery-1.10.2.js" type="text/javascript"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js" type="text/javascript"></script>
+    <script src="/static/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/static/js/moment.min.js" type="text/javascript"></script>
+    <script src="/static/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+
+    <script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+    <script type="text/javascript"
+            src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+    <script type="text/javascript"
+            src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
+
+
+    <link href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" rel="stylesheet">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+    <link href="/static/css/common.css" rel="stylesheet" type="text/css">
+
+
+    <script language="JavaScript">
+
+        $(document).ready(function () {
+            $('#dv-dttime').datetimepicker();
+        });
+
+    </script>
+    <style>
+        .plus-icon {
+            background: url(/static/images/dd-icon.png) left top no-repeat;
+            padding-left: 30px;
+            line-height: 1px;
+            line-height: 21px;
+            display: block;
+        }
+
+        .cls-in-player {
+            height: 34px;
+            font-size: 14px;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        }
+
+    </style>
+
+</head>
+
+<body>
+<header>
+    {% include "crkt/header.html" %}
+</header>
+
+<div id="div-editmatch" class="wrapper page clearfix">
+    <div class="container">
+        <div id="div-teamnav" class="row">
+            <div class="heading row form-group">
+                <div class="col-xs-12">
+                    <ul class="nav nav-pills nav-justified thumbnail setup-panel">
+                        <li class="active"><a href="#step-1">
+                            <h4 class="list-group-item-heading">Match details</h4>
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row content">
+                <div class="col-xs-12">
+                    <div class="col-md-12 well setup-content text-center" id="step-1"
+                         style="display: block;background: url(/static/images/gradient-bg.gif) left bottom repeat-x #fff;">
+                        <div class="formdiv">
+                            <form class="form-horizontal" role="form" id="form-match" name="form1"
+                                  onsubmit="return false;">
+                                <div class="form-group">
+
+                                    <label for="in-dttime" class="col-sm-2 control-label">Date & Time</label>
+
+                                    <div class="col-sm-10">
+                                        <div class='input-group date' id='dv-dttime'>
+                                            <input type='text' class="form-control" name="dttime" id="in-dttime"
+                                                   required/>
+                                            <span class="input-group-addon"><span
+                                                    class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="in-myteam" class="col-sm-2 control-label">My team</label>
+
+                                    <div class="col-sm-10">
+                                        <select class="form-control" id="in-myteam" name="teamId" required>
+                                            <option value="0">Select my team</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="in-opteam" class="col-sm-2 control-label">Opponent team</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" name="oppTeamName" class="form-control" id="in-opteam"
+                                               required value="">
+
+                                        <div>
+                                            <div class="gstl_0 sbdd_a"
+                                                 style="min-width: 570px; top: 27px; text-align: left; left: 0px; border: 1px;"
+                                                 dir="ltr">
+                                                <div class="sbdd_b">
+                                                    <div id="dv-sch" class="sbsb_a">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="in-matchtype" class="col-sm-2 control-label">Match format</label>
+
+                                    <div class="col-sm-10">
+                                        <select class="form-control" id="in-matchtype" name="cricketFormat" required>
+                                            <option value="0">Select match format</option>
+                                            <option value="1">T20</option>
+                                            <option value="2">ODI</option>
+                                            <option value="3">Test</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="in-pitchtype" class="col-sm-2 control-label">Pitch type</label>
+
+                                    <div class="col-sm-10">
+                                        <select class="form-control" id="in-pitchtype" name="pitchType" required>
+                                            <option value="0">Select pitch format</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="in-ground" class="col-sm-2 control-label">Ground name</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" name="groundName" class="form-control" id="in-ground"
+                                               required value="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="in-groundloc" class="col-sm-2 control-label">Ground Location</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" name="groundLoc" class="form-control" id="in-groundloc"
+                                               required value="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="in-city" class="col-sm-2 control-label">City</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" name="city" class="form-control" id="in-city" required
+                                               value="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="in-state" class="col-sm-2 control-label">State</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" name="state" class="form-control" id="in-state" required
+                                               value="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="in-country" class="col-sm-2 control-label">Country</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" name="country" class="form-control" id="in-country" required
+                                               value="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="in-weather" class="col-sm-2 control-label">Weather Condition</label>
+
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" rows="3" cols="50" type="text" id="in-weather"
+                                                  name="weatherCondition" required></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="in-ground_c" class="col-sm-2 control-label">Ground Condition</label>
+
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" rows="3" type="text" id="in-ground_c"
+                                                  name="groundCondition" required value=""></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="in-match_o" class="col-sm-2 control-label">Match officials</label>
+
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" rows="3" type="text" id="in-match_o"
+                                                  name="matchOfficials" required value=""></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-actions">
+                                    <input type="submit" value="Save match" id="btn-savematch"
+                                           class="btn btn-success btn-lg" formaction="#"/>
+                                    <button type="button" id="btn-clearmatch" class="btn btn-success btn-lg">Clear
+                                    </button>
+                                    <button type="button" id="btn-cancelmatch" class="btn btn-success btn-lg">Cancel
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="div-match" class="wrapper page clearfix"> match detail</div>
+<footer>
+    {% include "crkt/footer.html" %}
+</footer>
+
+<!-- back born scripts -->
+<script src="/static/js/team-model.js"></script>
+<script src="/static/js/match-model.js"></script>
+<script src="/static/js/match-view.js"></script>
+
+
+<script type="text/template" id="t-match">
+    <div class="team-details">
+        <!-- section 1 -->
+        <div class="well match-sec"><h2> <%= m.getTeamNm()%> VS <%= m.getOTeamNm()%> </h2></div>
+
+        <!-- section 2 -->
+        <div class="well match-sec">
+            <p> You can start the match after adding 11 players to each team <br>
+                After finalising the match player will be notified about the match
+            </p>
+
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="sc-match-action"
+                        data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-cog"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="sc-match-action">
+                    <li role="presentation"><a id="a-editmatch" role="menuitem" tabindex="-1">Edit</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Cancel</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Abandon</a></li>
+                </ul>
+            </div>
+
+            <button type="button" id="btn-scorecard" class="btn btn-success btn-lg">Fill Score Card</button>
+        </div>
+
+        <!-- section 3 -->
+        <div class="well match-sec">
+            <div class="match-det-sec">
+                <div class="match-time">
+                    <span class="gray">Match time: </span> <span> 10/01/2014 4:08 AM</span> <br>
+                    <span class="gray">Match rules: </span> <span> 11 player per team, ...maximum</span>
+                </div>
+                <div class="match-cond">
+                    <span class="gray">Conditions: </span> <span> <%= m.getWeCnd()%> , <%= m.getGrdCnd()%> , <%= m.getPthType()%> </span>
+                    <br>
+                    <span class="gray">Match officials: </span> <span> <%= m.getMthOff()%> </span>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><a href="/crkt/1/team/<%= m.getTeamId()%> "><%= m.getTeamNm()%> </a> players
+                    </h3>
+
+                    <div class="hidden"><%= m.getTeamId() %></div>
+                    <button id="btn-addpl-tm1" data-toggle="modal" data-target="#div-playerModal"
+                            class="btn btn-default" type="button">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </button>
+
+
+                </div>
+                <div class="panel-body">
+                    <div id="d-match-cnt-<%= m.getTeamId() %>">
+                        <!-- filled by template: # id -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><%= m.getOTeamNm()%> players
+                    </h3>
+
+                    <div class="hidden"><%= m.getOTeamId() %></div>
+                    <button id="btn-addpl-tm2" data-toggle="modal" data-target="#div-playerModal"
+                            class="btn btn-default" type="button">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </button>
+                </div>
+                <div class="panel-body">
+                    <div id="d-match-cnt-<%= m.getOTeamId() %>">
+                        <!-- filled by template: # id -->
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</script>
+
+<script type="text/template" id="t-search">
+    <ul class="sbsb_b" role="listbox" style=" border: 1px solid #ddd;  padding-left: 10px; border-radius: 4px;">
+        <% _.each(data, function(dt) { %>
+        <li class="search-r" dir="ltr" style="text-align: left;cursor: pointer;">
+            <div role="option" id="sbse0">
+                <div style="display: none;" id="search-r-<%= dt.id %>-key"><%= dt.id %></div>
+                <div class="sbqs_c" id="search-r-<%= dt.id %>"><%= dt.teamname %></div>
+            </div>
+        </li>
+
+        <% }); %>
+    </ul>
+</script>
+
+<script type="text/template" id="t-teampl">
+    <ul class="list-group">
+        <% _.each(t.getPlVo(), function(dt) { %>
+        <li id="t-player-<%= dt.cricketProfileId %>" class="list-group-item"><%= dt.userInfo.firstName %> <span
+                style="float: right;"
+                class="glyphicon glyphicon-plus-sign t-player"></span>
+        </li>
+        <% }); %>
+    </ul>
+</script>
+
+<script type="text/template" id="t-matchpl">
+    <p id="m-player-<%= id %>">
+        <span> <%= name %><span
+                class="glyphicon glyphicon-remove-circle m-player" style="float: right;"></span></span>
+    </p>
+
+</script>
+
+<script type="text/template" id="t-guestpl">
+    <p id="">
+        <span name="<%= t.name %>"> <%= t.name %> <span class="glyphicon glyphicon-remove-circle m-player"
+                                                        style="float: right;"></span></span>
+    </p>
+
+</script>
+
+<script type="text/template" id="t-match-plcnt">
+    <div class="row">
+        <% _.each(name, function(name) { %>
+        <div class="col-xs-6 col-md-3">
+            <div class="thumbnail">
+                <span><%= name %></span>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+
+</script>
+
+
+<!-- Add player model -->
+<div class="modal fade" id="div-playerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="div-modal-cnt">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 id="myModalLabel" class="modal-title">Add Players</h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Player of the team</div>
+                    <div class="panel-body">
+                        <div class="well" style="float: right; font-size: 22px">
+                            <h1> Selected players of match</h1>
+
+                            <div id="div-m-player">
+                                <!-- template #: template name   -->
+                            </div>
+                        </div>
+                        <div style="font-size: 22px;width: 60%;">
+                            <div id="div-t-player">
+                                <!-- template #: template name   -->
+                            </div>
+                            <div>
+
+                                <label for="in-g-player">Guest player</label>
+
+                                <div>
+                                    <span style="float: right;" class="glyphicon glyphicon-plus-sign t-player"></span>
+                                    <input type="text" name="g-player" class="form-control" id="in-g-player"
+                                           style="width: 92%;">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                <button data-dismiss="modal" id="btn-save-player" class="btn btn-success" type="button">Save changes
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

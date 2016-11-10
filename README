@@ -1,0 +1,23 @@
+1. Build the project using mvn clean install
+2. Run mvn eclipse:clean eclipse:eclipse to clean the eclipse project and build the project to be imported to eclipse
+3. Import project to eclipse
+4. Configuring App engine SDK 
+	4.1 Configure App engine SDK
+	4.2 Configure Datanucleus JDO/JPA version to v2
+	4.3 Check the Use Google App Engine
+	4.4 Configure ORM configuration to dataObjects Folder (src/main/java/com/thinqq/qsports/server/pesistence/dataobjects/)
+5 Configure GWT 
+	5.1 Configure GWT to installed GWT SDK Location
+	5.2 Check Use Google Web Toolkit
+6. Go to Java build path and check if GWT and App engine libraries are added to the build path. If not added then add the libraries and move them to top
+7. Move datanulcleus-api-jdo-***.jar to top - Will work out a solution for this.
+8. ServerConstants.java should have has 2 different property sets , one for PROD and one for DEV. make sure your local has the cone for DEV uncommented.
+9. Set the the GWT Web application "WAR Directory" property to "target\qsports-client". Check the "Lauch and deploy form here" checkbos to true. 
+Reach this property Right click project -> Properties -> Google -> Web Application  
+
+Run the application and you are there.
+
+How to Run the application? Coming soon..... - BINOY
+How to initialise application with sample data? NO ANSWER - SUBBU
+
+

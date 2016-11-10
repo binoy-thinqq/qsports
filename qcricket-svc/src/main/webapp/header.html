@@ -1,0 +1,51 @@
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.js"></script>
+<script>
+ $( document ).on( "QCricketCoreInitialized", function() {
+	 $("#profileHeader").attr("alt",inUser.firstName+" "+inUser.lastName);
+	 $("#headerHome").click(function() {
+			 window.location="profile.html/pid=" + inProfile.cricketProfileId;
+	});
+ });</script>
+<div class="wrapper clearfix">
+    <span class="logo fL"><a href="/crkt/1/done"><img src="images/logo.png" width="124" height="24" alt="logo"></a></span>
+    <ul class="topNav fL" style="margin-bottom: auto;">
+        <li>
+            <button class="btn btn-primary btn-lg" type="button" id="headerHome">
+                <span class="glyphicon glyphicon-home"></span> Home
+            </button>
+        </li>
+        <li>
+            <div class="btn-group">
+                <button data-toggle="dropdown" class="btn btn-primary btn-lg dropdown-toggle" type="button">
+                    <span class="glyphicon glyphicon-plus-sign"></span> Create new
+                </button>
+                <ul role="menu" class="dropdown-menu">
+                    <li><a href="team.html">Team</a></li>
+                    <li class="divider"></li>
+                    <li><a href="/crkt/1/match/000">Match</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Score Card</a></li>
+
+                </ul>
+            </div>
+        </li>
+        <li>
+            <button class="btn btn-primary btn-lg" type="button">
+                <span class="glyphicon glyphicon-user"></span> Invite Friends
+            </button>
+        </li>
+    </ul>
+    <div class="player-login fR">
+	 <div class="btn-group">
+	 <button data-toggle="dropdown" class="btn btn-primary btn-lg dropdown-toggle" type="button">
+        <a href="javascript:void(0);" class="login-trigger">
+            <img src="images/player-img.jpg" class="fL" id="profileHeader" alt=""> 
+        </a>
+		 </button>
+        <ul role="menu" class="dropdown-menu">
+            <li><a href="#"><img src="images/setting.png" alt="Setting"> Setting</a></li>
+            <li><a href="login.html"><img src="images/logout.jpg" alt="Logout" > Logout</a></li>
+        </ul>
+		</div>
+    </div>
+</div>

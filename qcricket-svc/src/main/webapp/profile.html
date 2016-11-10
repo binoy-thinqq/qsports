@@ -1,0 +1,379 @@
+
+
+<!DOCTYPE html>
+<head xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=100%; initial-scale=1; maximum-scale=1; minimum-scale=1; user-scalable=no;"/>
+<title>Cricket Konnect</title>
+
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"/>
+<script src="js/common.js"></script>
+<script src="js/profile.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/common.css"/>
+<link href="css/bootstrap.min.css" rel="stylesheet"/>
+
+<style>
+body {
+	background-color:#f6f6f6;
+	color:#403e3d;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	line-height:16px;
+}
+
+</style>
+
+<script>
+
+</script>
+</head>
+
+<body>
+<header>
+    <div id="header"></div>
+</header>
+<div class="wrapper page clearfix">
+  <div class="pageLeft fL">
+    <!-- Player details section -->
+    <div class="player-details">
+      <div class="player-info clearfix">
+        <div class="player-history fL">
+            <div class="sm-placeholder fR"> <span id="btn-editprofile"  class="edit-btn fR"><a class="fancybox" href="#">Edit</a></span> </div>
+            <div id="div-profile">
+              <div id="div-cricket-p">
+                <span class="player-img fL"> <img src="{{avatar_url}}?height=200&width=205" alt="Image"></span>
+                <span><h2 id="sp-displayname"></h2></span>
+                <h4>
+                    <div><span class=""><span id="sp-batting"></span></span></div>
+                    <div><span class=""><span id="sp-bowling"></span> </span></div>
+                    <div><span class=""><span class="gray">Fields at: </span><span id="sp-fielding"></span> </span></div>
+                </h4>
+              </div>
+              <div id="div-user-p">
+
+                <div><span class="gray">Born on:</span> <span id="sp-dob"></span></div>
+
+                <div><span class="gray">Gender:</span> <span id="sp-gender"></span></div>
+
+                <div>
+
+                    <span class="gray">Lives at:</span> <span id="sp-city"> </span>
+
+                    <span id="sp-state"></span>
+
+                    <span id="sp-country"> </span>
+
+                </div>
+				
+                    <div>
+
+                    <span class="gray">Preferred TimeZone:</span> <span id="sp-timezone"> </span>
+                </div>
+
+                <div id="parent-sp-email"><span class="gray">Email: </span> <span id="sp-email"></span> </div>
+                <div><span id="parent-sp-mobileNumber" class="gray">Phone: </span> <span id="sp-mobileNumber"></span> </div>
+            </div>
+
+                <p><div id="a-aboutme"></div></p>
+				<div>
+                        <div>
+                            <h4>Teams</h4>
+                        </div>
+                        <div >
+                            <div id="div-team-add">
+                                <ul id="ul-team-list" class="squad-list">
+                                    <!-- generated from JS add..plus icon click-->
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div id="div-editprofile">
+                <form class="form-horizontal" role="form" id="form-profile" name="form1" onsubmit="return false;">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                        <p>
+                            <label class="row-sm-3 control-label" for="firstName">First name:</label>
+                            <input class="form-control" placeholder="First Name" type="text"
+                                   name="firstName" id="firstName"
+                                   required minlength="2" maxlength="50"/>
+                        </p>
+                        </div>
+                        <div class="col-xs-6">
+                        <p>
+                            <label class="row-sm-3 control-label" for="lastName">Last Name:</label>
+                            <input class="form-control" placeholder="Last Name" type="text"
+                                   name="lastName" id="lastName" required
+                                     maxlength="50"/>
+                        </p>
+                        </div>
+                        <div class="col-xs-6">
+                            <label class="row-sm-3 control-label" for="gender">Gender</label>
+                            <select class="form-control" id="gender" name="gender" required>
+                            </select>
+                        </div>
+                        <div class="col-xs-6">
+                            <p>
+                                <label class="row-sm-3 control-label" for="dob">Date of birth :</label>
+                                <input class="form-control" type="text" id="dob" name="dob" required />
+                            </p>
+                        </div>
+                        <div class="col-xs-6">
+                            <p>
+                                <label class="row-sm-3 control-label" for="city">City :</label>
+                                <input class="form-control" type="text" id="city" name="city" required/>
+                            </p>
+                        </div>
+                        <div class="col-xs-6">
+                            <p>
+                                <label class="row-sm-3 control-label" for="state">State :</label>
+                                <input class="form-control" type="text" id="state"  name="state" required/>
+                            </p>
+                        </div>
+                        <div class="col-xs-6">
+                            <p>
+                                <label class="row-sm-3 control-label" for="country">Country :</label>
+                                <select class="form-control" id="country" name="isoCountryCode" required>
+                                </select>
+                            </p>
+                        </div>
+                        <!-- <div class="col-xs-6">
+                            <p>
+                                <label class="row-sm-3 control-label" for="timezone">Time Zone :</label>
+                                <select class="form-control" id="timezone" name="timezone" required>
+                                </select>
+                            </p>
+                        </div>-->
+                        <div class="col-xs-6">
+                            <p>
+                                <label class="row-sm-3 control-label" for="mobileNumber">Phone Number :</label>
+                                <input class="form-control"  pattern="[0-9]{10}" id="mobileNumber" name="mobileNumber" required/>
+                            </p>
+                        </div>
+                        <div class="col-xs-6">
+                            <p>
+                                <label class="row-sm-3 control-label" for="contactShown">Share my contacts with:</label>
+                                <select class="form-control" id="contactShown" name="contactShown" required>
+                                </select>
+                            </p>
+                        </div>
+                        <div class="col-xs-12">
+                        <p>
+                            <label class="row-sm-3 control-label" for="aboutme">About me :</label>
+                            <textarea class="form-control" rows="3" type="text" id="aboutme" name="aboutme">
+                            </textarea>
+                        </p>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <p>
+                            <label class="row-sm-3 control-labell" for="batting-hand">Batting Style :</label>
+                            <select class="form-control" id="batting-hand" name="battingHandType">
+                            </select>
+                            </p>
+                        </div>
+                        <div class="col-xs-6">
+                            <p>
+                            <label class="row-sm-3 control-label" for="batting-order">Batting Order :</label>
+                            <select class="form-control" id="batting-order" name="battingOrder">
+                            </select>
+                            </p>
+                        </div>
+                        <div class="col-xs-6">
+                            <p>
+                            <label class="row-sm-3 control-label" for="bowling-hand">Bowling Arm :</label>
+                            <select class="form-control" id="bowling-hand" name="bowlingHandType">
+                            </select>
+                            </p>
+                        </div>
+                        <div class="col-xs-6">
+                            <p>
+                            <label class="row-sm-3 control-label" for="bowling-style">Bowling Style :</label>
+                            <select class="form-control" id="bowling-style" name="bowlingMethod">
+                            </select>
+                            </p>
+                        </div>
+                        </p>
+                        <p>
+
+                        <div class="col-xs-6">
+                            <p>
+                            <label class="row-sm-3 control-label" for="fielding">Field position :</label>
+                            <select class="form-control" id="fielding" name="fieldPosition" >
+                            </select>
+                            </p>
+                        </div>
+                        <div class="col-xs-6" style="margin:25px 0px 25px 0px">
+                        <label class="control-label" for="optionsRadios1">Do you keep wickets?</label>
+                               <label style="width:20%">
+                                    <input type="radio" name="wicketKeeper" id="optionsRadios1" value="true" checked>
+                                    Yes
+                                </label>
+                                <label style="width:20%">
+                                    <input type="radio" name="wicketKeeper" id="optionsRadios2" value="false">
+                                    No
+                                </label>
+                        </div>
+
+
+                    <div class=" btn-group col-xs-6 fR">
+                        <input type="submit" value="Save Changes" id="btn-saveprofile" class="btn btn-success btn-lg" formaction="#"/>
+                        <button type="button" id="btn-cancelprofile"  class="btn btn-lg">Cancel</button>
+                    </div>
+                   </div>
+                </form>
+            </div>
+          <!--<p><span class="gray">Born on</span> December 25, 1984 <span class="gray">at</span> Gloucester<br>-->
+            <!--Left Handed Batsman<br>-->
+            <!--First International <span class="gray">against</span> India <span class="gray">on</span> Mar 01, 2006 <a href="#">Scorecard</a></p>-->
+          <!--<p>15,000 Test runs and 50 Test centuries are not beyond him" – Sunil Gavaskar, about Alastair Cook. It is not easy for a batsman to receive such high praise from a former cricketer, especially when the concerned persons are from different countries.  The fact that those words came from a batsman who is considered one of the best openers Test cricket has ever seen makes it even praiseworthy. </p>-->
+          <!--<span class="fR"><a class="btn-blue" href="#">View full profile</a></span>-->
+        </div>
+      </div>
+    </div>
+    <!-- first 5 matches section -->
+    <div class="div-match radius-box txtAlnLeft clearfix">
+      <h4 class="icons icon-team" id="perDisplayName"></h4>
+      <table width="100%" border="0" cellpadding="8">
+        <tbody><tr>
+		  <th width="14%">Form-Date</th>
+          <th width="20%">Played For</th>
+          <th width="20%">Against</th>
+          <th width="18%">Batting</th>
+          <th width="18%">Bowling</th>
+		  <th width="10%">Link</th>
+        </tr>
+        <tr>
+		  <td><span>T20 - 23 Feb 2014</span></td>
+          <td><span class="location"><a href="#">Fear the XI</a></span></td>
+          <td><a href="#">Infosys A Team</a></td>
+          <td>30 (25 balls)*</td>
+		  <td>4/45 (7.2 Overs)</td>
+		  <td><a href="#">View Match</a></td>
+        </tr>
+		<tr>
+		  <td><span>OD - 23 Feb 2014</span></td>
+          <td><span class="location"><a href="#">Crappy Team</a></span></td>
+          <td><a href="#">Good and Great Team</a></td>
+          <td>50 (25 balls)*</td>
+		  <td>4/45 (7.5 Overs)</td>
+		  <td><a href="#">View Match</a></td>
+        </tr>
+		<tr>
+		  <td><span>TST - 23 Feb 2014</span></td>
+          <td><span class="location"><a href="#">Fear the XI</a></span></td>
+          <td><a href="#">Infosys A Team</a></td>
+          <td>100 (25 balls)*</td>
+		  <td>4/60 (4.2 Overs)</td>
+		  <td><a href="#">View Match</a></td>
+        </tr>
+		<tr>
+		  <td><span>TST - 23 Feb 2014</span></td>
+          <td><span class="location"><a href="#">Fear the XI</a></span></td>
+          <td><a href="#">Infosys A Team</a></td>
+          <td>30 (25 balls)*</td>
+		  <td>4/60 (9.2 Overs)</td>
+		  <td><a href="#">View Match</a></td>
+        </tr>
+		<tr>
+		  <td><span>TST - 23 Feb 2014</span></td>
+          <td><span class="location"><a href="#">Fear the XI</a></span></td>
+          <td><a href="#">Infosys A Team</a></td>
+          <td>100 (25 balls)*</td>
+		  <td>4/60 (4.2 Overs)</td>
+		  <td><a href="#">View Match</a></td>
+        </tr>
+		</tbody></table>
+    </div>
+
+    <!-- Batting section -->
+    <div class="div-bat radius-box">
+      <h4 class="icons bat-icon">Batting</h4>
+     <table width="100%" border="0" cellpadding="8" class="txtAlnCenter battingStats" id="battingStats">
+	 </table>
+    </div>
+    <!-- Bowling section -->
+    <div class="div-dow radius-box">
+      <h4 class="icons ball-icon">Bowling</h4>
+      <table width="100%" border="0" cellpadding="8" class="txtAlnCenter" id="bowlingStats">
+       
+      </table>
+    </div>
+    <!-- Team table section -->
+    <div class="div-team radius-box txtAlnLeft clearfix">
+       <h4 class="icons icon-team">Team(s)</h4>
+        <table id="tbl-team" width="100%" border="0" cellpadding="8">
+        <tbody>
+        <tr>
+          <th width="27%">Team Name</th>
+          <th width="23%">Location</th>
+          <th width="35%">Quick Statictics</th>
+          <th width="20%" class="txtAlnCenter">Win Percentage</th>
+        </tr>
+      </tbody></table>
+    </div>
+  </div>
+  <div class="pageRight fR">
+  	<div class="radius-box right-search-blk">
+    	<div class="search-blk clearfix">
+        	<input type="text" placeholder="Search" class="fL">
+            <input type="image" src="static/images/go-btn.gif" class="fR" alt="go">
+        </div>
+        <ul class="search-list clearfix">
+            <li><a class="active" href="#">Team</a></li>
+            <li><a href="#">Players</a></li>
+          </ul>
+    </div>
+    <div class="radius-box">
+      <h4>Last Match</h4>
+      <div class="last-match">
+   	  	<img src="static/images/player-img-02.jpg" alt="cook" class="img-blk">
+        <p>Cook was caught behind trying to pull out of a shot as England's batsmen stuttered in the first ODI.</p>
+        <span class="block clearfix">
+        	<a href="#" class="fL">View big</a>
+            <span class="more-photos fR">[<a href="#">more photos</a>]</span>
+        </span>
+      </div>
+    </div>
+    <div class="radius-box" id="div-notification-team">
+
+<ul class="div-notification-team-ul">
+
+</ul>
+</div>
+    <div class="radius-box" id="div-notification-player">
+        <ul class="div-notification-team-ul"  id="div-notification-player-ul">
+
+        </ul>
+
+    </div>
+    <div class="radius-box">
+      <h4>Matches</h4>
+      <ul class="tab-match clearfix">
+        <li><a class="activeTab" href="#cur-match">Current Matches</a></li>
+        <li><a href="#cum-up">Coming Up</a></li>
+      </ul>
+      <div class="tab-wrap">
+        <div class="tab-block def-tab" id="cur-match"> <span class="block"><strong>ENG vs NZ, 2nd Test, Leeds</strong></span> <span class="tour-det block"><a href="#">New Zealand tour of England 2013</a></span>
+          <p><strong>NZ :</strong> 219/8, 65.3 Overs<br>
+            <strong>ENG :</strong> 354, 287/5 d<br>
+            New Zealand need 249 runs</p>
+        </div>
+        <div class="tab-block" id="cum-up"> <span class="block"><strong>ENG vs NZ, 2nd Test, Leeds</strong></span> </div>
+      </div>
+      <span class="showMat block"> <a href="#">Show all matches</a> </span> </div>
+  </div>
+</div>
+<footer>
+   <div id="footer"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui' 
+	xmlns:p1="urn:import:com.google.gwt.user.cellview.client"
+	xmlns:in="urn:import:com.thinqq.qsports.client.cricket.matchview.innings">
+	<g:VerticalPanel width="600px" height="500px" ui:field="matchViewPanel">
+	<g:Label styleName="matchHeading" ui:field="matchHeading"/>
+	<g:Label styleName="matchDetails" ui:field="matchDetails"/>
+	<g:Label styleName="matchStatus" ui:field="matchStatus"/>
+	<g:HTMLPanel>
+	<hr/>
+	</g:HTMLPanel>
+	</g:VerticalPanel>
+</ui:UiBinder>

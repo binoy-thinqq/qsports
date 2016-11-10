@@ -1,0 +1,16 @@
+<dataConfig>
+<dataSource name="qsports" driver="org.postgresql.Driver" url="jdbc:postgresql://localhost:5432/qsports" user="postgres" password="admin"/>
+ <document name="teamDocs">    
+            <entity dataSource="qsports" name="team" query="select team_id,team_name,CASE WHEN city IS NULL THEN '' ELSE city END,CASE WHEN state IS NULL THEN '' ELSE state END, CASE WHEN country IS NULL THEN '' ELSE country END, CASE WHEN description IS NULL THEN '' ELSE description END from cricket.cricket_team"
+			deltaImportQuery="select team_id,team_name,CASE WHEN city IS NULL THEN '' ELSE city END,CASE WHEN state IS NULL THEN '' ELSE state END, CASE WHEN country IS NULL THEN '' ELSE country END, CASE WHEN description IS NULL THEN '' ELSE description END from cricket.cricket_team where team_id = '${dih.delta.team_id}'"
+			deltaQuery="select team_id from cricket.cricket_team where updated_time = null or updated_time > '${dih.last_index_time}'">
+                <field column="team_id" name="id" />
+                <field column="team_name" name="teamname" />
+                <field column="city" name="city" />
+				 <field column="state" name="state" />
+				 <field column="country" name="country" />
+				 <field column="description" name="desc" />
+            </entity>
+      
+   </document>
+</dataConfig>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+   <session-factory>
+      <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+      <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+      <!-- Assume test is the database name -->
+      <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/qsports</property>
+      <property name="hibernate.connection.username">postgres</property>
+      <property name="hibernate.connection.password">postgres</property>
+      <property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
+      
+      <mapping class="com.thinqq.qsports.persistence.dataobjects.User"/>
+      <mapping class="com.thinqq.qsports.persistence.dataobjects.AuthKey"/>
+      <mapping class="com.thinqq.qsports.persistence.dataobjects.CricketProfile"/>
+	  <mapping class="com.thinqq.qsports.persistence.dataobjects.BattingStatistics"/>
+	  <mapping class="com.thinqq.qsports.persistence.dataobjects.BowlingStatistics"/>
+	  <mapping class="com.thinqq.qsports.persistence.dataobjects.CricketTeam"/>
+	  <mapping class="com.thinqq.qsports.persistence.dataobjects.CricketTeamPlayers"/>
+	  <mapping class="com.thinqq.qsports.persistence.dataobjects.CricketTeamStats"/>
+	  <mapping class="com.thinqq.qsports.persistence.dataobjects.Country"/>
+	  
+	  <mapping class="com.thinqq.qsports.persistence.dataobjects.Innings"/>
+	  <mapping class="com.thinqq.qsports.persistence.dataobjects.MatchFow"/>
+	  <mapping class="com.thinqq.qsports.persistence.dataobjects.CricketMatchTeamPlayers"/>
+	  <mapping class="com.thinqq.qsports.persistence.dataobjects.CricketMatchExt"/>
+	  <mapping class="com.thinqq.qsports.persistence.dataobjects.CricketMatch"/>
+	  <mapping class="com.thinqq.qsports.persistence.dataobjects.BowlingScorecardEntry"/>
+	  <mapping class="com.thinqq.qsports.persistence.dataobjects.BattingScorecardEntry"/>
+   	 </session-factory>
+</hibernate-configuration>
