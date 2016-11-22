@@ -507,4 +507,56 @@ public class UserProfileProcess {
 		
 	}
 	
+	/**
+	 * 
+	 * Save a user
+	 * @param userVo
+	 * @return
+	 * @throws InvalidRequestArgumentException
+	 */
+	public UserVo saveUser(final UserVo userVo) throws InvalidRequestArgumentException, UnauthorizedException {
+		
+		/*if (userVo.getUserId() == null || userVo.getEmail() == null) {
+			throw new InvalidRequestArgumentException();
+		}
+		if (!userVo.getUserId().equals(userVo.getSignedInUserId())) {
+			throw new UnauthorizedException("Not Authorized to updated another users details");
+		}*/
+		Session session = null;
+		try {
+			session = SessionManager.getSessionFactory().openSession();
+			User user = userDao.getByPrimaryKey(session, userVo.getSignedInUserId());
+			ObjectTransformUtil.transform(userVo, user);
+			
+			//Setting the values which will not be transformed
+			user.setUserId(userVo.getSignedInUserId());
+			user.setUpdatedId(userVo.getSignedInUserId());
+			user.setUpdatedTime(Calendar.getInstance().getTime());
+			if(user.getStatus() == null 
+					|| UserStatusEnum.FIRST_LOGIN_DONE.getName().equals(user.getStatus())){
+				user.setStatus(UserStatusEnum.SETUP.getName());
+			}
+			session.beginTransaction();
+			userDao.update(session, user);
+			session.getTransaction().commit();
+			ObjectTransformUtil.transform(user, userVo, false);
+			
+		} catch (Exception e) {
+			if (session != null && session.isOpen()) {
+				session.getTransaction().rollback();
+			}
+			logger.log(Level.SEVERE, "Exception in saving user", e);
+			ErrorInfo errorInfo = new ErrorInfo();
+			errorInfo.setErrorCode(ErrorConstants.SERVICE_ERROR);
+			errorInfo.setErrorDesc("Service error please check logs");
+			userVo.getErrors().add(errorInfo);
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
+		}
+		return userVo;
+	}
+	
+	
 }

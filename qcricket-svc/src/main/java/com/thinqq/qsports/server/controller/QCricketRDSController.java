@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.thinqq.qsports.persistence.dto.AddMemberToTeamVo;
 import com.thinqq.qsports.persistence.dto.AddPlayerToMatchResponse;
 import com.thinqq.qsports.persistence.dto.BaseResponseVo;
-import com.thinqq.qsports.persistence.dto.BaseVo;
 import com.thinqq.qsports.persistence.dto.BattingScorecardEntryVo;
 import com.thinqq.qsports.persistence.dto.BowlingScorecardEntryVo;
 import com.thinqq.qsports.persistence.dto.CountriesListVo;
@@ -59,9 +58,8 @@ import com.thinqq.qsports.shared.userprofile.CricketStatisticsResponseVo;
 
 @Controller
 @RequestMapping("ckt")
-public class QCricketRDSController {
+public class QCricketRDSController extends BaseController {
 
-	private static final String SIGNED_IN_USER = "signedInUser";
 
 	Logger logger = Logger.getLogger(QCricketRDSController.class.getName());
 	
@@ -211,7 +209,7 @@ public class QCricketRDSController {
 	@ResponseBody
 	public CricketTeamResponseVo getTeam(@PathVariable Integer id, @RequestParam(value="ismin",required=false) boolean ismin,
 			HttpServletRequest httpRequest) {
-		UserVo signedInUser = (UserVo) httpRequest.getAttribute(SIGNED_IN_USER);
+		UserVo signedInUser = getSignedInUser(httpRequest);
 		CricketTeamResponseVo cricketTeamVo = cricketTeamProcess.getTeamById(id, !ismin, signedInUser.getUserId());
 		return cricketTeamVo;
 	}
@@ -304,7 +302,7 @@ public class QCricketRDSController {
 	@RequestMapping(value = "getnotifications", method = RequestMethod.GET, headers = "Accept=application/xml, application/json")
 	@ResponseBody
 	public  List<NotificationVo> getNotifications(HttpServletRequest httpRequest) {
-		UserVo signedInUser = (UserVo) httpRequest.getAttribute(SIGNED_IN_USER);
+		UserVo signedInUser = getSignedInUser(httpRequest);
 		List<NotificationVo> notifications = notificationProcess.getNotifications(signedInUser.getUserId());
 		return notifications;
 	}
@@ -324,7 +322,7 @@ public class QCricketRDSController {
 	@RequestMapping(value = "getmatch/{id}", method = RequestMethod.GET, headers = "Accept=application/xml, application/json")
 	@ResponseBody
 	public CricketMatchResponseVo getMatch(@PathVariable Integer id, HttpServletRequest httpRequest) throws QSportsServiceException, InvalidRequestArgumentException, UnauthorizedException {
-		UserVo signedInUser = (UserVo) httpRequest.getAttribute(SIGNED_IN_USER);
+		UserVo signedInUser = getSignedInUser(httpRequest);
 		CricketMatchResponseVo response = new CricketMatchResponseVo();
 		cricketMatchProcess.getMatch(id, signedInUser.getUserId(), response);
 		return response;
@@ -333,7 +331,7 @@ public class QCricketRDSController {
 	@RequestMapping(value = "match/{id}", method = RequestMethod.DELETE, headers = "Accept=application/xml, application/json")
 	@ResponseBody
 	public BaseResponseVo abandonMatch(@PathVariable Integer id, HttpServletRequest httpRequest) throws QSportsServiceException, InvalidRequestArgumentException, UnauthorizedException {
-		UserVo signedInUser = (UserVo) httpRequest.getAttribute(SIGNED_IN_USER);
+		UserVo signedInUser = getSignedInUser(httpRequest);
 		BaseResponseVo response = new BaseResponseVo();
 		cricketMatchProcess.abandonMatch(id, response, signedInUser.getUserId());
 		return response;
@@ -342,7 +340,7 @@ public class QCricketRDSController {
 	@RequestMapping(value = "match/{mid}/complete", method = RequestMethod.POST, headers = "Accept=application/xml, application/json")
 	@ResponseBody
 	public BaseResponseVo completeMatch(@PathVariable Integer mid, HttpServletRequest httpRequest) throws QSportsServiceException, InvalidRequestArgumentException, UnauthorizedException {
-		UserVo signedInUser = (UserVo) httpRequest.getAttribute(SIGNED_IN_USER);
+		UserVo signedInUser = getSignedInUser(httpRequest);;
 		BaseResponseVo response = new BaseResponseVo();
 		cricketMatchProcess.completeMatch(mid, response, signedInUser.getUserId());
 		return response;
@@ -363,7 +361,7 @@ public class QCricketRDSController {
 	@RequestMapping(value = "removeplayermatch/{id}", method = RequestMethod.DELETE, headers = "Accept=application/xml, application/json")
 	@ResponseBody
 	public BaseResponseVo removePlayerFromMatch(@PathVariable Integer id, HttpServletRequest httpRequest) throws QSportsServiceException, InvalidRequestArgumentException, UnauthorizedException {
-		UserVo signedInUser = (UserVo) httpRequest.getAttribute(SIGNED_IN_USER);
+		UserVo signedInUser = getSignedInUser(httpRequest);;
 		BaseResponseVo response = new BaseResponseVo();
 		cricketMatchProcess.removePlayerFromMatch(id, response, signedInUser.getUserId());
 		return response;
@@ -373,7 +371,7 @@ public class QCricketRDSController {
 	@RequestMapping(value = "removeteam/{id}", method = RequestMethod.DELETE, headers = "Accept=application/xml, application/json")
 	@ResponseBody
 	public BaseResponseVo removeTeam(@PathVariable Integer id, HttpServletRequest httpRequest) throws QSportsServiceException, InvalidRequestArgumentException, UnauthorizedException {
-		UserVo signedInUser = (UserVo) httpRequest.getAttribute(SIGNED_IN_USER);
+		UserVo signedInUser = getSignedInUser(httpRequest);;
 		BaseResponseVo response = new BaseResponseVo();
 	//	cricketTeamProcess.addAsModerator(addModerator);
 		cricketMatchProcess.removePlayerFromMatch(id, response, signedInUser.getUserId());
@@ -398,7 +396,7 @@ public class QCricketRDSController {
 			@PathVariable Integer matchid,
 			HttpServletRequest httpRequest,@RequestParam(value="isfon",required=false) boolean isfon) throws QSportsServiceException, InvalidRequestArgumentException, UnauthorizedException {
 		InningsMinResponseVo response = new InningsMinResponseVo();
-		UserVo signedInUser = (UserVo) httpRequest.getAttribute(SIGNED_IN_USER);
+		UserVo signedInUser = getSignedInUser(httpRequest);;
 		cricketMatchProcess.addInnings(matchid, signedInUser.getUserId(),isfon, response);
 		return response;
 	}
@@ -422,7 +420,7 @@ public class QCricketRDSController {
 			@RequestBody List<BattingScorecardEntryVo> battingEntries,
 			HttpServletRequest httpRequest) throws QSportsServiceException, InvalidRequestArgumentException, UnauthorizedException {
 		BaseResponseVo response = new BaseResponseVo();
-		UserVo signedInUser = (UserVo) httpRequest.getAttribute(SIGNED_IN_USER);
+		UserVo signedInUser = getSignedInUser(httpRequest);;
 		cricketMatchProcess.updateBattingEntries(battingEntries, inningsid, signedInUser.getSignedInUserId(), response);
 		return response;
 	}
@@ -434,7 +432,7 @@ public class QCricketRDSController {
 			@RequestBody List<BowlingScorecardEntryVo> bowlEntries,
 			HttpServletRequest httpRequest) throws QSportsServiceException, InvalidRequestArgumentException, UnauthorizedException {
 		BaseResponseVo response = new BaseResponseVo();
-		UserVo signedInUser = (UserVo) httpRequest.getAttribute(SIGNED_IN_USER);
+		UserVo signedInUser = getSignedInUser(httpRequest);
 		cricketMatchProcess.updateBowlingEntries(bowlEntries, inningsid, signedInUser.getSignedInUserId(), response);
 		return response;
 	}
@@ -443,7 +441,7 @@ public class QCricketRDSController {
 	@ResponseBody
 	public MatchInningsDetailsResponse  getInnings(@PathVariable Integer mid, HttpServletRequest httpRequest) throws QSportsServiceException, InvalidRequestArgumentException, UnauthorizedException {
 		MatchInningsDetailsResponse response  = new MatchInningsDetailsResponse();
-		UserVo signedInUser = (UserVo) httpRequest.getAttribute(SIGNED_IN_USER);
+		UserVo signedInUser = getSignedInUser(httpRequest);;
 		cricketMatchProcess.getInnings(mid, signedInUser.getUserId(), response);
 		return response;
 	}
@@ -489,19 +487,7 @@ public class QCricketRDSController {
 		this.notificationProcess = notificationProcess;
 	}
 
-	/**
-	 * Set Signed user
-	 * @param request
-	 * @param httpRequest
-	 */
-	private void setSignedInUser(BaseVo request, HttpServletRequest httpRequest) {
-		UserVo signedInUser = (UserVo) httpRequest.getAttribute(SIGNED_IN_USER);
-		request.setSignedInUserId(signedInUser.getUserId());
-	}
 	
-	private UserVo getSignedInUser(HttpServletRequest httpRequest) {
-		return (UserVo) httpRequest.getAttribute(SIGNED_IN_USER);
-	}
 	/**
 	 * Validate a request
 	 * @param request

@@ -55,13 +55,22 @@
 
 	<bean id="countryDao" class="com.thinqq.qsports.persistence.dao.CountryDAO" />
 
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 
+		 <!-- setting maximum upload size -->
+		<property name="maxUploadSize" value="100000" />
+
+	</bean>
 	<!-- Controller -->
 	<bean id="cricketRDController"
 		class="com.thinqq.qsports.server.controller.QCricketRDSController">
 		<property name="validator">
 			<ref local="validator" />
 		</property>
+	</bean>
+	<bean id="cricketImgController"
+		class="com.thinqq.qsports.server.controller.ImageUploadController">
 	</bean>
 	<bean id="exceptionHandler"
 		class="com.thinqq.qsports.server.error.controller.QsportsExceptionHandler" />

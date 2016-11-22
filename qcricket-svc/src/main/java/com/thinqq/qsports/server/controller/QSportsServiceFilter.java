@@ -41,7 +41,7 @@ public class QSportsServiceFilter implements Filter {
 			FilterChain chain) throws IOException, ServletException {
 		boolean isValid = false;
 		String key = ((HttpServletRequest) request).getHeader("SECRET_KEY");
-		if (((HttpServletRequest) request).getPathInfo().contains("login")) {
+		if (((HttpServletRequest) request).getPathInfo().contains("login") || ((HttpServletRequest) request).getPathInfo().contains("register")) {
 			isValid = true;
 		} else {
 			String authKey = ((HttpServletRequest) request)

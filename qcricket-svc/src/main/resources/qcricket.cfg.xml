@@ -5,9 +5,9 @@
       <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
       <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
       <!-- Assume test is the database name -->
-      <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/qsports</property>
-      <property name="hibernate.connection.username">postgres</property>
-      <property name="hibernate.connection.password">postgres</property>
+      <property name="hibernate.connection.url">jdbc:postgresql://qsports.cqa40wov8fj7.us-west-2.rds.amazonaws.com:5432/qsports</property>
+      <property name="hibernate.connection.username">qsports</property>
+      <property name="hibernate.connection.password">thinqq16</property>
       <property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
       
       <mapping class="com.thinqq.qsports.persistence.dataobjects.User"/>
